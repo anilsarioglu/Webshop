@@ -15,7 +15,7 @@ namespace Webshop.UI_MVC.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Webshop DotNetAcademy";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
