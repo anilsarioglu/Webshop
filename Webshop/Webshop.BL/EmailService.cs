@@ -9,12 +9,12 @@ namespace Webshop.BL
 {
     public class EmailService
     {
-        public static void SendMail()
+        public static void SendMail(String mailTo)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("teampuntkomma@gmail.com");
-            mail.To.Add("idc1994@live.nl");
+            mail.To.Add(mailTo);
             mail.Subject = "Test Mail";
             mail.Body = "This is for testing SMTP mail from GMAIL";
 

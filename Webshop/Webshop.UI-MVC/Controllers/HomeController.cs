@@ -11,8 +11,7 @@ namespace Webshop.UI_MVC.Controllers
     {
         public ActionResult Index()
         {
-            EmailService email = new EmailService();
-            return View(email);
+            return View();
         }
 
         public ActionResult About()
