@@ -11,7 +11,8 @@ namespace Webshop.DAL.Entit
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public bool Betaald { get; set; }
-        public InvoiceDetail InvoiceDetail { get; set; }
-        public int InvoiceDetailId { get; set; }
+        public string InvoiceCode { get; set; }
+        public ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+       
     }
 }

@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\CourseConfiguration.cs" />
+    <Compile Include="Configuration\InvoiceConfiguration.cs" />
+    <Compile Include="Configuration\InvoiceDetailConfiguration.cs" />
+    <Compile Include="Configuration\ProductConfiguration.cs" />
+    <Compile Include="Configuration\ProductPriceConfiguration.cs" />
+    <Compile Include="Configuration\VatConfiguration.cs" />
     <Compile Include="Entit\Course.cs" />
     <Compile Include="Entit\DetailCourse.cs" />
     <Compile Include="Entit\Invoice.cs" />
@@ -60,7 +66,21 @@
     <Compile Include="Entit\ProductPrice.cs" />
     <Compile Include="Entit\Products.cs" />
     <Compile Include="Entit\Vat.cs" />
+    <Compile Include="Migrations\201911071036412_Initial.cs" />
+    <Compile Include="Migrations\201911071036412_Initial.designer.cs">
+      <DependentUpon>201911071036412_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CourseRepo.cs" />
+    <Compile Include="Repositories\DetailCourseRepo.cs" />
+    <Compile Include="Repositories\InvoiceRepo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ProductPriceRepo.cs" />
+    <Compile Include="Repositories\ProductRepo.cs" />
+    <Compile Include="Repositories\VatRepo.cs" />
+    <Compile Include="WebshopContext.cs" />
+    <Compile Include="WebshopDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Webshop.Domain\Webshop.Domain.csproj">
@@ -71,6 +91,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911071036412_Initial.resx">
+      <DependentUpon>201911071036412_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
