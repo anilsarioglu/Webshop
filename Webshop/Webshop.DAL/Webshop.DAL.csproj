@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,11 +65,15 @@
     <Compile Include="Entit\InvoiceDetail.cs" />
     <Compile Include="Entit\InvoiceDetailProduct.cs" />
     <Compile Include="Entit\ProductPrice.cs" />
-    <Compile Include="Entit\Products.cs" />
+    <Compile Include="Entit\Product.cs" />
     <Compile Include="Entit\Vat.cs" />
     <Compile Include="Migrations\201911071036412_Initial.cs" />
     <Compile Include="Migrations\201911071036412_Initial.designer.cs">
       <DependentUpon>201911071036412_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911071836278_Corrections.cs" />
+    <Compile Include="Migrations\201911071836278_Corrections.designer.cs">
+      <DependentUpon>201911071836278_Corrections.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,7 +85,7 @@
     <Compile Include="Repositories\ProductRepo.cs" />
     <Compile Include="Repositories\VatRepo.cs" />
     <Compile Include="WebshopContext.cs" />
-    <Compile Include="WebshopDataSource.cs" />
+    <Compile Include="IWebshopDataSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Webshop.Domain\Webshop.Domain.csproj">
@@ -95,6 +100,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911071036412_Initial.resx">
       <DependentUpon>201911071036412_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911071836278_Corrections.resx">
+      <DependentUpon>201911071836278_Corrections.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

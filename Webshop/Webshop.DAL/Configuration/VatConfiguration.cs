@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Configuration
@@ -14,7 +9,7 @@ namespace Webshop.DAL.Configuration
         {
             this.ToTable("Vat");
             this.Property(v => v.Id).HasColumnType("int");
-            this.Property(v => v.Precentage).HasColumnType("int");
+            this.Property(v => v.Percentage).HasColumnType("int");
         }
     }
 }

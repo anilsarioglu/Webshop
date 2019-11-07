@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Webshop.DAL.Repositories
 {
-    interface IRepository<T>
+    public interface IRepository<TEntity> where TEntity : class //It's a type constraint on T, specifying that it must be a class.
     {
-        void Add(T t );
-        T FinById(int? id);
+        void Add(TEntity t );
+        TEntity FindById(int? id);
         void Modify();
-        List<T> GetAll();
-        void Remove(T t);
+        List<TEntity> GetAll();
+        void Remove(TEntity t);
     }
 }
