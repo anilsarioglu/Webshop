@@ -5,7 +5,7 @@ using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Repositories
 {
-    class CourseRepo : IRepository<Course>
+    public class CourseRepo : IRepository<Course>
     {
         private WebshopContext _webshopContext = new WebshopContext();
         public void Add(Course course)
