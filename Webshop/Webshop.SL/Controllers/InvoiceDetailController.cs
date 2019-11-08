@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Webshop.SL.Controllers
 {
-    public class InvoiceDetailsController : ApiController
+    public class InvoiceDetailController : ApiController
     {
     }
 }
