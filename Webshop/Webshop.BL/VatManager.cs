@@ -19,27 +19,27 @@ namespace Webshop.BL
 
         public void Add(Vat t)
         {
-            repo.Add(t);
+            repo.Create(t);
         }
 
         public Vat FinById(int? id)
         {
-            return repo.FindById(id);
+            return repo.Read(id);
         }
 
         public void Modify()
         {
-            repo.Modify();
+            repo.Update();
         }
 
         public List<Vat> GetAll()
         {
-            return repo.GetAll();
+            return repo.ReadAll();
         }
 
         public void Remove(Vat t)
         {
-            repo.Remove(t);
+            repo.Delete(t);
         }
     }
 }
