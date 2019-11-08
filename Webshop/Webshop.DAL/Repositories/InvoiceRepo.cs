@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Repositories
@@ -18,7 +15,7 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public Invoice FinById(int? id)
+        public Invoice FindById(int? id)
         {
             return _webshopContext._Invoices.Find(id);
         }

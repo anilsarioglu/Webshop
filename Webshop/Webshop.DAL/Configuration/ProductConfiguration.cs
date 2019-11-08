@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects.DataClasses;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity.ModelConfiguration;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Configuration
 {
-    class ProductConfiguration : EntityTypeConfiguration<Products>
+    class ProductConfiguration : EntityTypeConfiguration<Product>
     {
         public ProductConfiguration()
         {

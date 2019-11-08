@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Repositories
@@ -18,7 +14,7 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public Course FinById(int? id)
+        public Course FindById(int? id)
         {
             return _webshopContext._Courses.Find(id);
         }

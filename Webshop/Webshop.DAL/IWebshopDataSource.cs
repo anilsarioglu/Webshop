@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL
 {
-    interface WebshopDataSource
+    interface IWebshopDataSource
     {
         IQueryable<Invoice> Invoices { get; }
         IQueryable<InvoiceDetail> InvoiceDetails { get; }
         IQueryable<Vat> Vats { get; }
         IQueryable<Course> Courses { get; }
-        IQueryable<Products> Product { get; }
+        IQueryable<Product> Products { get; }
         IQueryable<ProductPrice> ProductPrices { get; }
-        void Save();
     }
 }
