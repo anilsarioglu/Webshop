@@ -11,16 +11,15 @@ namespace Webshop.SL.Controllers
 {
     public class ProductController : ApiController
     {
-        private ProductManager mgr = new ProductManager();
 
-        public IEnumerable<Product> Get()
+        public string Get()
         {
-            return mgr.GetAll();
+            return "test";
         }
 
-        public Product Get(int id)
+        public string Get(int id)
         {
-            return mgr.FindById(id);
+            return "test " + id;
         }
     }
 }
