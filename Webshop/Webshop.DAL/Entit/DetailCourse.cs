@@ -1,6 +1,6 @@
 ﻿namespace Webshop.DAL.Entit
 {
-    class DetailCourse
+    public class DetailCourse
     {
         public Course Course { get; set; }
         public int CourseId { get; set; }

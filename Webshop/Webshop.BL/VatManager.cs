@@ -8,21 +8,21 @@ using Webshop.DAL.Repositories;
 
 namespace Webshop.BL
 {
-    public class CourseManager : IManager<Course>
+    public class VatManager : IManager<Vat>
     {
-        private CourseRepo repo;
+        private VatRepo repo;
 
-        public CourseManager()
+        public VatManager()
         {
-            repo = new CourseRepo();
+            repo = new VatRepo();
         }
 
-        public void Add(Course t)
+        public void Add(Vat t)
         {
             repo.Add(t);
         }
 
-        public Course FinById(int? id)
+        public Vat FinById(int? id)
         {
             return repo.FindById(id);
         }
@@ -32,12 +32,12 @@ namespace Webshop.BL
             repo.Modify();
         }
 
-        public List<Course> GetAll()
+        public List<Vat> GetAll()
         {
             return repo.GetAll();
         }
 
-        public void Remove(Course t)
+        public void Remove(Vat t)
         {
             repo.Remove(t);
         }

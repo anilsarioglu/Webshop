@@ -5,7 +5,7 @@ using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Repositories
 {
-    public class DetailCourseRepo : IRepository<InvoiceDetail>
+    public class InvoiceDetailRepo : IRepository<InvoiceDetail>
     {
         private WebshopContext _webshopContext = new WebshopContext();
 

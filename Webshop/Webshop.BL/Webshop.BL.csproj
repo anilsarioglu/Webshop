@@ -53,10 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseManager.cs" />
+    <Compile Include="InvoiceDetailManager.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="IManager.cs" />
+    <Compile Include="InvoiceManager.cs" />
     <Compile Include="ProductManager.cs" />
+    <Compile Include="ProductPriceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VatManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
