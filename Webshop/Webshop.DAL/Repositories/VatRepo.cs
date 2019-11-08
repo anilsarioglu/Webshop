@@ -9,29 +9,29 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext _webshopContext = new WebshopContext();
 
-        public void Add(Vat t)
+        public void Create(Vat t)
         {
             _webshopContext._Vats.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public Vat FindById(int? id)
+        public Vat Read(int? id)
         {
             return _webshopContext._Vats.Find(id);
         }
 
-        public void Modify()
+        public void Update()
         {
             _webshopContext._Vats.AddOrUpdate();
             _webshopContext.SaveChanges();
         }
 
-        public List<Vat> GetAll()
+        public List<Vat> ReadAll()
         {
             return _webshopContext._Vats.ToList();
         }
 
-        public void Remove(Vat t)
+        public void Delete(Vat t)
         {
             _webshopContext._Vats.Remove(t);
             _webshopContext.SaveChanges();
