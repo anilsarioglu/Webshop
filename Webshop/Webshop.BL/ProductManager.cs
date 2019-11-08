@@ -19,27 +19,27 @@ namespace Webshop.BL
 
         public void Add(Product t)
         {
-            repo.Add(t);
+            repo.Create(t);
         }
 
         public Product FinById(int? id)
         {
-            return repo.FindById(id);
+            return repo.Read(id);
         }
 
         public void Modify()
         {
-            repo.Modify();
+            repo.Update();
         }
 
         public List<Product> GetAll()
         {
-            return repo.GetAll();
+            return repo.ReadAll();
         }
 
         public void Remove(Product t)
         {
-            repo.Remove(t);
+            repo.Delete(t);
         }
     }
 }

@@ -19,27 +19,27 @@ namespace Webshop.BL
 
         public void Add(Invoice t)
         {
-            repo.Add(t);
+            repo.Create(t);
         }
 
         public Invoice FinById(int? id)
         {
-            return repo.FindById(id);
+            return repo.Read(id);
         }
 
         public void Modify()
         {
-            repo.Modify();
+            repo.Update();
         }
 
         public List<Invoice> GetAll()
         {
-            return repo.GetAll();
+            return repo.ReadAll();
         }
 
         public void Remove(Invoice t)
         {
-            repo.Remove(t);
+            repo.Delete(t);
         }
     }
 }
