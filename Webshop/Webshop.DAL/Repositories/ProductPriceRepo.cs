@@ -9,29 +9,29 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext  _webshopContext = new WebshopContext();
 
-        public void Add(ProductPrice t)
+        public void Create(ProductPrice t)
         {
             _webshopContext._ProductPrices.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public ProductPrice FindById(int? id)
+        public ProductPrice Read(int? id)
         {
             return _webshopContext._ProductPrices.Find(id);
         }
 
-        public void Modify()
+        public void Update()
         {
             _webshopContext._ProductPrices.AddOrUpdate();
             _webshopContext.SaveChanges();
         }
 
-        public List<ProductPrice> GetAll()
+        public List<ProductPrice> ReadAll()
         {
             return _webshopContext._ProductPrices.ToList();
         }
 
-        public void Remove(ProductPrice t)
+        public void Delete(ProductPrice t)
         {
             _webshopContext._ProductPrices.Remove(t);
             _webshopContext.SaveChanges();
