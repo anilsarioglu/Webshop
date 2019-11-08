@@ -22,7 +22,7 @@ namespace Webshop.BL
             repo.Create(t);
         }
 
-        public Vat FinById(int? id)
+        public Vat FindById(int? id)
         {
             return repo.Read(id);
         }

@@ -22,7 +22,7 @@ namespace Webshop.BL
             repo.Create(t);
         }
 
-        public Course FinById(int? id)
+        public Course FindById(int? id)
         {
             return repo.Read(id);
         }
