@@ -9,7 +9,7 @@ namespace Webshop.BL
     interface IManager<T>
     {
         void Add(T t);
-        T FinById(int? id);
+        T FindById(int? id);
         void Modify();
         List<T> GetAll();
         void Remove(T t);
