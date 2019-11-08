@@ -351,3 +351,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Webshop/Webshop.DAL/App.config
+Webshop/Webshop.UI-MVC/Web.config
