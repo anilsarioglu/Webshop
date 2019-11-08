@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="EmailService.cs" />
     <Compile Include="IManager.cs" />
+    <Compile Include="ProductManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
