@@ -4,5 +4,10 @@
     {
         public int Id { get; set; }
         public int Percentage { get; set; }
+
+        public Vat(int percentage)
+        {
+            Percentage = percentage;
+        }
     }
 }

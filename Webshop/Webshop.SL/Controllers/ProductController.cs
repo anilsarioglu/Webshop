@@ -11,15 +11,24 @@ namespace Webshop.SL.Controllers
 {
     public class ProductController : ApiController
     {
-
-        public string Get()
+        private List<Product> SeedList()
         {
-            return "test";
+            List<Product> products = new List<Product>();
+            products.Add(new Product("Video", 120, DateTime.Now, DateTime.Now, null, null, null));
+            products.Add(new Product("Book", 40, DateTime.Now, DateTime.Now, null, null, null));
+            products.Add(new Product("CD", 80, DateTime.Now, DateTime.Now, null, null, null));
+            return products;
         }
 
-        public string Get(int id)
+        public IEnumerable<Product> Get()
         {
-            return "test " + id;
+            
+            return SeedList();
+        }
+
+        public Product Get(int id)
+        {
+            return SeedList().ElementAt(id - 1);
         }
     }
 }
