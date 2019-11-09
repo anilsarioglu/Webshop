@@ -8,5 +8,12 @@ namespace Webshop.DAL.Entit
         public decimal ProductPrices { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndTime { get; set; }
+
+        public ProductPrice(decimal productPrices, DateTime beginDate, DateTime endTime)
+        {
+            ProductPrices = productPrices;
+            BeginDate = beginDate;
+            EndTime = endTime;
+        }
     }
 }
