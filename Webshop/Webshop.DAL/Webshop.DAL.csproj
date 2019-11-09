@@ -59,6 +59,7 @@
     <Compile Include="Configuration\ProductConfiguration.cs" />
     <Compile Include="Configuration\ProductPriceConfiguration.cs" />
     <Compile Include="Configuration\VatConfiguration.cs" />
+    <Compile Include="DataHolder.cs" />
     <Compile Include="Entit\Course.cs" />
     <Compile Include="Entit\DetailCourse.cs" />
     <Compile Include="Entit\Invoice.cs" />

@@ -10,7 +10,7 @@ namespace Webshop.DAL.Configuration
             this.ToTable("Course");
             this.Property(c => c.Id);
             this.Property(c => c.Name).HasMaxLength(100);
-            this.Property(c => c.price).HasPrecision(8, 2);
+            this.Property(c => c.Price).HasPrecision(8, 2);
 
         }
     }

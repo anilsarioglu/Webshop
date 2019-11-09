@@ -10,6 +10,13 @@ namespace Webshop.DAL.Entit
         public bool IsPaid { get; set; }
         public string InvoiceCode { get; set; }
         public ICollection<InvoiceDetail> InvoiceDetails { get; set; }
-       
+
+        public Invoice(DateTime date, bool isPaid, string invoiceCode, ICollection<InvoiceDetail> invoiceDetails)
+        {
+            Date = date;
+            IsPaid = isPaid;
+            InvoiceCode = invoiceCode;
+            InvoiceDetails = invoiceDetails;
+        }
     }
 }
