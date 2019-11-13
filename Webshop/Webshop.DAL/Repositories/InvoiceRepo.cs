@@ -9,13 +9,18 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext _webshopContext = new WebshopContext();
 
-        public void Create(Invoice t)
+        public void Add(Invoice t)
         {
             _webshopContext._Invoices.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public Invoice Read(int? id)
+        public Invoice FindById(int? id)
+        {
+            return _webshopContext._Invoices.Find(id);
+        }
+
+        public Invoice FinById(int? id)
         {
             return _webshopContext._Invoices.Find(id);
         }
@@ -27,12 +32,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public List<Invoice> ReadAll()
+        public List<Invoice> GetAll()
         {
             return _webshopContext._Invoices.ToList();
         }
 
-        public void Delete(Invoice t)
+        public void Remove(Invoice t)
         {
             _webshopContext._Invoices.Remove(t);
             _webshopContext.SaveChanges();

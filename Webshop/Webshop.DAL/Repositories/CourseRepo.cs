@@ -8,13 +8,13 @@ namespace Webshop.DAL.Repositories
     public class CourseRepo : IRepository<Course>
     {
         private WebshopContext _webshopContext = new WebshopContext();
-        public void Create(Course course)
+        public void Add(Course course)
         {
             _webshopContext._Courses.Add(course);
             _webshopContext.SaveChanges();
         }
 
-        public Course Read(int? id)
+        public Course FindById(int? id)
         {
             return _webshopContext._Courses.Find(id);
         }
@@ -24,12 +24,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext._Courses.AddOrUpdate(course);
         }
 
-        public List<Course> ReadAll()
+        public List<Course> GetAll()
         {
             return _webshopContext._Courses.ToList();
         }
 
-        public void Delete(Course t)
+        public void Remove(Course t)
         {
             _webshopContext._Courses.Remove(t);
         }

@@ -9,13 +9,13 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext _webshopContext = new WebshopContext();
 
-        public void Create(Product t)
+        public void Add(Product t)
         {
             _webshopContext._Products.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public Product Read(int? id)
+        public Product FindById(int? id)
         {
             return _webshopContext._Products.Find(id);
         }
@@ -26,12 +26,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public List<Product> ReadAll()
+        public List<Product> GetAll()
         {
             return _webshopContext._Products.ToList();
         }
 
-        public void Delete(Product t)
+        public void Remove(Product t)
         {
             _webshopContext._Products.Remove(t);
             _webshopContext.SaveChanges();

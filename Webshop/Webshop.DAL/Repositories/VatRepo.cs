@@ -9,13 +9,13 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext _webshopContext = new WebshopContext();
 
-        public void Create(Vat t)
+        public void Add(Vat t)
         {
             _webshopContext._Vats.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public Vat Read(int? id)
+        public Vat FindById(int? id)
         {
             return _webshopContext._Vats.Find(id);
         }
@@ -26,12 +26,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public List<Vat> ReadAll()
+        public List<Vat> GetAll()
         {
             return _webshopContext._Vats.ToList();
         }
 
-        public void Delete(Vat t)
+        public void Remove(Vat t)
         {
             _webshopContext._Vats.Remove(t);
             _webshopContext.SaveChanges();

@@ -9,28 +9,29 @@ namespace Webshop.DAL.Repositories
     {
         private WebshopContext _webshopContext = new WebshopContext();
 
-        public void Create(InvoiceDetail t)
+        public void Add(InvoiceDetail t)
         {
             _webshopContext._InvoiceDetails.Add(t);
             _webshopContext.SaveChanges();
         }
 
-        public InvoiceDetail Read(int? id)
+        public InvoiceDetail FindById(int? id)
         {
             return _webshopContext._InvoiceDetails.Find(id);
         }
 
-        public void Update()
+        public void Modify(InvoiceDetail t)
         {
             _webshopContext._InvoiceDetails.AddOrUpdate();
+
         }
 
-        public List<InvoiceDetail> ReadAll()
+        public List<InvoiceDetail> GetAll()
         {
             return _webshopContext._InvoiceDetails.ToList();
         }
 
-        public void Delete(InvoiceDetail t)
+        public void Remove(InvoiceDetail t)
         {
             _webshopContext._InvoiceDetails.Remove(t);
         }
