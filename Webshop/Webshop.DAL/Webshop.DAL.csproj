@@ -68,17 +68,14 @@
     <Compile Include="Entit\ProductPrice.cs" />
     <Compile Include="Entit\Product.cs" />
     <Compile Include="Entit\Vat.cs" />
-    <Compile Include="Migrations\201911071036412_Initial.cs" />
-    <Compile Include="Migrations\201911071036412_Initial.designer.cs">
-      <DependentUpon>201911071036412_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911071836278_Corrections.cs" />
-    <Compile Include="Migrations\201911071836278_Corrections.designer.cs">
-      <DependentUpon>201911071836278_Corrections.cs</DependentUpon>
+    <Compile Include="Migrations\201911081629537_initial.cs" />
+    <Compile Include="Migrations\201911081629537_initial.designer.cs">
+      <DependentUpon>201911081629537_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CourseRepo.cs" />
+    <Compile Include="Repositories\DetailCourseRepo.cs" />
     <Compile Include="Repositories\InvoiceDetailRepo.cs" />
     <Compile Include="Repositories\InvoiceRepo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -99,14 +96,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911071036412_Initial.resx">
-      <DependentUpon>201911071036412_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911071836278_Corrections.resx">
-      <DependentUpon>201911071836278_Corrections.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911081629537_initial.resx">
+      <DependentUpon>201911081629537_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

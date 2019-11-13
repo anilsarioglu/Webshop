@@ -20,9 +20,10 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Invoices.Find(id);
         }
 
-        public void Update()
+
+        public void Modify(Invoice invoice)
         {
-            _webshopContext._Invoices.AddOrUpdate();
+            _webshopContext._Invoices.AddOrUpdate(invoice);
             _webshopContext.SaveChanges();
         }
 
@@ -36,5 +37,6 @@ namespace Webshop.DAL.Repositories
             _webshopContext._Invoices.Remove(t);
             _webshopContext.SaveChanges();
         }
+        
     }
 }

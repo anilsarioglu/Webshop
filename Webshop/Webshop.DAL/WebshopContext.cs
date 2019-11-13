@@ -5,7 +5,7 @@ using Webshop.DAL.Entit;
 
 namespace Webshop.DAL
 {
-    class WebshopContext : DbContext,IWebshopDataSource
+    public class WebshopContext : DbContext,IWebshopDataSource
     {
         public WebshopContext() : base("Webshop")
         {
@@ -37,5 +37,7 @@ namespace Webshop.DAL
             modelBuilder.Configurations.Add(new ProductPriceConfiguration());
 
         }
+
+        public System.Data.Entity.DbSet<Webshop.Domain.CourseDTO> CourseDTOes { get; set; }
     }
 }

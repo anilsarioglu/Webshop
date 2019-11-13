@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,15 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseManager.cs" />
-    <Compile Include="InvoiceDetailManager.cs" />
+    <Compile Include="CourseLogic.cs" />
     <Compile Include="EmailService.cs" />
-    <Compile Include="IManager.cs" />
-    <Compile Include="InvoiceManager.cs" />
-    <Compile Include="ProductManager.cs" />
-    <Compile Include="ProductPriceManager.cs" />
+    <Compile Include="InvoiceDetailLogic.cs" />
+    <Compile Include="InvoiceLogic.cs" />
+    <Compile Include="ProductLogic.cs" />
+    <Compile Include="ProductPriceLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VatManager.cs" />
+    <Compile Include="VatLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -70,6 +72,10 @@
     <ProjectReference Include="..\Webshop.DAL\Webshop.DAL.csproj">
       <Project>{62FE80E5-8F85-4C76-95A1-7AF9EEB16455}</Project>
       <Name>Webshop.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Webshop.Domain\Webshop.Domain.csproj">
+      <Project>{E6D9123E-6F6F-4D8C-8A04-49961F4F8C6C}</Project>
+      <Name>Webshop.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

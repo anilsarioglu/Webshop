@@ -19,9 +19,9 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Courses.Find(id);
         }
 
-        public void Update()
+        public void Modify(Course course)
         {
-            _webshopContext._Courses.AddOrUpdate();
+            _webshopContext._Courses.AddOrUpdate(course);
         }
 
         public List<Course> ReadAll()

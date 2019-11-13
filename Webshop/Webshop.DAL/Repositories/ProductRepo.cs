@@ -20,7 +20,7 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Products.Find(id);
         }
 
-        public void Update()
+        public void Modify(Product product)
         {
             _webshopContext._Products.AddOrUpdate();
             _webshopContext.SaveChanges();
