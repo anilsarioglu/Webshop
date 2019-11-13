@@ -6,7 +6,7 @@ namespace Webshop.DAL.Repositories
     {
         void Add(TEntity t );
         TEntity FindById(int? id);
-        void Modify();
+        void Modify<T>(T t);
         List<TEntity> GetAll();
         void Remove(TEntity t);
     }

@@ -20,9 +20,9 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._ProductPrices.Find(id);
         }
 
-        public void Modify()
+        public void Modify(ProductPrice productPrice)
         {
-            _webshopContext._ProductPrices.AddOrUpdate();
+            _webshopContext._ProductPrices.AddOrUpdate(productPrice);
             _webshopContext.SaveChanges();
         }
 

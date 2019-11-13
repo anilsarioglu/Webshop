@@ -20,7 +20,7 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Vats.Find(id);
         }
 
-        public void Modify()
+        public void Modify(Vat vat)
         {
             _webshopContext._Vats.AddOrUpdate();
             _webshopContext.SaveChanges();

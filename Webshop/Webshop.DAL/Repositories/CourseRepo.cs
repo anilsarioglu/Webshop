@@ -5,7 +5,7 @@ using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Repositories
 {
-    class CourseRepo : IRepository<Course>
+    public class CourseRepo : IRepository<Course>
     {
         private WebshopContext _webshopContext = new WebshopContext();
         public void Add(Course course)
@@ -19,9 +19,9 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Courses.Find(id);
         }
 
-        public void Modify()
+        public void Modify(Course course)
         {
-            _webshopContext._Courses.AddOrUpdate();
+            _webshopContext._Courses.AddOrUpdate(course);
         }
 
         public List<Course> GetAll()
