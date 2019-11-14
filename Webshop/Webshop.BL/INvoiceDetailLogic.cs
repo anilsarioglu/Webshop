@@ -38,12 +38,12 @@ namespace Webshop.BL
 
         public void Create(InvoiceDetailDTO c)
         {
-            _invoiceDetailRepo.c((Map(c));
+            _invoiceDetailRepo.Add(Map(c));
         }
 
         public InvoiceDetailDTO FindByID(int? id)
         {
-            InvoiceDetail c = _invoiceDetailRepo.Read(id);
+            InvoiceDetail c = _invoiceDetailRepo.FindById(id);
 
             return Map(c);
         }

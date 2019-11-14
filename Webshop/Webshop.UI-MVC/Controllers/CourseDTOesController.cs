@@ -54,7 +54,7 @@ namespace Webshop.UI_MVC.Controllers
             {
                 
             }
-            _courseLogic.Add(courseDTO);
+            _courseLogic.Create(courseDTO);
             return View(courseDTO);
         }
 
