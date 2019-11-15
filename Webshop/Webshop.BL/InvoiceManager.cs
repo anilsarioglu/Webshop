@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,7 +34,7 @@ namespace Webshop.BL
 
         public List<Invoice> GetAll()
         {
-            return repo.ReadAll();
+            return repo.GetAll();
         }
 
         public void Remove(Invoice t)

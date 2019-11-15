@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+using System.Data.Entity;
 using System.Linq;
 using Webshop.DAL.Configuration;
 using Webshop.DAL.Entit;
@@ -10,6 +10,7 @@ namespace Webshop.DAL
         public WebshopContext() : base("Webshop")
         {
         }
+
         public DbSet<Invoice> _Invoices { get; set; }
         public DbSet<InvoiceDetail> _InvoiceDetails { get; set; }
         public DbSet<Vat> _Vats { get; set; }
