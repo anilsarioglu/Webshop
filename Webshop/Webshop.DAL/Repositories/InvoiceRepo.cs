@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -26,7 +26,7 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-        public List<Invoice> ReadAll()
+        public List<Invoice> GetAll()
         {
             return _webshopContext._Invoices.ToList();
         }
@@ -36,5 +36,22 @@ namespace Webshop.DAL.Repositories
             _webshopContext._Invoices.Remove(t);
             _webshopContext.SaveChanges();
         }
+
+    public void insertData()
+    {
+      List<Invoice> invoices = DataHolder.GetInvoices();
+      for (int i = 0; i < invoices.Count; i++)
+      {
+        Invoice invoice = invoices[i];
+        invoice.Id = i;
+        _webshopContext._Invoices.Add(invoice);
+      }
+      _webshopContext.SaveChanges();
+      //foreach (Invoice item in DataHolder.GetInvoices())
+      //{
+      //  _webshopContext._Invoices.Add(item);
+      //}
+      //_webshopContext.SaveChanges();
+    }
     }
 }

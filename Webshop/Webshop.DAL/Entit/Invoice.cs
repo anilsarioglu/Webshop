@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Webshop.DAL.Entit
@@ -13,10 +13,10 @@ namespace Webshop.DAL.Entit
 
         public Invoice(DateTime date, bool isPaid, string invoiceCode, ICollection<InvoiceDetail> invoiceDetails)
         {
-            Date = date;
-            IsPaid = isPaid;
-            InvoiceCode = invoiceCode;
-            InvoiceDetails = invoiceDetails;
+            this.Date = date;
+            this.IsPaid = isPaid;
+            this.InvoiceCode = invoiceCode;
+            this.InvoiceDetails = invoiceDetails;
         }
     }
 }

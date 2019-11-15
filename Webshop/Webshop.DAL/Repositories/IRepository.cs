@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Webshop.DAL.Repositories
 {
@@ -7,7 +7,7 @@ namespace Webshop.DAL.Repositories
         void Create(TEntity t );
         TEntity Read(int? id);
         void Update();
-        List<TEntity> ReadAll();
+        List<TEntity> GetAll();
         void Delete(TEntity t);
     }
 }
