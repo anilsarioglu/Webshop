@@ -18,5 +18,9 @@ namespace Webshop.DAL.Entit
             this.InvoiceCode = invoiceCode;
             this.InvoiceDetails = invoiceDetails;
         }
+
+        public Invoice()
+        {
+        }
     }
 }
