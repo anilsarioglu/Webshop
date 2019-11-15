@@ -37,21 +37,16 @@ namespace Webshop.DAL.Repositories
             _webshopContext.SaveChanges();
         }
 
-    public void insertData()
-    {
-      List<Invoice> invoices = DataHolder.GetInvoices();
-      for (int i = 0; i < invoices.Count; i++)
-      {
-        Invoice invoice = invoices[i];
-        invoice.Id = i;
-        _webshopContext._Invoices.Add(invoice);
-      }
-      _webshopContext.SaveChanges();
-      //foreach (Invoice item in DataHolder.GetInvoices())
-      //{
-      //  _webshopContext._Invoices.Add(item);
-      //}
-      //_webshopContext.SaveChanges();
-    }
+        public void insertData()
+        {
+            List<Invoice> invoices = DataHolder.GetInvoices();
+            for (int i = 0; i < invoices.Count; i++)
+            {
+                Invoice invoice = invoices[i];
+                invoice.Id = i;
+                _webshopContext._Invoices.Add(invoice);
+            }
+            _webshopContext.SaveChanges();
+        }
     }
 }
