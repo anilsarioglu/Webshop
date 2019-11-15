@@ -5,7 +5,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Webshop.BL;
-using Webshop.DAL.Entit;
 
 namespace Webshop.SL.Controllers
 {
