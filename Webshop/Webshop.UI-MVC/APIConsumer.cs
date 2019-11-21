@@ -21,7 +21,7 @@ namespace Webshop.UI_MVC
                 {
                     var readJob = result.Content.ReadAsStringAsync();
                     JavaScriptSerializer JSserializer = new JavaScriptSerializer();
-                    objects = JSserializer.Deserialize<List<T>>(readJob.Result);
+                    objects = JSserializer.Deserialize<IEnumerable<T>>(readJob.Result);
                 }
                 return objects;
             }

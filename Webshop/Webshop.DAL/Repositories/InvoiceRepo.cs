@@ -20,12 +20,6 @@ namespace Webshop.DAL.Repositories
             return _webshopContext._Invoices.Find(id);
         }
 
-        public Invoice FinById(int? id)
-        {
-            return _webshopContext._Invoices.Find(id);
-        }
-
-
         public void Modify(Invoice invoice)
         {
             _webshopContext._Invoices.AddOrUpdate(invoice);

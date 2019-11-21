@@ -14,7 +14,6 @@ namespace Webshop.BL
     {
         private ProductRepo _productRepo  = new ProductRepo();
 
-
         public static Product Map(ProductDTO e)
         {
 

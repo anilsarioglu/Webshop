@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Webshop.DAL.Entit;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
     {
@@ -18,6 +19,16 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+            foreach (Invoice invoice in DataHolder.GetInvoices())
+            {
+                context._Invoices.Add(invoice);
+            }
+            foreach(Product product in DataHolder.GetProducts())
+            {
+                context._Products.Add(product);
+            }
+
+            context.SaveChanges();
         }
     }
 }

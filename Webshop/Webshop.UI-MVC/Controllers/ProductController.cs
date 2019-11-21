@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Webshop.DAL.Entit;
 using Webshop.Domain;
 
 namespace Webshop.UI_MVC.Controllers
@@ -14,9 +13,9 @@ namespace Webshop.UI_MVC.Controllers
     {
         IEnumerable<ProductDTO> products = APIConsumer<ProductDTO>.GetAPI("product");
         // GET: Product
-        public  ActionResult Index()
+        public ActionResult Index()
         {
-            
+
             return View(products);
         }
 

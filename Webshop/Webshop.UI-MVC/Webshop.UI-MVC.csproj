@@ -250,6 +250,8 @@
     <Content Include="Views\CourseDTOes\Details.cshtml" />
     <Content Include="Views\CourseDTOes\Edit.cshtml" />
     <Content Include="Views\CourseDTOes\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

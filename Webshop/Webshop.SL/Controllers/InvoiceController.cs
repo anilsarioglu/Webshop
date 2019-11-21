@@ -18,9 +18,9 @@ namespace Webshop.SL.Controllers
             invoiceLogic = new InvoiceLogic();
         }
 
-        public List<InvoiceDTO> GetInvoices()
+        public IEnumerable<InvoiceDTO> GetInvoices()
         {
-            return invoiceLogic.GetAll();
+            return invoiceLogic.GetAll().AsEnumerable();
         }
     }
 }

@@ -14,6 +14,11 @@ namespace Webshop.DAL.Entit
         public ICollection<Vat> Vats { get; set; }
         public ICollection<ProductPrice> ProductPrices { get; set; }
 
+        public Product()
+        {
+
+        }
+
         public Product(string name, int duration, DateTime startDate, DateTime endDate, ICollection<Course> courses, ICollection<Vat> vats, ICollection<ProductPrice> productPrices)
         {
             Name = name;
