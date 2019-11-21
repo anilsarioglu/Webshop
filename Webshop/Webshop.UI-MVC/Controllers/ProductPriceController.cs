@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop.DAL.Entit;
+using Webshop.Domain;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class ProductPriceController : Controller
     {
-        private IEnumerable<ProductPrice> productPrices = APIConsumer<ProductPrice>.GetAPI("productprice");
+        private IEnumerable<ProductPriceDTO> productPrices = APIConsumer<ProductPriceDTO>.GetAPI("productprice");
         // GET: ProductPrice
         public ActionResult Index()
         {

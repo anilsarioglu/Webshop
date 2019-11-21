@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop.DAL.Entit;
+using Webshop.Domain;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class VatController : Controller
     {
-        private IEnumerable<Vat> vats = APIConsumer<Vat>.GetAPI("vat");
+        private IEnumerable<VatDTO> vats = APIConsumer<VatDTO>.GetAPI("vat");
 
         // GET: Vat
         public ActionResult Index()

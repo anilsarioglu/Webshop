@@ -4,21 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop.DAL.Entit;
+using Webshop.Domain;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class CourseController : Controller
     {
+        private IEnumerable<CourseDTO> courses = APIConsumer<CourseDTO>.GetAPI("course");
+
         // GET: Course
         public ActionResult Index()
         {
-            return View(APIConsumer<Course>.GetAPI("course"));
+            return View(courses);
         }
 
         // GET: Course/Details/5
         public ActionResult Details(int id)
         {
-            return View(APIConsumer<Product>.GetAPI("course").ElementAt(id + 1));
+            return View(courses.ElementAt(id + 1));
         }
 
         // GET: Course/Create
@@ -46,7 +49,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(courses.ElementAt(id + 1));
         }
 
         // POST: Course/Edit/5
@@ -68,7 +71,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(courses.ElementAt(id + 1));
         }
 
         // POST: Course/Delete/5

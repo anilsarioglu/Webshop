@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop.DAL.Entit;
+using Webshop.Domain;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class InvoiceDetailController : Controller
     {
-        private IEnumerable<InvoiceDetail> invoiceDetails = APIConsumer<InvoiceDetail>.GetAPI("invoicedetail");
+        private IEnumerable<InvoiceDetailDTO> invoiceDetails = APIConsumer<InvoiceDetailDTO>.GetAPI("invoicedetail");
 
         // GET: InvoiceDetail
         public ActionResult Index()
