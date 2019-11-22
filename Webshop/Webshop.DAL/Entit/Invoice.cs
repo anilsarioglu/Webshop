@@ -11,7 +11,8 @@ namespace Webshop.DAL.Entit
         public string InvoiceCode { get; set; }
         public ICollection<InvoiceDetail> InvoiceDetails { get; set; }
 
-        public Invoice(DateTime date, bool isPaid, string invoiceCode, ICollection<InvoiceDetail> invoiceDetails)
+
+    public Invoice(DateTime date, bool isPaid, string invoiceCode, ICollection<InvoiceDetail> invoiceDetails)
         {
             this.Date = date;
             this.IsPaid = isPaid;
