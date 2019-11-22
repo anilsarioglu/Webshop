@@ -15,5 +15,10 @@ namespace Webshop.DAL.Entit
             BeginDate = beginDate;
             EndTime = endTime;
         }
+
+        public ProductPrice()
+        {
+            
+        }
     }
 }
