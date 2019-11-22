@@ -10,7 +10,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    class InvoiceDetailLogic
+    public class InvoiceDetailLogic
     {
         private InvoiceDetailRepo _invoiceDetailRepo = new InvoiceDetailRepo();
 
