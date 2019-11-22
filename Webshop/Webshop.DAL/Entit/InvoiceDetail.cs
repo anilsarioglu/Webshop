@@ -5,6 +5,10 @@
         public int Id { get; set; }
         public int Pieces { get; set; }
 
+        public InvoiceDetail()
+        {
+            
+        }
         public InvoiceDetail(int pieces)
         {
             Pieces = pieces;

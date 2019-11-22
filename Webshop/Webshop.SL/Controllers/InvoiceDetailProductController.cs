@@ -11,16 +11,5 @@ namespace Webshop.SL.Controllers
 {
     public class InvoiceDetailProductController : ApiController
     {
-        private InvoiceDetailLogic invoiceDetailLogic = new InvoiceDetailLogic();
-
-        public IEnumerable<InvoiceDetailDTO> Get()
-        {
-            return invoiceDetailLogic.GetAll().AsEnumerable();
-        }
-
-        public string Get(int id)
-        {
-            return "test " + id;
-        }
     }
 }
