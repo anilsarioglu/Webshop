@@ -15,7 +15,7 @@ namespace Webshop.BL
             mail.Body = "This is for testing SMTP mail from GMAIL";
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("teampuntkomma@gmail.com", "TeamPuntKomma");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("teampuntkomma@gmail.com", "TeamPuntKomma3");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
