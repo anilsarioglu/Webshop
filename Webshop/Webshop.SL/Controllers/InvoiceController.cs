@@ -32,6 +32,7 @@ namespace Webshop.SL.Controllers
           return invoiceLogic.FindByID(id);
         }
 
+        [HttpDelete]
         public void Delete(InvoiceDTO invoiceDTO)
         {
           invoiceLogic.Delete(invoiceDTO);

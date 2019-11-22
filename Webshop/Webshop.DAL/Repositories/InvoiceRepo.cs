@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -33,8 +33,9 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Invoice t)
         {
-            _webshopContext._Invoices.Remove(t);
-            _webshopContext.SaveChanges();
+      //_webshopContext._Invoices.Remove(t);
+          _webshopContext.Entry(t).State = System.Data.Entity.EntityState.Deleted;
+          _webshopContext.SaveChanges();
         }
 
         public void insertData()
