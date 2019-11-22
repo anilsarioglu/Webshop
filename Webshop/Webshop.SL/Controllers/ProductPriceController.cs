@@ -4,22 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Webshop.DAL;
-using Webshop.DAL.Entit;
+using Webshop.Domain;
 
 namespace Webshop.SL.Controllers
 {
     public class ProductPriceController : ApiController
     {
-        public IEnumerable<ProductPrice> Get()
+        public IEnumerable<ProductPriceDTO> Get()
         {
 
-            return DataHolder.GetProductPrices();
+            return null;
         }
 
-        public ProductPrice Get(int id)
+        public ProductPriceDTO Get(int id)
         {
-            return DataHolder.GetProductPrices().ElementAt(id - 1);
+            return null;
         }
     }
 }
