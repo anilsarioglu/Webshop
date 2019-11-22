@@ -186,6 +186,15 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Webshop\Course.cs" />
+    <Compile Include="Models\Webshop\Customer.cs" />
+    <Compile Include="Models\Webshop\DetailCourse.cs" />
+    <Compile Include="Models\Webshop\Invoice.cs" />
+    <Compile Include="Models\Webshop\InvoiceDetail.cs" />
+    <Compile Include="Models\Webshop\InvoiceDetailProduct.cs" />
+    <Compile Include="Models\Webshop\Product.cs" />
+    <Compile Include="Models\Webshop\ProductPrice.cs" />
+    <Compile Include="Models\Webshop\Vat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
