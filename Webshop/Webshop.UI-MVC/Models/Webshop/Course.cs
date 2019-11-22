@@ -12,4 +12,3 @@ namespace Webshop.UI_MVC.Models.Webshop
         public decimal price { get; set; }
     }
 }
-}

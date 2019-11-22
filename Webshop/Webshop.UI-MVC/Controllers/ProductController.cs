@@ -6,23 +6,30 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Webshop.Domain;
+using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class ProductController : Controller
     {
-        IEnumerable<ProductDTO> products = APIConsumer<ProductDTO>.GetAPI("product");
+        IEnumerable<ProductDTO> productsDTO = APIConsumer<ProductDTO>.GetAPI("product");
+
         // GET: Product
         public ActionResult Index()
         {
+            List<Product> products = new List<Product>();
 
+            foreach (ProductDTO dto in productsDTO)
+            {
+                products.Add(MapDTO.Map<Product, ProductDTO>(dto));
+            }
             return View(products);
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View(products.ElementAt(id + 1));
+            return View();
         }
 
         // GET: Product/Create
@@ -50,7 +57,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(products.ElementAt(id + 1));
+            return View();
         }
 
         // POST: Product/Edit/5
@@ -72,7 +79,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(products.ElementAt(id + 1));
+            return View();
         }
 
         // POST: Product/Delete/5
