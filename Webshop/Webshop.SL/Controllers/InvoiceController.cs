@@ -36,6 +36,7 @@ namespace Webshop.SL.Controllers
         {
           invoiceLogic.Delete(invoiceDTO);
         }
+        [HttpPut]
         public void Update(InvoiceDTO invoiceDTO)
         {
            invoiceLogic.Update(invoiceDTO);
