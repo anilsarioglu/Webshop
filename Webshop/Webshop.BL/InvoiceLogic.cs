@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,20 +52,21 @@ namespace Webshop.BL
             _invoiceRepo.Remove(Map(c));
         }
 
+
         public List<InvoiceDTO> GetAll()
         {
-            List<Invoice> invoices = _invoiceRepo.GetAll();
-            List<InvoiceDTO> invoiceDtos = new List<InvoiceDTO>();
+          List<Invoice> invoices = _invoiceRepo.GetAll();
+          List<InvoiceDTO> invoiceDTO = new List<InvoiceDTO>();
 
-            foreach (Invoice c in invoices)
-            {
-                invoiceDtos.Add(Map(c));
-            }
+          foreach (Invoice c in invoices)
+          {
+             invoiceDTO.Add(Map(c));
+          }
 
-            return invoiceDtos;
+         return invoiceDTO;
         }
 
-        public void Update(InvoiceDTO c)
+    public void Update(InvoiceDTO c)
         {
 
             _invoiceRepo.Modify(Map(c));

@@ -13,14 +13,32 @@ namespace Webshop.SL.Controllers
     {
         public InvoiceLogic invoiceLogic;
 
+
+        
         public InvoiceController()
         {
             invoiceLogic = new InvoiceLogic();
         }
 
+       
         public IEnumerable<InvoiceDTO> GetInvoices()
         {
+
             return invoiceLogic.GetAll().AsEnumerable();
         }
-    }
+
+        public InvoiceDTO Get(int id)
+        {
+          return invoiceLogic.FindByID(id);
+        }
+
+        public void Delete(InvoiceDTO invoiceDTO)
+        {
+          invoiceLogic.Delete(invoiceDTO);
+        }
+        public void Update(InvoiceDTO invoiceDTO)
+        {
+           invoiceLogic.Update(invoiceDTO);
+        }
+  }
 }
