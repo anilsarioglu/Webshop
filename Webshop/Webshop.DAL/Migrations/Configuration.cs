@@ -28,6 +28,10 @@
                 context._Products.Add(product);
             }
 
+            foreach (ProductPrice productPrice in DataHolder.GetProductPrices())
+            {
+                context._ProductPrices.Add(productPrice);
+            }
             context.SaveChanges();
         }
     }
