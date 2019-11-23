@@ -23,10 +23,12 @@
             {
                 context._Invoices.Add(invoice);
             }
+
             foreach(Product product in DataHolder.GetProducts())
             {
                 context._Products.Add(product);
             }
+
             foreach (InvoiceDetail detail in DataHolder.GetInvoiceDetails())
             {
                 context._InvoiceDetails.Add(detail);
@@ -36,6 +38,7 @@
             {
                 context._ProductPrices.Add(productPrice);
             }
+
             context.SaveChanges();
         }
     }

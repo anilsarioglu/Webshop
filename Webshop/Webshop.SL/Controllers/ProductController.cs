@@ -11,7 +11,12 @@ namespace Webshop.SL.Controllers
 {
     public class ProductController : ApiController
     {
-        private ProductLogic productLogic = new ProductLogic();
+        private ILogic<ProductDTO> productLogic;
+
+        public ProductController(ProductLogic logic)
+        {
+            productLogic = logic;
+        }
 
         public IEnumerable<ProductDTO> Get()
         {

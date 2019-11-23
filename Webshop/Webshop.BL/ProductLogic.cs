@@ -10,7 +10,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    public class ProductLogic
+    public class ProductLogic : ILogic<ProductDTO>
     {
         private ProductRepo _productRepo  = new ProductRepo();
 
@@ -54,6 +54,7 @@ namespace Webshop.BL
 
         public List<ProductDTO> GetAll()
         {
+
             List<Product> products = _productRepo.GetAll();
             List<ProductDTO> productDtos = new List<ProductDTO>();
 

@@ -28,6 +28,11 @@ namespace Webshop.DAL.Repositories
 
         public List<Product> GetAll()
         {
+            foreach (Product product in DataHolder.GetProducts())
+            {
+                _webshopContext._Products.Add(product);
+            }
+            _webshopContext.SaveChanges();
             return _webshopContext._Products.ToList();
         }
 

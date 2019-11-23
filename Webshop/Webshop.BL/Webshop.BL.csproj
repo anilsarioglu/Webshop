@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="CourseLogic.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="ILogic.cs" />
     <Compile Include="InvoiceDetailLogic.cs" />
     <Compile Include="InvoiceLogic.cs" />
     <Compile Include="ProductLogic.cs" />

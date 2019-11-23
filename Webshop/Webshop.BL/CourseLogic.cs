@@ -12,7 +12,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    public class CourseLogic
+    public class CourseLogic : ILogic<CourseDTO>
     {
         private CourseRepo _courseRepo = new CourseRepo();
         
