@@ -10,7 +10,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    public class ProductPriceLogic
+    public class ProductPriceLogic : ILogic<ProductPriceDTO>
     {
         private ProductPriceRepo _productPriceRepo = new ProductPriceRepo();
 

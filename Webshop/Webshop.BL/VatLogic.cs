@@ -10,7 +10,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    class VatLogic
+    public class VatLogic : ILogic<VatDTO>
     {
         private VatRepo _vatRepo = new VatRepo();
 

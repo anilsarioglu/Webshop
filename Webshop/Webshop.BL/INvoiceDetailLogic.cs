@@ -10,7 +10,7 @@ using Webshop.Domain;
 
 namespace Webshop.BL
 {
-    public class InvoiceDetailLogic
+    public class InvoiceDetailLogic : ILogic<InvoiceDetailDTO>
     {
         private InvoiceDetailRepo _invoiceDetailRepo = new InvoiceDetailRepo();
 

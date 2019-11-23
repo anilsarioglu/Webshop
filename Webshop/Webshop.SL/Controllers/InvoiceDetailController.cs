@@ -11,7 +11,12 @@ namespace Webshop.SL.Controllers
 {
     public class InvoiceDetailController : ApiController
     {
-        private InvoiceDetailLogic invoiceDetailLogic = new InvoiceDetailLogic();
+        private ILogic<InvoiceDetailDTO> invoiceDetailLogic;
+
+        public InvoiceDetailController(InvoiceDetailLogic logic)
+        {
+            invoiceDetailLogic = logic;
+        }
 
         public IEnumerable<InvoiceDetailDTO> Get()
         {

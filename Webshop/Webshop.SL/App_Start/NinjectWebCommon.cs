@@ -65,8 +65,12 @@ namespace Webshop.SL.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            
+            kernel.Bind<ILogic<CourseDTO>>().To<CourseLogic>();
+            kernel.Bind<ILogic<InvoiceDTO>>().To<InvoiceLogic>();
+            kernel.Bind<ILogic<InvoiceDetailDTO>>().To<InvoiceDetailLogic>();
             kernel.Bind<ILogic<ProductDTO>>().To<ProductLogic>();
+            kernel.Bind<ILogic<ProductPriceDTO>>().To<ProductPriceLogic>();
+            kernel.Bind<ILogic<VatDTO>>().To<VatLogic>();
         }        
     }
 }

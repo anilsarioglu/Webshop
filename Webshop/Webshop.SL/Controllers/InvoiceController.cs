@@ -11,15 +11,12 @@ namespace Webshop.SL.Controllers
 {
     public class InvoiceController : ApiController
     {
-        public InvoiceLogic invoiceLogic;
-
-
+        public ILogic<InvoiceDTO> invoiceLogic;
         
-        public InvoiceController()
+        public InvoiceController(InvoiceLogic logic)
         {
-            invoiceLogic = new InvoiceLogic();
+            invoiceLogic = logic;
         }
-
        
         public IEnumerable<InvoiceDTO> GetInvoices()
         {
