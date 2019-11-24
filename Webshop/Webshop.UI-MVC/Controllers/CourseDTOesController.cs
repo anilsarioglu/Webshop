@@ -15,7 +15,6 @@ namespace Webshop.UI_MVC.Controllers
     public class CourseDTOesController : Controller
     {
         private WebshopContext db = new WebshopContext();
-        private CourseLogic _courseLogic = new CourseLogic();
         // GET: CourseDTOes
         public ActionResult Index()
         {
@@ -54,7 +53,6 @@ namespace Webshop.UI_MVC.Controllers
             {
                 
             }
-            _courseLogic.Create(courseDTO);
             return View(courseDTO);
         }
 

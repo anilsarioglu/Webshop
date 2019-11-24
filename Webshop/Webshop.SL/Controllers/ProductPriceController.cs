@@ -11,11 +11,11 @@ namespace Webshop.SL.Controllers
 {
     public class ProductPriceController : ApiController
     {
-        private ILogic<ProductPriceDTO> productPriceLogic;
+        private ILogic<ProductPriceDTO> _productPriceLogic;
 
         public ProductPriceController(ProductPriceLogic logic)
         {
-            productPriceLogic = logic;
+            _productPriceLogic = logic;
         }
 
         //GET /api/productprice

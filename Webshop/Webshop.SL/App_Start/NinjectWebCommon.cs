@@ -12,6 +12,8 @@ namespace Webshop.SL.App_Start
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
     using Webshop.BL;
+    using Webshop.DAL.Entit;
+    using Webshop.DAL.Repositories;
     using Webshop.Domain;
 
     public static class NinjectWebCommon 
@@ -65,6 +67,13 @@ namespace Webshop.SL.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<IRepository<Course>>().To<CourseRepo>();
+            kernel.Bind<IRepository<InvoiceDetail>>().To<InvoiceDetailRepo>();
+            kernel.Bind<IRepository<Invoice>>().To<InvoiceRepo>();
+            kernel.Bind<IRepository<Product>>().To<ProductRepo>();
+            kernel.Bind<IRepository<ProductPrice>>().To<ProductPriceRepo>();
+            kernel.Bind<IRepository<Vat>>().To<VatRepo>();
+
             kernel.Bind<ILogic<CourseDTO>>().To<CourseLogic>();
             kernel.Bind<ILogic<InvoiceDTO>>().To<InvoiceLogic>();
             kernel.Bind<ILogic<InvoiceDetailDTO>>().To<InvoiceDetailLogic>();

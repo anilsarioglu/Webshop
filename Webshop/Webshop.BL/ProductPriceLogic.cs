@@ -12,8 +12,12 @@ namespace Webshop.BL
 {
     public class ProductPriceLogic : ILogic<ProductPriceDTO>
     {
-        private ProductPriceRepo _productPriceRepo = new ProductPriceRepo();
+        private IRepository<ProductPrice> _productPriceRepo;
 
+        public ProductPriceLogic(ProductPriceRepo repo)
+        {
+            _productPriceRepo = repo;
+        }
 
         public static ProductPrice Map(ProductPriceDTO e)
         {

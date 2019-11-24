@@ -12,8 +12,12 @@ namespace Webshop.BL
 {
     public class InvoiceDetailLogic : ILogic<InvoiceDetailDTO>
     {
-        private InvoiceDetailRepo _invoiceDetailRepo = new InvoiceDetailRepo();
+        private IRepository<InvoiceDetail> _invoiceDetailRepo;
 
+        public InvoiceDetailLogic(InvoiceDetailRepo repo)
+        {
+            _invoiceDetailRepo = repo;
+        }
 
         public static InvoiceDetail Map(InvoiceDetailDTO e)
         {

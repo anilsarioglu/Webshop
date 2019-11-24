@@ -14,8 +14,12 @@ namespace Webshop.BL
 {
     public class CourseLogic : ILogic<CourseDTO>
     {
-        private CourseRepo _courseRepo = new CourseRepo();
-        
+        private IRepository<Course> _courseRepo;
+
+        public CourseLogic(CourseRepo repo)
+        {
+            _courseRepo = repo;
+        }
 
         public static Course Map(CourseDTO e)
         {

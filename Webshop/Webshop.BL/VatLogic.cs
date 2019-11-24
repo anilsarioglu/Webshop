@@ -12,8 +12,12 @@ namespace Webshop.BL
 {
     public class VatLogic : ILogic<VatDTO>
     {
-        private VatRepo _vatRepo = new VatRepo();
+        private IRepository<Vat> _vatRepo;
 
+        public VatLogic(VatRepo repo)
+        {
+            _vatRepo = repo;
+        }
 
         public static Vat Map(VatDTO e)
         {
