@@ -44,9 +44,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf, Version=2019.8.8.26453, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.2019.8.8.1\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +62,7 @@
   <ItemGroup>
     <Compile Include="CourseLogic.cs" />
     <Compile Include="EmailService.cs" />
+    <Compile Include="GeneratePDF.cs" />
     <Compile Include="ILogic.cs" />
     <Compile Include="InvoiceDetailLogic.cs" />
     <Compile Include="InvoiceLogic.cs" />
