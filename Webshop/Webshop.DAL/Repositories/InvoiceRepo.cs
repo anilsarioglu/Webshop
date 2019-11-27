@@ -7,7 +7,11 @@ namespace Webshop.DAL.Repositories
 {
     public class InvoiceRepo : IRepository<Invoice>
     {
-        private WebshopContext _webshopContext = new WebshopContext();
+        private WebshopContext _webshopContext;
+        public InvoiceRepo(WebshopContext context)
+        {
+            _webshopContext = context;
+        }
 
         public void Add(Invoice t)
         {

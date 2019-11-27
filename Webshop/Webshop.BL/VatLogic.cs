@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class VatLogic : ILogic<VatDTO>
     {
-        private IRepository<Vat> _vatRepo;
+        private UnitOfWork _uow;
 
-        public VatLogic(VatRepo repo)
+        public VatLogic()
         {
-            _vatRepo = repo;
+            _uow = new UnitOfWork(new WebshopContext());
         }
 
         public static Vat Map(VatDTO e)
@@ -42,24 +44,24 @@ namespace Webshop.BL
 
         public void Create(VatDTO c)
         {
-            _vatRepo.Add(Map(c));
+            _uow.Vats.Add(Map(c));
         }
 
         public VatDTO FindByID(int? id)
         {
-            Vat c = _vatRepo.FindById(id);
+            Vat c = _uow.Vats.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(VatDTO c)
         {
-            _vatRepo.Remove(Map(c));
+            _uow.Vats.Remove(Map(c));
         }
 
         public List<VatDTO> GetAll()
         {
-            List<Vat> vats = _vatRepo.GetAll();
+            List<Vat> vats = _uow.Vats.GetAll();
             List<VatDTO> vatDtos = new List<VatDTO>();
 
             foreach (Vat c in vats)
@@ -73,7 +75,7 @@ namespace Webshop.BL
         public void Update(VatDTO c)
         {
 
-            _vatRepo.Modify(Map(c));
+            _uow.Vats.Modify(Map(c));
 
         }
     }

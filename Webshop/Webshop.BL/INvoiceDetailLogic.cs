@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class InvoiceDetailLogic : ILogic<InvoiceDetailDTO>
     {
-        private IRepository<InvoiceDetail> _invoiceDetailRepo;
+        private UnitOfWork _uow;
 
-        public InvoiceDetailLogic(InvoiceDetailRepo repo)
+        public InvoiceDetailLogic()
         {
-            _invoiceDetailRepo = repo;
+            _uow = new UnitOfWork(new WebshopContext());
         }
 
         public static InvoiceDetail Map(InvoiceDetailDTO e)
@@ -31,7 +33,6 @@ namespace Webshop.BL
         }
         public static InvoiceDetailDTO Map(InvoiceDetail e)
         {
-
             var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDetail, InvoiceDetailDTO>());
             var mapper = config.CreateMapper();
             mapper = new Mapper(config);
@@ -42,24 +43,24 @@ namespace Webshop.BL
 
         public void Create(InvoiceDetailDTO c)
         {
-            _invoiceDetailRepo.Add(Map(c));
+            _uow.InvoiceDetails.Add(Map(c));
         }
 
         public InvoiceDetailDTO FindByID(int? id)
         {
-            InvoiceDetail c = _invoiceDetailRepo.FindById(id);
+            InvoiceDetail c = _uow.InvoiceDetails.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(InvoiceDetailDTO c)
         {
-            _invoiceDetailRepo.Remove(Map(c));
+            _uow.InvoiceDetails.Remove(Map(c));
         }
 
         public List<InvoiceDetailDTO> GetAll()
         {
-            List<InvoiceDetail> invoiceDetails = _invoiceDetailRepo.GetAll();
+            List<InvoiceDetail> invoiceDetails = _uow.InvoiceDetails.GetAll();
             List<InvoiceDetailDTO> invoiceDtos = new List<InvoiceDetailDTO>();
 
             foreach (InvoiceDetail c in invoiceDetails)
@@ -73,7 +74,7 @@ namespace Webshop.BL
         public void Update(InvoiceDetailDTO c)
         {
 
-            _invoiceDetailRepo.Modify(Map(c));
+            _uow.InvoiceDetails.Modify(Map(c));
 
         }
     }

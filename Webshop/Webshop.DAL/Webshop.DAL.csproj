@@ -85,6 +85,8 @@
     <Compile Include="Repositories\ProductPriceRepo.cs" />
     <Compile Include="Repositories\ProductRepo.cs" />
     <Compile Include="Repositories\VatRepo.cs" />
+    <Compile Include="UnitOfWork\Interface\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="WebshopContext.cs" />
     <Compile Include="IWebshopDataSource.cs" />
   </ItemGroup>
@@ -106,6 +108,7 @@
       <Name>Webshop.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

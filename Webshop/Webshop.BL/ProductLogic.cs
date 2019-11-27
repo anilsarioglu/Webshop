@@ -4,15 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class ProductLogic : ILogic<ProductDTO>
     {
-        private ProductRepo _productRepo  = new ProductRepo();
+        private UnitOfWork _uow;
+
+        public ProductLogic()
+        {
+            _uow = new UnitOfWork(new WebshopContext());
+        }
 
         public static Product Map(ProductDTO e)
         {
@@ -37,25 +44,25 @@ namespace Webshop.BL
 
         public void Create(ProductDTO c)
         {
-            _productRepo.Add(Map(c));
+            _uow.Products.Add(Map(c));
         }
 
         public ProductDTO FindByID(int? id)
         {
-            Product c = _productRepo.FindById(id);
+            Product c = _uow.Products.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            _productRepo.Remove(Map(c));
+            _uow.Products.Remove(Map(c));
         }
 
         public List<ProductDTO> GetAll()
         {
 
-            List<Product> products = _productRepo.GetAll();
+            List<Product> products = _uow.Products.GetAll();
             List<ProductDTO> productDtos = new List<ProductDTO>();
 
             foreach (Product c in products)
@@ -69,7 +76,7 @@ namespace Webshop.BL
         public void Update(ProductDTO c)
         {
 
-            _productRepo.Modify(Map(c));
+            _uow.Products.Modify(Map(c));
 
         }
     }
