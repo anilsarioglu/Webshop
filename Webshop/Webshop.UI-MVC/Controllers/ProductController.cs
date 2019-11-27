@@ -17,13 +17,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            List<Product> products = new List<Product>();
-
-            foreach (ProductDTO dto in productsDTO)
-            {
-                products.Add(MapDTO.Map<Product, ProductDTO>(dto));
-            }
-            return View(products);
+            return View(MapDTO.MapList<Product, ProductDTO>(productsDTO));
         }
 
         // GET: Product/Details/5
