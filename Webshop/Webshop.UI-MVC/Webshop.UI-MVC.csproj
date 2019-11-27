@@ -326,6 +326,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Mail\" />
+    <Folder Include="Views\Vat\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

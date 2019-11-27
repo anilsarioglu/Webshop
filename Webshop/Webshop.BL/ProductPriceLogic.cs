@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -38,22 +34,12 @@ namespace Webshop.BL
 
         public List<ProductPriceDTO> GetAll()
         {
-            List<ProductPrice> productPrices = _productPriceRepo.GetAll();
-            List<ProductPriceDTO> productPriceDtos = new List<ProductPriceDTO>();
-
-            foreach (ProductPrice c in productPrices)
-            {
-                productPriceDtos.Add(MapDTO.Map<ProductPriceDTO, ProductPrice>(c));
-            }
-
-            return productPriceDtos;
+            return MapDTO.MapList<ProductPriceDTO, ProductPrice>(_productPriceRepo.GetAll()).ToList();
         }
 
         public void Update(ProductPriceDTO c)
         {
-
             _productPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
-
         }
     }
 }

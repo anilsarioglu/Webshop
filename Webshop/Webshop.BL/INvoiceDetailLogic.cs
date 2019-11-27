@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -38,22 +34,12 @@ namespace Webshop.BL
 
         public List<InvoiceDetailDTO> GetAll()
         {
-            List<InvoiceDetail> invoiceDetails = _invoiceDetailRepo.GetAll();
-            List<InvoiceDetailDTO> invoiceDtos = new List<InvoiceDetailDTO>();
-
-            foreach (InvoiceDetail c in invoiceDetails)
-            {
-                invoiceDtos.Add(MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c));
-            }
-
-            return invoiceDtos;
+            return MapDTO.MapList<InvoiceDetailDTO, InvoiceDetail>(_invoiceDetailRepo.GetAll()).ToList();
         }
 
         public void Update(InvoiceDetailDTO c)
         {
-
             _invoiceDetailRepo.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -33,16 +34,7 @@ namespace Webshop.BL
 
         public List<ProductDTO> GetAll()
         {
-
-            List<Product> products = _productRepo.GetAll();
-            List<ProductDTO> productDtos = new List<ProductDTO>();
-
-            foreach (Product c in products)
-            {
-                productDtos.Add(MapDTO.Map<ProductDTO, Product>(c));
-            }
-
-            return productDtos;
+            return MapDTO.MapList<ProductDTO, Product>(_productRepo.GetAll()).ToList();
         }
 
         public void Update(ProductDTO c)

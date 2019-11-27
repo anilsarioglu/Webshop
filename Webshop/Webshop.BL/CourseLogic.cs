@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -40,22 +34,12 @@ namespace Webshop.BL
 
         public List<CourseDTO> GetAll()
         {
-            List<Course> courses = _courseRepo.GetAll();
-            List<CourseDTO> coursesDto = new List<CourseDTO>();
-
-            foreach (Course c in courses)
-            {
-                coursesDto.Add(MapDTO.Map<CourseDTO, Course>(c));
-            }
-
-            return coursesDto;
+            return MapDTO.MapList<CourseDTO, Course>(_courseRepo.GetAll()).ToList();
         }
 
         public void Update(CourseDTO c)
         {
-
             _courseRepo.Modify(MapDTO.Map<Course, CourseDTO>(c));
-            
         }
     }
 }

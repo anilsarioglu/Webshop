@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -38,22 +34,12 @@ namespace Webshop.BL
 
         public List<VatDTO> GetAll()
         {
-            List<Vat> vats = _vatRepo.GetAll();
-            List<VatDTO> vatDtos = new List<VatDTO>();
-
-            foreach (Vat c in vats)
-            {
-                vatDtos.Add(MapDTO.Map<VatDTO, Vat>(c));
-            }
-
-            return vatDtos;
+            return MapDTO.MapList<VatDTO, Vat>(_vatRepo.GetAll()).ToList();
         }
 
         public void Update(VatDTO c)
         {
-
             _vatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
-
         }
     }
 }

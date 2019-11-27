@@ -16,5 +16,15 @@ namespace Webshop.BL
             T1 dto = mapper.Map<T1>(e);
             return dto;
         }
+
+        internal static IEnumerable<T1> MapList<T1, T2>(IEnumerable<T2> list)
+        {
+            List<T1> items = new List<T1>();
+            foreach (T2 item in list)
+            {
+                items.Add(Map<T1, T2>(item));
+            }
+            return items;
+        }
     }
 }
