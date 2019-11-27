@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using System.Collections.Generic;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
 using Webshop.Domain;
@@ -12,44 +7,28 @@ namespace Webshop.BL
 {
     public class ProductLogic : ILogic<ProductDTO>
     {
-        private ProductRepo _productRepo  = new ProductRepo();
+        private IRepository<Product> _productRepo;
 
-        public static Product Map(ProductDTO e)
+        public ProductLogic(ProductRepo repo)
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Product dto = mapper.Map<Product>(e);
-            return dto;
-
-        }
-        public static ProductDTO Map(Product e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            ProductDTO dto = mapper.Map<ProductDTO>(e);
-            return dto;
-
+            _productRepo = repo;
         }
 
         public void Create(ProductDTO c)
         {
-            _productRepo.Add(Map(c));
+            _productRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
         }
 
         public ProductDTO FindByID(int? id)
         {
             Product c = _productRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<ProductDTO, Product>(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            _productRepo.Remove(Map(c));
+            _productRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
         }
 
         public List<ProductDTO> GetAll()
@@ -60,7 +39,7 @@ namespace Webshop.BL
 
             foreach (Product c in products)
             {
-                productDtos.Add(Map(c));
+                productDtos.Add(MapDTO.Map<ProductDTO, Product>(c));
             }
 
             return productDtos;
@@ -69,7 +48,7 @@ namespace Webshop.BL
         public void Update(ProductDTO c)
         {
 
-            _productRepo.Modify(Map(c));
+            _productRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
 
         }
     }

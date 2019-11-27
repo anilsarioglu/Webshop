@@ -19,42 +19,21 @@ namespace Webshop.BL
             _vatRepo = repo;
         }
 
-        public static Vat Map(VatDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<VatDTO, Vat>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Vat dto = mapper.Map<Vat>(e);
-            return dto;
-
-        }
-        public static VatDTO Map(Vat e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Vat, VatDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            VatDTO dto = mapper.Map<VatDTO>(e);
-            return dto;
-
-        }
-
         public void Create(VatDTO c)
         {
-            _vatRepo.Add(Map(c));
+            _vatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
         }
 
         public VatDTO FindByID(int? id)
         {
             Vat c = _vatRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<VatDTO, Vat>(c);
         }
 
         public void Delete(VatDTO c)
         {
-            _vatRepo.Remove(Map(c));
+            _vatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
         }
 
         public List<VatDTO> GetAll()
@@ -64,7 +43,7 @@ namespace Webshop.BL
 
             foreach (Vat c in vats)
             {
-                vatDtos.Add(Map(c));
+                vatDtos.Add(MapDTO.Map<VatDTO, Vat>(c));
             }
 
             return vatDtos;
@@ -73,7 +52,7 @@ namespace Webshop.BL
         public void Update(VatDTO c)
         {
 
-            _vatRepo.Modify(Map(c));
+            _vatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
 
         }
     }

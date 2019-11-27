@@ -21,42 +21,21 @@ namespace Webshop.BL
             _courseRepo = repo;
         }
 
-        public static Course Map(CourseDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CourseDTO, Course>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Course dto = mapper.Map<Course>(e);
-            return dto;
-
-        }
-        public static CourseDTO Map(Course e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Course, CourseDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            CourseDTO dto = mapper.Map<CourseDTO>(e);
-            return dto;
-
-        }
-
         public void Create(CourseDTO c)
         {
-            _courseRepo.Add(Map(c));
+            _courseRepo.Add(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public CourseDTO FindByID(int? id)
         {
             Course c = _courseRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<CourseDTO, Course>(c);
         }
 
         public void Delete(CourseDTO c)
         {
-            _courseRepo.Remove(Map(c));
+            _courseRepo.Remove(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public List<CourseDTO> GetAll()
@@ -66,7 +45,7 @@ namespace Webshop.BL
 
             foreach (Course c in courses)
             {
-                coursesDto.Add(Map(c));
+                coursesDto.Add(MapDTO.Map<CourseDTO, Course>(c));
             }
 
             return coursesDto;
@@ -75,7 +54,7 @@ namespace Webshop.BL
         public void Update(CourseDTO c)
         {
 
-            _courseRepo.Modify(Map(c));
+            _courseRepo.Modify(MapDTO.Map<Course, CourseDTO>(c));
             
         }
     }

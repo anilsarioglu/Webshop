@@ -19,42 +19,21 @@ namespace Webshop.BL
             _productPriceRepo = repo;
         }
 
-        public static ProductPrice Map(ProductPriceDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductPriceDTO, ProductPrice>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            ProductPrice dto = mapper.Map<ProductPrice>(e);
-            return dto;
-
-        }
-        public static ProductPriceDTO Map(ProductPrice e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductPrice, ProductPriceDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            ProductPriceDTO dto = mapper.Map<ProductPriceDTO>(e);
-            return dto;
-
-        }
-
         public void Create(ProductPriceDTO c)
         {
-            _productPriceRepo.Add(Map(c));
+            _productPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
         }
 
         public ProductPriceDTO FindByID(int? id)
         {
             ProductPrice c = _productPriceRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
         }
 
         public void Delete(ProductPriceDTO c)
         {
-            _productPriceRepo.Remove(Map(c));
+            _productPriceRepo.Remove(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
         }
 
         public List<ProductPriceDTO> GetAll()
@@ -64,7 +43,7 @@ namespace Webshop.BL
 
             foreach (ProductPrice c in productPrices)
             {
-                productPriceDtos.Add(Map(c));
+                productPriceDtos.Add(MapDTO.Map<ProductPriceDTO, ProductPrice>(c));
             }
 
             return productPriceDtos;
@@ -73,7 +52,7 @@ namespace Webshop.BL
         public void Update(ProductPriceDTO c)
         {
 
-            _productPriceRepo.Modify(Map(c));
+            _productPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
 
         }
     }

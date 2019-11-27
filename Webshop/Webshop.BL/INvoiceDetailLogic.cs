@@ -19,42 +19,21 @@ namespace Webshop.BL
             _invoiceDetailRepo = repo;
         }
 
-        public static InvoiceDetail Map(InvoiceDetailDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDetailDTO, InvoiceDetail>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDetail dto = mapper.Map<InvoiceDetail>(e);
-            return dto;
-
-        }
-        public static InvoiceDetailDTO Map(InvoiceDetail e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDetail, InvoiceDetailDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDetailDTO dto = mapper.Map<InvoiceDetailDTO>(e);
-            return dto;
-
-        }
-
         public void Create(InvoiceDetailDTO c)
         {
-            _invoiceDetailRepo.Add(Map(c));
+            _invoiceDetailRepo.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
         }
 
         public InvoiceDetailDTO FindByID(int? id)
         {
             InvoiceDetail c = _invoiceDetailRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c);
         }
 
         public void Delete(InvoiceDetailDTO c)
         {
-            _invoiceDetailRepo.Remove(Map(c));
+            _invoiceDetailRepo.Remove(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
         }
 
         public List<InvoiceDetailDTO> GetAll()
@@ -64,7 +43,7 @@ namespace Webshop.BL
 
             foreach (InvoiceDetail c in invoiceDetails)
             {
-                invoiceDtos.Add(Map(c));
+                invoiceDtos.Add(MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c));
             }
 
             return invoiceDtos;
@@ -73,7 +52,7 @@ namespace Webshop.BL
         public void Update(InvoiceDetailDTO c)
         {
 
-            _invoiceDetailRepo.Modify(Map(c));
+            _invoiceDetailRepo.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
 
         }
     }

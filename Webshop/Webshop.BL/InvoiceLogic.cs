@@ -19,42 +19,21 @@ namespace Webshop.BL
             _invoiceRepo = repo;
         }
 
-        public static Invoice Map(InvoiceDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDTO, Invoice>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Invoice dto = mapper.Map<Invoice>(e);
-            return dto;
-
-        }
-        public static InvoiceDTO Map(Invoice e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Invoice, InvoiceDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDTO dto = mapper.Map<InvoiceDTO>(e);
-            return dto;
-
-        }
-
         public void Create(InvoiceDTO c)
         {
-            _invoiceRepo.Add(Map(c));
+            _invoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
         }
 
         public InvoiceDTO FindByID(int? id)
         {
             Invoice c = _invoiceRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<InvoiceDTO, Invoice>(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
-            _invoiceRepo.Remove(Map(c));
+            _invoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
         }
 
 
@@ -65,7 +44,7 @@ namespace Webshop.BL
 
           foreach (Invoice c in invoices)
           {
-             invoiceDTO.Add(Map(c));
+             invoiceDTO.Add(MapDTO.Map<InvoiceDTO, Invoice>(c));
           }
 
          return invoiceDTO;
@@ -74,7 +53,7 @@ namespace Webshop.BL
     public void Update(InvoiceDTO c)
         {
 
-            _invoiceRepo.Modify(Map(c));
+            _invoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
 
         }
     }
