@@ -9,6 +9,7 @@ namespace Webshop.UI_MVC.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -16,6 +17,7 @@ namespace Webshop.UI_MVC.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
