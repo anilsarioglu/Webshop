@@ -7,12 +7,12 @@ using IronPdf;
 
 namespace Webshop.BL
 {
-    public static class GeneratePDF
+    internal static class GeneratePDF
     {
-        public static void CreatePDF()
+        internal static void CreatePDF(string html)
         {
             HtmlToPdf renderer = new HtmlToPdf();
-            renderer.RenderHtmlAsPdf("<h1>Hello World</h1>").SaveAs("..\\..\\test.pdf");
+            renderer.RenderHtmlAsPdf(html).SaveAs("..\\..\\test.pdf");
         }
     }
 }

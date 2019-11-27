@@ -15,6 +15,7 @@ namespace Webshop.SL.App_Start
     using Webshop.DAL.Entit;
     using Webshop.DAL.Repositories;
     using Webshop.Domain;
+    using Webshop.UI_MVC;
 
     public static class NinjectWebCommon 
     {

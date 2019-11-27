@@ -149,6 +149,10 @@
       <Project>{e6d9123e-6f6f-4d8c-8a04-49961f4f8c6c}</Project>
       <Name>Webshop.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Webshop.UI-MVC\Webshop.UI-MVC.csproj">
+      <Project>{a03a8863-6c44-4ec6-b884-bee6c861ce28}</Project>
+      <Name>Webshop.UI-MVC</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
