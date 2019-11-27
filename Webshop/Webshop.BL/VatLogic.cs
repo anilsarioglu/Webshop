@@ -18,7 +18,7 @@ namespace Webshop.BL
 
         public VatLogic()
         {
-            _uow = new UnitOfWork(new WebshopContext());
+            _uow = new UnitOfWork();
         }
 
         public static Vat Map(VatDTO e)

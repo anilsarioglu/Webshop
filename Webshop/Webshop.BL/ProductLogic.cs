@@ -18,7 +18,7 @@ namespace Webshop.BL
 
         public ProductLogic()
         {
-            _uow = new UnitOfWork(new WebshopContext());
+            _uow = new UnitOfWork();
         }
 
         public static Product Map(ProductDTO e)

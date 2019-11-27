@@ -18,7 +18,7 @@ namespace Webshop.BL
 
         public ProductPriceLogic()
         {
-            _uow = new UnitOfWork(new WebshopContext());
+            _uow = new UnitOfWork();
         }
 
         public static ProductPrice Map(ProductPriceDTO e)

@@ -14,15 +14,16 @@ namespace Webshop.DAL.UnitOfWork
         public ProductRepo Products { get; private set; }
         public VatRepo Vats { get; private set; }
 
-        public UnitOfWork(WebshopContext context)
+        public UnitOfWork()
         {
-            _context = context;
-            Courses = new CourseRepo(context);
-            InvoiceDetails = new InvoiceDetailRepo(context);
-            Invoices = new InvoiceRepo(context);
-            ProductPrices = new ProductPriceRepo(context);
-            Products = new ProductRepo(context);
-            Vats = new VatRepo(context);
+            _context = new WebshopContext();
+
+            Courses = new CourseRepo(_context);
+            InvoiceDetails = new InvoiceDetailRepo(_context);
+            Invoices = new InvoiceRepo(_context);
+            ProductPrices = new ProductPriceRepo(_context);
+            Products = new ProductRepo(_context);
+            Vats = new VatRepo(_context);
         }
 
         public int SaveChanges()

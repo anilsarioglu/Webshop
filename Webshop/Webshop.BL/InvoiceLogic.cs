@@ -18,7 +18,7 @@ namespace Webshop.BL
 
         public InvoiceLogic()
         {
-            _uow = new UnitOfWork(new WebshopContext());
+            _uow = new UnitOfWork();
         }
 
         public static Invoice Map(InvoiceDTO e)

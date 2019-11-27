@@ -14,7 +14,7 @@ namespace Webshop.BL
 
         public CourseLogic()
         {
-            _uow = new UnitOfWork(new WebshopContext());
+            _uow = new UnitOfWork();
         }
 
         public static Course Map(CourseDTO e)
