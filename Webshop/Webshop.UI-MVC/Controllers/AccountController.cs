@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Webshop.UI_MVC.Models;
+using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
@@ -14,9 +15,12 @@ namespace Webshop.UI_MVC.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext context;
+
 
         public AccountController()
         {
+            context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -71,7 +75,7 @@ namespace Webshop.UI_MVC.Controllers
             }
 
             // Require the user to have a confirmed email before they can log on.
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
@@ -83,7 +87,9 @@ namespace Webshop.UI_MVC.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
+            var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -147,6 +153,8 @@ namespace Webshop.UI_MVC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => u.Name.Contains("Customer"))
+                .ToList(), "Name", "Name");
             return View();
         }
 
@@ -171,15 +179,20 @@ namespace Webshop.UI_MVC.Controllers
                      string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                      var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                      service.SendMail(user.Email, user.Id, "Confirm your account",
-                         "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                         "Please confirm your account by clicking "+ callbackUrl);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                     ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                    //Assign Role to user Here       
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
                                        + "before you can log in.";
 
                      return View("Info");
                     //return RedirectToAction("Index", "Home");
                 }
+                ViewBag.Name = new SelectList(context.Roles.Where(u => u.Name.Contains("Customer"))
+                    .ToList(), "Name", "Name");
                 AddErrors(result);
             }
 
