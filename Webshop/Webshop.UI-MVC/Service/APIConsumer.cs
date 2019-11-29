@@ -39,5 +39,23 @@ namespace Webshop.UI_MVC
         var result = postTask.Result;
       }
     }
+    internal static void EditObject<T>(string path, string id, T t)
+    {
+      using (var client = new HttpClient())
+      {
+        client.BaseAddress = new Uri("https://localhost:44366/api/");
+
+        //HTTP POST
+        string fullPath = path + "/" + id;
+        var postTask = client.PostAsJsonAsync<T>(path +"/" + id, t);
+        postTask.Wait();
+
+        var result = postTask.Result;
+        if (result.IsSuccessStatusCode)
+        {
+          Console.WriteLine("qsd");
+        }
+      }
     }
+  }
 }

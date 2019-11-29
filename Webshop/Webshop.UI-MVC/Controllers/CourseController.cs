@@ -21,7 +21,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Details/5
         public ActionResult Details(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(courses.ElementAt(id - 1));
         }
 
         // GET: Course/Create
@@ -51,19 +51,19 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(courses.ElementAt(id - 1));
         }
 
         // POST: Course/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Course courseDTO)
+        public ActionResult Edit(Course course)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+        // TODO: Add update logic here
+        APIConsumer<Models.Webshop.Course>.EditObject<Models.Webshop.Course>("course" , course.Id.ToString(), course);
+        return RedirectToAction("Index");
             }
             catch
             {
@@ -74,7 +74,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(courses.ElementAt(id - 1));
         }
 
         // POST: Course/Delete/5
