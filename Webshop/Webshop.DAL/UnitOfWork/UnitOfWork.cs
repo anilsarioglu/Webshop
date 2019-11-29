@@ -1,124 +1,41 @@
-﻿using System;
+﻿using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
-
+using Webshop.DAL.UnitOfWork.Interface;
 
 namespace Webshop.DAL.UnitOfWork
 {
-    public class UnitOfWork : IDisposable
+    public class UnitOfWork
     {
-        private WebshopContext context = new WebshopContext();
-        private CourseRepo _courseRepo;
-        private InvoiceRepo _invoice;
-        private InvoiceDetailRepo _invoiceDetailRepo;
-        private ProductPriceRepo _productPriceRepo;
-        private VatRepo _vatRepo;
-        private ProductRepo _product;
+        private readonly WebshopContext _context;
 
-        public ProductRepo ProductRepo
+        public IRepository<Course> Courses { get; private set; }
+        public IRepository<InvoiceDetail> InvoiceDetails { get; private set; }
+        public IRepository<Invoice> Invoices { get; private set; }
+        public IRepository<ProductPrice> ProductPrices { get; private set; }
+        public IRepository<Product> Products { get; private set; }
+        public IRepository<Vat> Vats { get; private set; }
+
+        public UnitOfWork(WebshopContext context, CourseRepo courseRepo, InvoiceDetailRepo invoiceDetailRepo, InvoiceRepo invoiceRepo,
+            ProductPriceRepo productPriceRepo, ProductRepo productRepo, VatRepo vatRepo)
         {
-            get
-            {
+            _context = context;
 
-                if (this._product == null)
-                {
-                    this._product = new ProductRepo(context);
-                }
-                return _product;
-            }
+            Courses = courseRepo;
+            InvoiceDetails = invoiceDetailRepo;
+            Invoices = invoiceRepo;
+            ProductPrices = productPriceRepo;
+            Products = productRepo;
+            Vats = vatRepo;
         }
 
-        public VatRepo VatRepo
+        public int SaveChanges()
         {
-            get
-            {
-
-                if (this._vatRepo == null)
-                {
-                    this._vatRepo = new VatRepo(context);
-                }
-                return _vatRepo;
-            }
-        }
-
-        public ProductPriceRepo ProductPriceRepo
-        {
-            get
-            {
-
-                if (this._productPriceRepo == null)
-                {
-                    this._productPriceRepo = new ProductPriceRepo(context);
-                }
-                return _productPriceRepo;
-            }
-        }
-        public InvoiceDetailRepo InvoiceDetailRepo
-        {
-            get
-            {
-
-                if (this._invoiceDetailRepo == null)
-                {
-                    this._invoiceDetailRepo = new InvoiceDetailRepo(context);
-                }
-
-                return _invoiceDetailRepo;
-            }
-        }
-
-        public InvoiceRepo InvoiceRepo
-        {
-            get
-            {
-
-                if (this._invoice == null)
-                {
-                    this._invoice = new InvoiceRepo(context);
-                }
-
-                return _invoice;
-            }
-        }
-
-        public  CourseRepo CourseRepo
-        {
-            get
-            {
-
-                if (this._courseRepo == null)
-                {
-                    this._courseRepo = new CourseRepo(context);
-                }
-                return _courseRepo;
-            }
-        }
-      
-
-        public void Save()
-        {
-            context.SaveChanges();
-        }
-
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
+            return _context.SaveChanges();
         }
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            _context.Dispose();
         }
     }
 }
-

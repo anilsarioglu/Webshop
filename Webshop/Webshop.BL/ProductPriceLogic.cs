@@ -28,7 +28,7 @@ namespace Webshop.BL
 
         public ProductPriceDTO FindByID(int? id)
         {
-            ProductPrice c = _uow.ProductPriceRepo.FindById(id);
+            ProductPrice c = _uow.ProductPrices.FindById(id);
 
             return MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
         }

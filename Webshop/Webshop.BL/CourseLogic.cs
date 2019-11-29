@@ -24,7 +24,7 @@ namespace Webshop.BL
 
         public CourseDTO FindByID(int? id)
         {
-            Course c = _uow.CourseRepo.FindById(id);
+            Course c = _uow.Courses.FindById(id);
 
             return MapDTO.Map<CourseDTO, Course>(c);
         }
