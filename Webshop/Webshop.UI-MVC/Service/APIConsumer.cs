@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Script.Serialization;
@@ -26,5 +26,18 @@ namespace Webshop.UI_MVC
                 return objects;
             }
         }
+    internal static void AddObject<T>(string path , T t)
+    {
+      using (var client = new HttpClient())
+      {
+        client.BaseAddress = new Uri("https://localhost:44366/api/");
+
+        //HTTP POST
+        var postTask = client.PostAsJsonAsync<T>(path, t);
+        postTask.Wait();
+
+        var result = postTask.Result;
+      }
+    }
     }
 }

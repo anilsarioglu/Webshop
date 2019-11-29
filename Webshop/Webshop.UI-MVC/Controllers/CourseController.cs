@@ -27,18 +27,19 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
         // POST: Course/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Course course)
         {
             try
             {
-                // TODO: Add insert logic here
-
+        // TODO: Add insert logic here
+        APIConsumer<Models.Webshop.Course>.AddObject<Models.Webshop.Course>("course", course);
                 return RedirectToAction("Index");
             }
             catch
