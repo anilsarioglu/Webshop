@@ -21,9 +21,10 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Create(InvoiceDetailDTO c)
         {
             _uow.InvoiceDetails.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+            return c;
         }
 
         public InvoiceDetailDTO FindByID(int? id)
@@ -43,9 +44,10 @@ namespace Webshop.BL
             return MapDTO.MapList<InvoiceDetailDTO, InvoiceDetail>(_uow.InvoiceDetails.GetAll());
         }
 
-        public void Update(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Update(InvoiceDetailDTO c)
         {
             _uow.InvoiceDetails.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+            return c;
         }
     }
 }
