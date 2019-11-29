@@ -12,6 +12,7 @@ namespace Webshop.SL.App_Start
     using Ninject.Web.Common;
     using Ninject.Web.Common.WebHost;
     using Webshop.BL;
+    using Webshop.DAL;
     using Webshop.DAL.Entit;
     using Webshop.DAL.Repositories;
     using Webshop.DAL.UnitOfWork;
@@ -83,6 +84,7 @@ namespace Webshop.SL.App_Start
             kernel.Bind<ILogic<VatDTO>>().To<VatLogic>();
 
             kernel.Bind<UnitOfWork>().To<UnitOfWork>();
+            kernel.Bind<WebshopContext>().To<WebshopContext>();
         }        
     }
 }
