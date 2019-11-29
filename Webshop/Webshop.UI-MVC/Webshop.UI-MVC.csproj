@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Service\APIConsumer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -399,6 +400,7 @@
     <Content Include="Views\Course\Delete.cshtml" />
     <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
