@@ -15,6 +15,8 @@ namespace Webshop.BL
     public class ProductPriceLogic : ILogic<ProductPriceDTO>
     {
         private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ProductPriceLogic(UnitOfWork uow)
         {
@@ -23,29 +25,68 @@ namespace Webshop.BL
 
         public void Create(ProductPriceDTO c)
         {
-            _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c)); ;
+            try
+            {
+                _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen productprijs toevoegen");
+                throw new Exception(e.Message);
+            }
         }
 
         public ProductPriceDTO FindByID(int? id)
         {
-            ProductPrice c = _uow.ProductPriceRepo.FindById(id);
-
-            return MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
+            try
+            {
+                ProductPrice c = _uow.ProductPriceRepo.FindById(id);
+                return MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen Prijs id vinden");
+                throw new Exception(e.Message);
+            }
         }
 
         public void Delete(ProductPriceDTO c)
         {
-            _uow.ProductPriceRepo.Remove(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            try
+            {
+                _uow.ProductPriceRepo.Remove(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen prijs verwijderen",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<ProductPriceDTO> GetAll()
         {
-            return MapDTO.MapList<ProductPriceDTO, ProductPrice>(_uow.ProductPriceRepo.GetAll());
+            try
+            {
+                return MapDTO.MapList<ProductPriceDTO, ProductPrice>(_uow.ProductPriceRepo.GetAll());
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen producten ophalen",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public void Update(ProductPriceDTO c)
         {
-            _uow.ProductPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            try
+            {
+                _uow.ProductPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            }
+            catch (Exception e)
+            {
+               log.Error("kon geen prijs aanpassen",e);
+               throw new Exception(e.Message);
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Webshop.BL
     public class InvoiceLogic : ILogic<InvoiceDTO>
     {
         private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public InvoiceLogic(UnitOfWork uow)
         {
@@ -23,7 +25,16 @@ namespace Webshop.BL
 
         public void Create(InvoiceDTO c)
         {
-            _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            try
+            {
+                _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen factuur toevoegen",e);
+                throw new Exception(e.Message);
+            }
+          
 
         }
 

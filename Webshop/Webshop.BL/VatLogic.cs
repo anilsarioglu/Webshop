@@ -15,6 +15,8 @@ namespace Webshop.BL
     public class VatLogic : ILogic<VatDTO>
     {
         private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public VatLogic(UnitOfWork uow)
         {
@@ -23,30 +25,69 @@ namespace Webshop.BL
 
         public void Create(VatDTO c)
         {
-            _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
-            ;
+            try
+            {
+                _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
+            }
+            catch (Exception e)
+            {
+               log.Error(e.Message);
+               throw new Exception(e.Message);
+            }
+            
         }
 
         public VatDTO FindByID(int? id)
         {
-            Vat c = _uow.VatRepo.FindById(id);
-
-            return MapDTO.Map<VatDTO, Vat>(c);
+            try
+            {
+                Vat c = _uow.VatRepo.FindById(id);
+                return MapDTO.Map<VatDTO, Vat>(c);
+            }
+            catch (Exception e)
+            {
+               log.Error("kon geen btw id vinden",e);
+               throw new Exception(e.Message);
+            }
         }
 
         public void Delete(VatDTO c)
         {
-            _uow.VatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
+            try
+            {
+                _uow.VatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen btw verwijderen",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<VatDTO> GetAll()
         {
-            return MapDTO.MapList<VatDTO, Vat>(_uow.VatRepo.GetAll());
+            try
+            {
+                return MapDTO.MapList<VatDTO, Vat>(_uow.VatRepo.GetAll());
+            }
+            catch (Exception e)
+            {
+               log.Error("kon geen btw's vinden",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public void Update(VatDTO c)
         {
-            _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
+            try
+            {
+                _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen btw aanpassen",e);
+                throw new Exception(e.Message);
+            }
         }
     }
 }

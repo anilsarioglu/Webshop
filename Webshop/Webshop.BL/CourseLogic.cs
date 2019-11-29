@@ -62,7 +62,7 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon niet verwijderren",e);
+                log.Error("kon geen cursus verwijderren",e);
                 throw new Exception(e.Message);
             }
          
@@ -95,7 +95,6 @@ namespace Webshop.BL
                 throw new Exception(e.Message);
             }
 
-            
             
         }
     }
