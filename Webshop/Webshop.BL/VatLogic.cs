@@ -16,67 +16,37 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public VatLogic()
+        public VatLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
-        }
-
-        public static Vat Map(VatDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<VatDTO, Vat>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Vat dto = mapper.Map<Vat>(e);
-            return dto;
-
-        }
-        public static VatDTO Map(Vat e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Vat, VatDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            VatDTO dto = mapper.Map<VatDTO>(e);
-            return dto;
-
+            _uow = uow;
         }
 
         public void Create(VatDTO c)
         {
-            _uow.Vats.Add(Map(c));
+            _uow.Vats.Add(MapDTO.Map<Vat, VatDTO>(c));
+            ;
         }
 
         public VatDTO FindByID(int? id)
         {
             Vat c = _uow.Vats.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<VatDTO, Vat>(c);
         }
 
         public void Delete(VatDTO c)
         {
-            _uow.Vats.Remove(Map(c));
+            _uow.Vats.Remove(MapDTO.Map<Vat, VatDTO>(c));
         }
 
         public List<VatDTO> GetAll()
         {
-            List<Vat> vats = _uow.Vats.GetAll();
-            List<VatDTO> vatDtos = new List<VatDTO>();
-
-            foreach (Vat c in vats)
-            {
-                vatDtos.Add(Map(c));
-            }
-
-            return vatDtos;
+            return MapDTO.MapList<VatDTO, Vat>(_uow.Vats.GetAll());
         }
 
         public void Update(VatDTO c)
         {
-
-            _uow.Vats.Modify(Map(c));
-
+            _uow.Vats.Modify(MapDTO.Map<Vat, VatDTO>(c));
         }
     }
 }

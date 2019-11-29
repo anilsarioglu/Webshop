@@ -17,7 +17,7 @@ namespace Webshop.BL
             return dto;
         }
 
-        internal static IEnumerable<T1> MapList<T1, T2>(IEnumerable<T2> list)
+        internal static List<T1> MapList<T1, T2>(List<T2> list)
         {
             List<T1> items = new List<T1>();
             foreach (T2 item in list)
