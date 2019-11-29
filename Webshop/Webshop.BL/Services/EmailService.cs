@@ -5,7 +5,7 @@ namespace Webshop.BL
 {
     public class EmailService
     {
-        public static void SendMail(String mailTo)
+        public static void SendMail(String mailTo, String html)
         {
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
@@ -13,6 +13,8 @@ namespace Webshop.BL
             mail.To.Add(mailTo);
             mail.Subject = "Test Mail";
             mail.Body = "This is for testing SMTP mail from GMAIL";
+            GeneratePDF.CreatePDF(html);
+            mail.Attachments.Add(new Attachment("..\\..\\test.pdf"));
 
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("teampuntkomma@gmail.com", "TeamPuntKomma3");

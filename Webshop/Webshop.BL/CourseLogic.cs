@@ -12,66 +12,36 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public CourseLogic()
+        public CourseLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
-        }
-
-        public static Course Map(CourseDTO e)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CourseDTO, Course>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Course dto = mapper.Map<Course>(e);
-            return dto;
-
-        }
-        public static CourseDTO Map(Course e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Course, CourseDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            CourseDTO dto = mapper.Map<CourseDTO>(e);
-            return dto;
-
+            _uow = uow;
         }
 
         public void Create(CourseDTO c)
         {
-            _uow.CourseRepo.Add(Map(c));
+            _uow.Courses.Add(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public CourseDTO FindByID(int? id)
         {
             Course c = _uow.CourseRepo.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<CourseDTO, Course>(c);
         }
 
         public void Delete(CourseDTO c)
         {
-            _uow.CourseRepo.Remove(Map(c));
+            _uow.Courses.Remove(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public List<CourseDTO> GetAll()
         {
-            List<Course> courses = _uow.CourseRepo.GetAll();
-            List<CourseDTO> coursesDto = new List<CourseDTO>();
-
-            foreach (Course c in courses)
-            {
-                coursesDto.Add(Map(c));
-            }
-
-            return coursesDto;
+            return MapDTO.MapList<CourseDTO, Course>(_uow.Courses.GetAll());
         }
 
         public void Update(CourseDTO c)
         {
-
-            _uow.CourseRepo.Modify(Map(c));
-            
+            _uow.Courses.Modify(MapDTO.Map<Course, CourseDTO>(c));
         }
     }
 }

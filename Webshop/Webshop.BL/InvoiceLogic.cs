@@ -16,68 +16,38 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public InvoiceLogic()
+        public InvoiceLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
-        }
-
-        public static Invoice Map(InvoiceDTO e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDTO, Invoice>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Invoice dto = mapper.Map<Invoice>(e);
-            return dto;
-
-        }
-        public static InvoiceDTO Map(Invoice e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Invoice, InvoiceDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDTO dto = mapper.Map<InvoiceDTO>(e);
-            return dto;
-
+            _uow = uow;
         }
 
         public void Create(InvoiceDTO c)
         {
-            _uow.Invoices.Add(Map(c));
+            _uow.Invoices.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+
         }
 
         public InvoiceDTO FindByID(int? id)
         {
             Invoice c = _uow.Invoices.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<InvoiceDTO, Invoice>(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
-            _uow.Invoices.Remove(Map(c));
+            _uow.Invoices.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
         }
 
 
         public List<InvoiceDTO> GetAll()
         {
-          List<Invoice> invoices = _uow.Invoices.GetAll();
-          List<InvoiceDTO> invoiceDTO = new List<InvoiceDTO>();
-
-          foreach (Invoice c in invoices)
-          {
-             invoiceDTO.Add(Map(c));
-          }
-
-         return invoiceDTO;
+            return MapDTO.MapList<InvoiceDTO, Invoice>(_uow.Invoices.GetAll());
         }
 
     public void Update(InvoiceDTO c)
         {
-
-            _uow.Invoices.Modify(Map(c));
-
+            _uow.Invoices.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
         }
     }
 }
