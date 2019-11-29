@@ -17,7 +17,12 @@ namespace Webshop.SL.Controllers
         {
             invoiceLogic = logic;
         }
-       
+
+
+        public void Create(InvoiceDTO invoiceDTO)
+        {
+          invoiceLogic.Create(invoiceDTO);
+        }
         public IEnumerable<InvoiceDTO> GetInvoices()
         {
 

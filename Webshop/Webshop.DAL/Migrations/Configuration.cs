@@ -1,4 +1,4 @@
-﻿namespace Webshop.DAL.Migrations
+namespace Webshop.DAL.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -38,7 +38,10 @@
             {
                 context._ProductPrices.Add(productPrice);
             }
-
+            foreach (Course course in DataHolder.GetCourses())
+            {
+              context._Courses.Add(course);
+            }
             context.SaveChanges();
         }
     }

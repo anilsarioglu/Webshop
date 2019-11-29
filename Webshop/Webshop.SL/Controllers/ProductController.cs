@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -23,9 +23,25 @@ namespace Webshop.SL.Controllers
             return productLogic.GetAll().AsEnumerable();
         }
 
-        public string Get(int id)
+        public ProductDTO Get(int id)
         {
-            return "test " + id;
+          return productLogic.FindByID(id);
         }
-    }
+
+        [HttpDelete]
+        public void Delete(ProductDTO productDTO)
+        {
+          productLogic.Delete(productDTO);
+        }
+        [HttpPut]
+        public void Update(ProductDTO productDTO)
+        {
+          productLogic.Update(productDTO);
+        }
+        [HttpPost]
+        public void Create(ProductDTO productDTO)
+        {
+          productLogic.Create(productDTO);
+        }
+  }
 }

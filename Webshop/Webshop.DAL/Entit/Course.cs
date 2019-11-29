@@ -1,4 +1,4 @@
-﻿namespace Webshop.DAL.Entit
+namespace Webshop.DAL.Entit
 {
     public class Course
     {
@@ -11,5 +11,9 @@
             Name = name;
             Price = price;
         }
+      public Course()
+      {
+
+      }
     }
 }
