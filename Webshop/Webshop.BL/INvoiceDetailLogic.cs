@@ -16,66 +16,38 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public InvoiceDetailLogic()
+        public InvoiceDetailLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-        public static InvoiceDetail Map(InvoiceDetailDTO e)
+        public InvoiceDetailDTO Create(InvoiceDetailDTO c)
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDetailDTO, InvoiceDetail>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDetail dto = mapper.Map<InvoiceDetail>(e);
-            return dto;
-
-        }
-        public static InvoiceDetailDTO Map(InvoiceDetail e)
-        {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDetail, InvoiceDetailDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDetailDTO dto = mapper.Map<InvoiceDetailDTO>(e);
-            return dto;
-
-        }
-
-        public void Create(InvoiceDetailDTO c)
-        {
-            _uow.InvoiceDetails.Add(Map(c));
+            _uow.InvoiceDetails.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+            return c;
         }
 
         public InvoiceDetailDTO FindByID(int? id)
         {
             InvoiceDetail c = _uow.InvoiceDetails.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c);
         }
 
         public void Delete(InvoiceDetailDTO c)
         {
-            _uow.InvoiceDetails.Remove(Map(c));
+            _uow.InvoiceDetails.Remove(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
         }
 
         public List<InvoiceDetailDTO> GetAll()
         {
-            List<InvoiceDetail> invoiceDetails = _uow.InvoiceDetails.GetAll();
-            List<InvoiceDetailDTO> invoiceDtos = new List<InvoiceDetailDTO>();
-
-            foreach (InvoiceDetail c in invoiceDetails)
-            {
-                invoiceDtos.Add(Map(c));
-            }
-
-            return invoiceDtos;
+            return MapDTO.MapList<InvoiceDetailDTO, InvoiceDetail>(_uow.InvoiceDetails.GetAll());
         }
 
-        public void Update(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Update(InvoiceDetailDTO c)
         {
-
-            _uow.InvoiceDetails.Modify(Map(c));
-
+            _uow.InvoiceDetails.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+            return c;
         }
     }
 }

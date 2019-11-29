@@ -16,68 +16,38 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public ProductLogic()
+        public ProductLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-        public static Product Map(ProductDTO e)
+        public ProductDTO Create(ProductDTO c)
         {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProductDTO, Product>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Product dto = mapper.Map<Product>(e);
-            return dto;
-
-        }
-        public static ProductDTO Map(Product e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Product, ProductDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            ProductDTO dto = mapper.Map<ProductDTO>(e);
-            return dto;
-
-        }
-
-        public void Create(ProductDTO c)
-        {
-            _uow.Products.Add(Map(c));
+            _uow.Products.Add(MapDTO.Map<Product, ProductDTO>(c));
+            return c;
         }
 
         public ProductDTO FindByID(int? id)
         {
             Product c = _uow.Products.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<ProductDTO, Product>(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            _uow.Products.Remove(Map(c));
+            _uow.Products.Remove(MapDTO.Map<Product, ProductDTO>(c));
         }
 
         public List<ProductDTO> GetAll()
         {
-
-            List<Product> products = _uow.Products.GetAll();
-            List<ProductDTO> productDtos = new List<ProductDTO>();
-
-            foreach (Product c in products)
-            {
-                productDtos.Add(Map(c));
-            }
-
-            return productDtos;
+            return MapDTO.MapList<ProductDTO, Product>(_uow.Products.GetAll());
         }
 
-        public void Update(ProductDTO c)
+        public ProductDTO Update(ProductDTO c)
         {
-
-            _uow.Products.Modify(Map(c));
-
+            _uow.Products.Modify(MapDTO.Map<Product, ProductDTO>(c));
+            return c;
         }
     }
 }

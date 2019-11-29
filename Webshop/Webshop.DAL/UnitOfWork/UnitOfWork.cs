@@ -1,29 +1,31 @@
-﻿using Webshop.DAL.Repositories;
+﻿using Webshop.DAL.Entit;
+using Webshop.DAL.Repositories;
 using Webshop.DAL.UnitOfWork.Interface;
 
 namespace Webshop.DAL.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork
     {
         private readonly WebshopContext _context;
 
-        public CourseRepo Courses { get; private set; }
-        public InvoiceDetailRepo InvoiceDetails { get; private set; }
-        public InvoiceRepo Invoices { get; private set; }
-        public ProductPriceRepo ProductPrices { get; private set; }
-        public ProductRepo Products { get; private set; }
-        public VatRepo Vats { get; private set; }
+        public IRepository<Course> Courses { get; private set; }
+        public IRepository<InvoiceDetail> InvoiceDetails { get; private set; }
+        public IRepository<Invoice> Invoices { get; private set; }
+        public IRepository<ProductPrice> ProductPrices { get; private set; }
+        public IRepository<Product> Products { get; private set; }
+        public IRepository<Vat> Vats { get; private set; }
 
-        public UnitOfWork()
+        public UnitOfWork(WebshopContext context, CourseRepo courseRepo, InvoiceDetailRepo invoiceDetailRepo, InvoiceRepo invoiceRepo,
+            ProductPriceRepo productPriceRepo, ProductRepo productRepo, VatRepo vatRepo)
         {
-            _context = new WebshopContext();
+            _context = context;
 
-            Courses = new CourseRepo(_context);
-            InvoiceDetails = new InvoiceDetailRepo(_context);
-            Invoices = new InvoiceRepo(_context);
-            ProductPrices = new ProductPriceRepo(_context);
-            Products = new ProductRepo(_context);
-            Vats = new VatRepo(_context);
+            Courses = courseRepo;
+            InvoiceDetails = invoiceDetailRepo;
+            Invoices = invoiceRepo;
+            ProductPrices = productPriceRepo;
+            Products = productRepo;
+            Vats = vatRepo;
         }
 
         public int SaveChanges()

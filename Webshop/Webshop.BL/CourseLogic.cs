@@ -12,66 +12,38 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
-        public CourseLogic()
+        public CourseLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-        public static Course Map(CourseDTO e)
+        public CourseDTO Create(CourseDTO c)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CourseDTO, Course>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Course dto = mapper.Map<Course>(e);
-            return dto;
-
-        }
-        public static CourseDTO Map(Course e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Course, CourseDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            CourseDTO dto = mapper.Map<CourseDTO>(e);
-            return dto;
-
-        }
-
-        public void Create(CourseDTO c)
-        {
-            _uow.Courses.Add(Map(c));
+            _uow.Courses.Add(MapDTO.Map<Course, CourseDTO>(c));
+            return c;
         }
 
         public CourseDTO FindByID(int? id)
         {
             Course c = _uow.Courses.FindById(id);
 
-            return Map(c);
+            return MapDTO.Map<CourseDTO, Course>(c);
         }
 
         public void Delete(CourseDTO c)
         {
-            _uow.Courses.Remove(Map(c));
+            _uow.Courses.Remove(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public List<CourseDTO> GetAll()
         {
-            List<Course> courses = _uow.Courses.GetAll();
-            List<CourseDTO> coursesDto = new List<CourseDTO>();
-
-            foreach (Course c in courses)
-            {
-                coursesDto.Add(Map(c));
-            }
-
-            return coursesDto;
+            return MapDTO.MapList<CourseDTO, Course>(_uow.Courses.GetAll());
         }
 
-        public void Update(CourseDTO c)
+        public CourseDTO Update(CourseDTO c)
         {
-
-            _uow.Courses.Modify(Map(c));
-            
+            _uow.Courses.Modify(MapDTO.Map<Course, CourseDTO>(c));
+            return c;
         }
     }
 }

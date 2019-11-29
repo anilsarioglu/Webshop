@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201911221425261_Seed_InvoiceDetails.designer.cs">
       <DependentUpon>201911221425261_Seed_InvoiceDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911221508365_CreateASPIdentity.cs" />
+    <Compile Include="Migrations\201911221508365_CreateASPIdentity.designer.cs">
+      <DependentUpon>201911221508365_CreateASPIdentity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CourseRepo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911221425261_Seed_InvoiceDetails.resx">
       <DependentUpon>201911221425261_Seed_InvoiceDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911221508365_CreateASPIdentity.resx">
+      <DependentUpon>201911221508365_CreateASPIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
