@@ -10,6 +10,7 @@ namespace Webshop.UI_MVC.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
 
     public static class NinjectWebCommon 
     {

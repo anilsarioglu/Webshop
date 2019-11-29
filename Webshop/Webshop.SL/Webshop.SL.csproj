@@ -148,7 +148,7 @@
       <Name>Webshop.BL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Webshop.DAL\Webshop.DAL.csproj">
-      <Project>{62FE80E5-8F85-4C76-95A1-7AF9EEB16455}</Project>
+      <Project>{62fe80e5-8f85-4c76-95a1-7af9eeb16455}</Project>
       <Name>Webshop.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Webshop.Domain\Webshop.Domain.csproj">
