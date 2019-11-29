@@ -29,15 +29,14 @@ namespace Webshop.BL
 
         public ProductDTO FindByID(int? id)
         {
-            Product c = _uow.ProductRepo.FindById(id);
+            Product c = _uow.Products.FindById(id);
 
             return MapDTO.Map<ProductDTO, Product>(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            
-            _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.Products.Remove(MapDTO.Map<Product, ProductDTO>(c));
         }
 
         public List<ProductDTO> GetAll()

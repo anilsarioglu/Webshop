@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -37,7 +36,7 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Course t)
         {
-            _webshopContext.Entry(t).State = EntityState.Deleted;
+            _webshopContext._Courses.Remove(t);
         }
 
        

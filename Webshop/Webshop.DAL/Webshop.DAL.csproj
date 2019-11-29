@@ -85,6 +85,7 @@
     <Compile Include="Repositories\ProductPriceRepo.cs" />
     <Compile Include="Repositories\ProductRepo.cs" />
     <Compile Include="Repositories\VatRepo.cs" />
+    <Compile Include="UnitOfWork\Interface\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="WebshopContext.cs" />
     <Compile Include="IWebshopDataSource.cs" />
