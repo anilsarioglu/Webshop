@@ -23,30 +23,30 @@ namespace Webshop.BL
 
         public ProductDTO Create(ProductDTO c)
         {
-            _uow.Products.Add(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
             return c;
         }
 
         public ProductDTO FindByID(int? id)
         {
-            Product c = _uow.Products.FindById(id);
+            Product c = _uow.ProductRepo.FindById(id);
 
             return MapDTO.Map<ProductDTO, Product>(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            _uow.Products.Remove(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
         }
 
         public List<ProductDTO> GetAll()
         {
-            return MapDTO.MapList<ProductDTO, Product>(_uow.Products.GetAll());
+            return MapDTO.MapList<ProductDTO, Product>(_uow.ProductRepo.GetAll());
         }
 
         public ProductDTO Update(ProductDTO c)
         {
-            _uow.Products.Modify(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
             return c;
         }
     }

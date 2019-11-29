@@ -19,30 +19,30 @@ namespace Webshop.BL
 
         public CourseDTO Create(CourseDTO c)
         {
-            _uow.Courses.Add(MapDTO.Map<Course, CourseDTO>(c));
+            _uow.CourseRepo.Add(MapDTO.Map<Course, CourseDTO>(c));
             return c;
         }
 
         public CourseDTO FindByID(int? id)
         {
-            Course c = _uow.Courses.FindById(id);
+            Course c = _uow.CourseRepo.FindById(id);
 
             return MapDTO.Map<CourseDTO, Course>(c);
         }
 
         public void Delete(CourseDTO c)
         {
-            _uow.Courses.Remove(MapDTO.Map<Course, CourseDTO>(c));
+            _uow.CourseRepo.Remove(MapDTO.Map<Course, CourseDTO>(c));
         }
 
         public List<CourseDTO> GetAll()
         {
-            return MapDTO.MapList<CourseDTO, Course>(_uow.Courses.GetAll());
+            return MapDTO.MapList<CourseDTO, Course>(_uow.CourseRepo.GetAll());
         }
 
         public CourseDTO Update(CourseDTO c)
         {
-            _uow.Courses.Modify(MapDTO.Map<Course, CourseDTO>(c));
+            _uow.CourseRepo.Modify(MapDTO.Map<Course, CourseDTO>(c));
             return c;
         }
     }
