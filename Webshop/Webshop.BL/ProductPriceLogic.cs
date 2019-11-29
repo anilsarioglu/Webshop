@@ -44,24 +44,26 @@ namespace Webshop.BL
 
         public void Create(ProductPriceDTO c)
         {
-            _uow.ProductPrices.Add(Map(c));
+            _uow.ProductPriceRepo.Add(Map(c));
+            _uow.Save();
         }
 
         public ProductPriceDTO FindByID(int? id)
         {
-            ProductPrice c = _uow.ProductPrices.FindById(id);
+            ProductPrice c = _uow.ProductPriceRepo.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(ProductPriceDTO c)
         {
-            _uow.ProductPrices.Remove(Map(c));
+            _uow.ProductPriceRepo.Remove(Map(c));
+            _uow.Save();
         }
 
         public List<ProductPriceDTO> GetAll()
         {
-            List<ProductPrice> productPrices = _uow.ProductPrices.GetAll();
+            List<ProductPrice> productPrices = _uow.ProductPriceRepo.GetAll();
             List<ProductPriceDTO> productPriceDtos = new List<ProductPriceDTO>();
 
             foreach (ProductPrice c in productPrices)
@@ -75,7 +77,8 @@ namespace Webshop.BL
         public void Update(ProductPriceDTO c)
         {
 
-            _uow.ProductPrices.Modify(Map(c));
+            _uow.ProductPriceRepo.Modify(Map(c));
+            _uow.Save();
 
         }
     }

@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int Pieces { get; set; }
+        public Invoice Invoice { get; set; }
 
         public InvoiceDetail()
         {

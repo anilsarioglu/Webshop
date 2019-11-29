@@ -39,24 +39,24 @@ namespace Webshop.BL
 
         public void Create(CourseDTO c)
         {
-            _uow.Courses.Add(Map(c));
+            _uow.CourseRepo.Add(Map(c));
         }
 
         public CourseDTO FindByID(int? id)
         {
-            Course c = _uow.Courses.FindById(id);
+            Course c = _uow.CourseRepo.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(CourseDTO c)
         {
-            _uow.Courses.Remove(Map(c));
+            _uow.CourseRepo.Remove(Map(c));
         }
 
         public List<CourseDTO> GetAll()
         {
-            List<Course> courses = _uow.Courses.GetAll();
+            List<Course> courses = _uow.CourseRepo.GetAll();
             List<CourseDTO> coursesDto = new List<CourseDTO>();
 
             foreach (Course c in courses)
@@ -70,7 +70,7 @@ namespace Webshop.BL
         public void Update(CourseDTO c)
         {
 
-            _uow.Courses.Modify(Map(c));
+            _uow.CourseRepo.Modify(Map(c));
             
         }
     }

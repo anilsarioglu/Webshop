@@ -44,25 +44,27 @@ namespace Webshop.BL
 
         public void Create(ProductDTO c)
         {
-            _uow.Products.Add(Map(c));
+            _uow.ProductRepo.Add(Map(c));
+            _uow.Save();
         }
 
         public ProductDTO FindByID(int? id)
         {
-            Product c = _uow.Products.FindById(id);
+            Product c = _uow.ProductRepo.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(ProductDTO c)
         {
-            _uow.Products.Remove(Map(c));
+            _uow.ProductRepo.Remove(Map(c));
+            _uow.Save();
         }
 
         public List<ProductDTO> GetAll()
         {
 
-            List<Product> products = _uow.Products.GetAll();
+            List<Product> products = _uow.ProductRepo.GetAll();
             List<ProductDTO> productDtos = new List<ProductDTO>();
 
             foreach (Product c in products)
@@ -76,7 +78,8 @@ namespace Webshop.BL
         public void Update(ProductDTO c)
         {
 
-            _uow.Products.Modify(Map(c));
+            _uow.ProductRepo.Modify(Map(c));
+            _uow.Save();
 
         }
     }
