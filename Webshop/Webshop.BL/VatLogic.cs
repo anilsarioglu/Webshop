@@ -21,10 +21,10 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(VatDTO c)
+        public VatDTO Create(VatDTO c)
         {
             _uow.Vats.Add(MapDTO.Map<Vat, VatDTO>(c));
-            ;
+            return c;
         }
 
         public VatDTO FindByID(int? id)
@@ -44,9 +44,10 @@ namespace Webshop.BL
             return MapDTO.MapList<VatDTO, Vat>(_uow.Vats.GetAll());
         }
 
-        public void Update(VatDTO c)
+        public VatDTO Update(VatDTO c)
         {
             _uow.Vats.Modify(MapDTO.Map<Vat, VatDTO>(c));
+            return c;
         }
     }
 }

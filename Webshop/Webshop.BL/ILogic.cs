@@ -8,10 +8,10 @@ namespace Webshop.BL
 {
     public interface ILogic<T> where T : class
     {
-        void Create(T t);
+        T Create(T t);
         T FindByID(int? id);
         void Delete(T t);
         List<T> GetAll();
-        void Update(T t);
+        T Update(T t);
     }
 }
