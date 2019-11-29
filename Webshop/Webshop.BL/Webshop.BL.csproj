@@ -47,6 +47,9 @@
     <Reference Include="IronPdf, Version=2019.8.8.26453, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPdf.2019.8.8.1\lib\net40\IronPdf.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -61,6 +64,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CourseLogic.cs" />
+    <Compile Include="log4net.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>log4net.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\GeneratePDF.cs" />
     <Compile Include="ILogic.cs" />
@@ -85,6 +94,16 @@
       <Project>{E6D9123E-6F6F-4D8C-8A04-49961F4F8C6C}</Project>
       <Name>Webshop.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>log4net.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

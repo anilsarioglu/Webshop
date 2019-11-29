@@ -17,7 +17,7 @@ namespace Webshop.DAL.Repositories
         public void Add(Course course)
         {
             _webshopContext._Courses.Add(course);
-            _webshopContext.SaveChanges();
+          
         }
 
         public Course FindById(int? id)

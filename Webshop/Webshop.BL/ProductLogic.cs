@@ -23,7 +23,7 @@ namespace Webshop.BL
 
         public void Create(ProductDTO c)
         {
-            _uow.Products.Add(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
 
         }
 
@@ -42,12 +42,12 @@ namespace Webshop.BL
 
         public List<ProductDTO> GetAll()
         {
-            return MapDTO.MapList<ProductDTO, Product>(_uow.Products.GetAll());
+            return MapDTO.MapList<ProductDTO, Product>(_uow.ProductRepo.GetAll());
         }
 
         public void Update(ProductDTO c)
         {
-            _uow.Products.Modify(MapDTO.Map<Product, ProductDTO>(c));
+            _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
         }
     }
 }
