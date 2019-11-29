@@ -43,7 +43,7 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(InvoiceDetail t)
         {
-            _webshopContext._InvoiceDetails.Remove(t);
+            _webshopContext.Entry(t).State = EntityState.Deleted;
         }
     }
 }
