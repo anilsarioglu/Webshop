@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -16,7 +17,7 @@ namespace Webshop.DAL.Repositories
         public void Add(Invoice t)
         {
             _webshopContext._Invoices.Add(t);
-            _webshopContext.SaveChanges();
+           
         }
 
         public Invoice FindById(int? id)
@@ -27,7 +28,7 @@ namespace Webshop.DAL.Repositories
         public void Modify(Invoice invoice)
         {
             _webshopContext._Invoices.AddOrUpdate(invoice);
-            _webshopContext.SaveChanges();
+         
         }
 
         public List<Invoice> GetAll()
@@ -37,21 +38,9 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Invoice t)
         {
-      //_webshopContext._Invoices.Remove(t);
-          _webshopContext.Entry(t).State = System.Data.Entity.EntityState.Deleted;
-          _webshopContext.SaveChanges();
+            _webshopContext.Entry(t).State = EntityState.Deleted;
         }
 
-        public void insertData()
-        {
-            List<Invoice> invoices = DataHolder.GetInvoices();
-            for (int i = 0; i < invoices.Count; i++)
-            {
-                Invoice invoice = invoices[i];
-                invoice.Id = i;
-                _webshopContext._Invoices.Add(invoice);
-            }
-            _webshopContext.SaveChanges();
-        }
+        
     }
 }
