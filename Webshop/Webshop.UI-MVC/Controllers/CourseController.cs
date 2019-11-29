@@ -1,15 +1,16 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webshop.Domain;
+using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class CourseController : Controller
     {
-        private IEnumerable<CourseDTO> courses = APIConsumer<CourseDTO>.GetAPI("course");
+        private IEnumerable<Course> courses = APIConsumer<Course>.GetAPI("course");
 
         // GET: Course
         public ActionResult Index()
@@ -31,6 +32,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Course/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -53,7 +55,8 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Course/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Course courseDTO)
         {
             try
             {
@@ -75,6 +78,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Course/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
