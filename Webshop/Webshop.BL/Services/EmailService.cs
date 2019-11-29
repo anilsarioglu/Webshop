@@ -1,39 +1,25 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Webshop.BL
 {
     public class EmailService
     {
-        public static void SendMail(String mailTo)
+        public void SendMail(string email, string id, string subject, string body)
         {
+            //TODO aanpassen waarden email!
+            // Plug in your email service here to send an email.
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("teampuntkomma@gmail.com");
-            mail.To.Add(mailTo);
-            mail.Subject = "Test Mail";
-            mail.Body = "This is for testing SMTP mail from GMAIL";
+            mail.From = new MailAddress("xxxxxx@gmail.com");
+            mail.To.Add(email);
+            mail.Subject = subject;
+            mail.Body = body;
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("teampuntkomma@gmail.com", "TeamPuntKomma3");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-        }
-
-        public static void SendMail(String mailTo, String html)
-        {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("teampuntkomma@gmail.com");
-            mail.To.Add(mailTo);
-            mail.Subject = "Test Mail";
-            mail.Body = "This is for testing SMTP mail from GMAIL";
-            GeneratePDF.CreatePDF(html);
-            mail.Attachments.Add(new Attachment("..\\..\\test.pdf"));
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("teampuntkomma@gmail.com", "TeamPuntKomma3");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("xxxx@gmail.com", "xxxx");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
