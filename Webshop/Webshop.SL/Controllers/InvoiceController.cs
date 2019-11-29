@@ -23,6 +23,7 @@ namespace Webshop.SL.Controllers
         {
           invoiceLogic.Create(invoiceDTO);
         }
+
         public IEnumerable<InvoiceDTO> GetInvoices()
         {
 
@@ -39,6 +40,7 @@ namespace Webshop.SL.Controllers
         {
           invoiceLogic.Delete(invoiceDTO);
         }
+
         [HttpPut]
         public void Update(InvoiceDTO invoiceDTO)
         {

@@ -21,9 +21,10 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(ProductPriceDTO c)
+        public ProductPriceDTO Create(ProductPriceDTO c)
         {
-            _uow.ProductPrices.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c)); ;
+            _uow.ProductPrices.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            return c;
         }
 
         public ProductPriceDTO FindByID(int? id)
@@ -43,9 +44,10 @@ namespace Webshop.BL
             return MapDTO.MapList<ProductPriceDTO, ProductPrice>(_uow.ProductPrices.GetAll());
         }
 
-        public void Update(ProductPriceDTO c)
+        public ProductPriceDTO Update(ProductPriceDTO c)
         {
             _uow.ProductPrices.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+            return c;
         }
     }
 }

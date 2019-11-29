@@ -17,9 +17,10 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(CourseDTO c)
+        public CourseDTO Create(CourseDTO c)
         {
             _uow.Courses.Add(MapDTO.Map<Course, CourseDTO>(c));
+            return c;
         }
 
         public CourseDTO FindByID(int? id)
@@ -39,9 +40,10 @@ namespace Webshop.BL
             return MapDTO.MapList<CourseDTO, Course>(_uow.Courses.GetAll());
         }
 
-        public void Update(CourseDTO c)
+        public CourseDTO Update(CourseDTO c)
         {
             _uow.Courses.Modify(MapDTO.Map<Course, CourseDTO>(c));
+            return c;
         }
     }
 }
