@@ -7,7 +7,12 @@ namespace Webshop.DAL.Repositories
 {
     public class CourseRepo : IRepository<Course>
     {
-        private WebshopContext _webshopContext = new WebshopContext();
+        private WebshopContext _webshopContext;
+        public CourseRepo(WebshopContext context)
+        {
+              _webshopContext = context;  
+        }
+
         public void Add(Course course)
         {
             _webshopContext._Courses.Add(course);

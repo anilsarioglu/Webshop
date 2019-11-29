@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class InvoiceLogic : ILogic<InvoiceDTO>
     {
-        private IRepository<Invoice> _invoiceRepo;
+        private UnitOfWork _uow;
 
-        public InvoiceLogic(InvoiceRepo repo)
+        public InvoiceLogic()
         {
-            _invoiceRepo = repo;
+            _uow = new UnitOfWork();
         }
 
         public static Invoice Map(InvoiceDTO e)
@@ -42,25 +44,25 @@ namespace Webshop.BL
 
         public void Create(InvoiceDTO c)
         {
-            _invoiceRepo.Add(Map(c));
+            _uow.Invoices.Add(Map(c));
         }
 
         public InvoiceDTO FindByID(int? id)
         {
-            Invoice c = _invoiceRepo.FindById(id);
+            Invoice c = _uow.Invoices.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
-            _invoiceRepo.Remove(Map(c));
+            _uow.Invoices.Remove(Map(c));
         }
 
 
         public List<InvoiceDTO> GetAll()
         {
-          List<Invoice> invoices = _invoiceRepo.GetAll();
+          List<Invoice> invoices = _uow.Invoices.GetAll();
           List<InvoiceDTO> invoiceDTO = new List<InvoiceDTO>();
 
           foreach (Invoice c in invoices)
@@ -74,7 +76,7 @@ namespace Webshop.BL
     public void Update(InvoiceDTO c)
         {
 
-            _invoiceRepo.Modify(Map(c));
+            _uow.Invoices.Modify(Map(c));
 
         }
     }

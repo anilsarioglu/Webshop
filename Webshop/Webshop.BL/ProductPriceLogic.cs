@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class ProductPriceLogic : ILogic<ProductPriceDTO>
     {
-        private IRepository<ProductPrice> _productPriceRepo;
+        private UnitOfWork _uow;
 
-        public ProductPriceLogic(ProductPriceRepo repo)
+        public ProductPriceLogic()
         {
-            _productPriceRepo = repo;
+            _uow = new UnitOfWork();
         }
 
         public static ProductPrice Map(ProductPriceDTO e)
@@ -42,24 +44,24 @@ namespace Webshop.BL
 
         public void Create(ProductPriceDTO c)
         {
-            _productPriceRepo.Add(Map(c));
+            _uow.ProductPrices.Add(Map(c));
         }
 
         public ProductPriceDTO FindByID(int? id)
         {
-            ProductPrice c = _productPriceRepo.FindById(id);
+            ProductPrice c = _uow.ProductPrices.FindById(id);
 
             return Map(c);
         }
 
         public void Delete(ProductPriceDTO c)
         {
-            _productPriceRepo.Remove(Map(c));
+            _uow.ProductPrices.Remove(Map(c));
         }
 
         public List<ProductPriceDTO> GetAll()
         {
-            List<ProductPrice> productPrices = _productPriceRepo.GetAll();
+            List<ProductPrice> productPrices = _uow.ProductPrices.GetAll();
             List<ProductPriceDTO> productPriceDtos = new List<ProductPriceDTO>();
 
             foreach (ProductPrice c in productPrices)
@@ -73,7 +75,7 @@ namespace Webshop.BL
         public void Update(ProductPriceDTO c)
         {
 
-            _productPriceRepo.Modify(Map(c));
+            _uow.ProductPrices.Modify(Map(c));
 
         }
     }

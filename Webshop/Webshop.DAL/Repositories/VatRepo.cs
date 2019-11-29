@@ -7,7 +7,11 @@ namespace Webshop.DAL.Repositories
 {
     public class VatRepo : IRepository<Vat>
     {
-        private WebshopContext _webshopContext = new WebshopContext();
+        private WebshopContext _webshopContext;
+        public VatRepo(WebshopContext context)
+        {
+            _webshopContext = context;
+        }
 
         public void Add(Vat t)
         {

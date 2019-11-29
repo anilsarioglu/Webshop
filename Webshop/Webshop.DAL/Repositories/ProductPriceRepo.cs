@@ -8,7 +8,11 @@ namespace Webshop.DAL.Repositories
 {
     public class ProductPriceRepo : IRepository<ProductPrice>
     {
-        private WebshopContext  _webshopContext = new WebshopContext();
+        private WebshopContext _webshopContext;
+        public ProductPriceRepo(WebshopContext context)
+        {
+            _webshopContext = context;
+        }
 
         public void Add(ProductPrice t)
         {

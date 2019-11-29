@@ -185,11 +185,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APIConsumer.cs" />
+    <Compile Include="Service\APIConsumer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -207,7 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MapDTO.cs" />
+    <Compile Include="Service\MapDTO.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -327,6 +326,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Mail\" />
+    <Folder Include="Views\Vat\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

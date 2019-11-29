@@ -5,9 +5,9 @@ using System.Web.Script.Serialization;
 
 namespace Webshop.UI_MVC
 {
-    public static class APIConsumer<T> where T : class
+    internal static class APIConsumer<T> where T : class
     {
-        public static IEnumerable<T> GetAPI(string path)
+        internal static IEnumerable<T> GetAPI(string path)
         {
             IEnumerable<T> objects = null;
             using (var client = new HttpClient())
