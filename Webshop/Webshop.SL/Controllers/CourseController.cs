@@ -11,38 +11,76 @@ namespace Webshop.SL.Controllers
 {
     public class CourseController : ApiController
     {
-    public ILogic<CourseDTO> courseLogic;
+        private ILogic<CourseDTO> _courseLogic;
 
-    public CourseController(CourseLogic logic)
-    {
-      courseLogic = logic;
-    }
+        public CourseController(CourseLogic logic)
+        {
+          _courseLogic = logic;
+        }
 
-    public IEnumerable<CourseDTO> GetInvoices()
-    {
+        public IHttpActionResult GetAllCourses()
+        {
 
-      return courseLogic.GetAll().AsEnumerable();
-    }
+          return Ok(_courseLogic.GetAll().AsEnumerable());
+        }
 
-    [HttpPost]
-    public void Create(CourseDTO courseDTO)
-    {
-      courseLogic.Create(courseDTO);
-    }
-    public CourseDTO Get(int id)
-    {
-      return courseLogic.FindByID(id);
-    }
+        public IHttpActionResult GetCourse(int id)
+        {
+            var course = _courseLogic.FindByID(id);
 
-    [HttpDelete]
-    public void Delete(CourseDTO invoiceDTO)
-    {
-      courseLogic.Delete(invoiceDTO);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(course);
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateCourse(CourseDTO courseDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _courseLogic.Create(courseDto);
+            return Created(new Uri(Request.RequestUri + "/" + courseDto.Id), courseDto);
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateCourse(CourseDTO courseDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var courseInDb = _courseLogic.FindByID(courseDto.Id);
+
+            if (courseInDb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_courseLogic.Update(courseDto));
+
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(CourseDTO courseDto)
+        {
+            var courseInDb = _courseLogic.FindByID(courseDto.Id);
+
+            if (courseInDb == null)
+            {
+                return NotFound();
+            }
+
+            _courseLogic.Delete(courseDto);
+
+            return Ok();
+
+        }
     }
-    [HttpPut]
-    public void Update(CourseDTO invoiceDTO)
-    {
-      courseLogic.Update(invoiceDTO);
-    }
-  }
 }

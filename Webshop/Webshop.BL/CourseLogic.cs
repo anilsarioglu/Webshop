@@ -19,15 +19,19 @@ namespace Webshop.BL
 
         public CourseDTO Create(CourseDTO c)
         {
-            _uow.CourseRepo.Add(MapDTO.Map<Course, CourseDTO>(c));
+            var course = MapDTO.Map<Course, CourseDTO>(c);
+            _uow.CourseRepo.Add(course);
+
+            c.Id = course.Id;
+
             return c;
         }
 
         public CourseDTO FindByID(int? id)
         {
-            Course c = _uow.CourseRepo.FindById(id);
+            var c = _uow.CourseRepo.FindById(id);
+            return c == null ? null : MapDTO.Map<CourseDTO, Course>(c);
 
-            return MapDTO.Map<CourseDTO, Course>(c);
         }
 
         public void Delete(CourseDTO c)
