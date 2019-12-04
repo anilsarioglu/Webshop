@@ -64,7 +64,6 @@ namespace Webshop.SL.Controllers
             }
 
             return Ok(_courseLogic.Update(courseDto));
-
         }
 
         [HttpDelete]
@@ -80,7 +79,6 @@ namespace Webshop.SL.Controllers
             _courseLogic.Delete(courseDto);
 
             return Ok();
-
         }
     }
 }

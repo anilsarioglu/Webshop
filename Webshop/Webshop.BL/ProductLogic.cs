@@ -16,38 +16,86 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
 
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public ProductLogic(UnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public ProductDTO Create(ProductDTO c)
+        public void Create(ProductDTO c)
         {
-            _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
-            return c;
+            try
+            {
+                _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen product toevoegen", e);
+                throw new Exception(e.Message);
+            }
+
+
         }
 
         public ProductDTO FindByID(int? id)
         {
-            Product c = _uow.ProductRepo.FindById(id);
+            try
+            {
+                Product c = _uow.ProductRepo.FindById(id);
 
-            return MapDTO.Map<ProductDTO, Product>(c);
+                return MapDTO.Map<ProductDTO, Product>(c);
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen product vinden");
+                throw new Exception(e.Message);
+            }
         }
 
         public void Delete(ProductDTO c)
         {
-            _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
+
+            try
+            {
+                _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen product verwijderen");
+                throw new Exception(e.Message);
+            }
         }
 
         public List<ProductDTO> GetAll()
         {
-            return MapDTO.MapList<ProductDTO, Product>(_uow.ProductRepo.GetAll());
+            try
+            {
+                return MapDTO.MapList<ProductDTO, Product>(_uow.ProductRepo.GetAll());
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen producten oplijsten");
+                throw new Exception(e.Message);
+            }
         }
 
-        public ProductDTO Update(ProductDTO c)
+        public void Update(ProductDTO c)
         {
-            _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
-            return c;
+            try
+            {
+                _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
+                _uow.Save();
+
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen product wijzigen");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

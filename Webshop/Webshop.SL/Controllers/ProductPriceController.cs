@@ -19,36 +19,70 @@ namespace Webshop.SL.Controllers
         }
 
         //GET /api/productprice
-        public IEnumerable<ProductPriceDTO> Get()
+        public IHttpActionResult GetProductPrices()
         {
-            return _productPriceLogic.GetAll().AsEnumerable();
+            return Ok(_productPriceLogic.GetAll().AsEnumerable());
         }
 
         //GET /api/productprice/1
-        public ProductPriceDTO GetById(int id)
+        public IHttpActionResult GetProductPrice(int id)
         {
-            return _productPriceLogic.FindByID(id);
+            var productPrice = _productPriceLogic.FindByID(id);
+
+            if (productPrice == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(productPrice);
         }
 
         //POST /api/productprice
         [HttpPost]
-        public void Add(ProductPriceDTO productPriceDto)
+        public IHttpActionResult AddProductPrice(ProductPriceDTO productPriceDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             _productPriceLogic.Create(productPriceDto);
+            return Created(new Uri(Request.RequestUri + "/" + productPriceDto.Id), productPriceDto);
         }
 
         //PUT /api/productprice/1
         [HttpPut]
-        public void Update(ProductPriceDTO productPriceDto)
+        public IHttpActionResult UpdateProductPrice(ProductPriceDTO productPriceDto)
         {
-            _productPriceLogic.Update(productPriceDto);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var productPriceInDb = _productPriceLogic.FindByID(productPriceDto.Id);
+
+            if (productPriceInDb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_productPriceLogic.Update(productPriceInDb));
         }
 
         //Delete /api/productprice/1
         [HttpDelete]
-        public void Delete(ProductPriceDTO productPriceDto)
+        public IHttpActionResult DeleteProductPrice(ProductPriceDTO productPriceDto)
         {
+            var productPriceInDb = _productPriceLogic.FindByID(productPriceDto.Id);
+
+            if (productPriceInDb == null)
+            {
+                return NotFound();
+            }
+
             _productPriceLogic.Delete(productPriceDto);
+
+            return Ok();
         }
     }
 }

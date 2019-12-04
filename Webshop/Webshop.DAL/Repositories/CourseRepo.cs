@@ -17,7 +17,6 @@ namespace Webshop.DAL.Repositories
         public void Add(Course course)
         {
             _webshopContext._Courses.Add(course);
-            _webshopContext.SaveChanges();
         }
 
         public Course FindById(int? id)
@@ -28,7 +27,6 @@ namespace Webshop.DAL.Repositories
         public void Modify(Course course)
         {
             _webshopContext._Courses.AddOrUpdate(course);
-            _webshopContext.SaveChanges();
         }
 
         public List<Course> GetAll()
@@ -38,10 +36,7 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Course t)
         {
-            var course = _webshopContext._Courses.Find(t.Id);
-            _webshopContext.Entry(course).State = EntityState.Deleted;
-            _webshopContext.SaveChanges();
-
+            _webshopContext._Courses.Remove(t);
         }
 
 

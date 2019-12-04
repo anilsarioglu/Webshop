@@ -16,7 +16,6 @@ namespace Webshop.DAL.Repositories
         public void Add(Vat t)
         {
             _webshopContext._Vats.Add(t);
-            _webshopContext.SaveChanges();
         }
 
         public Vat FindById(int? id)
@@ -27,7 +26,6 @@ namespace Webshop.DAL.Repositories
         public void Modify(Vat vat)
         {
             _webshopContext._Vats.AddOrUpdate();
-            _webshopContext.SaveChanges();
         }
 
         public List<Vat> GetAll()
@@ -38,7 +36,6 @@ namespace Webshop.DAL.Repositories
         public void Remove(Vat t)
         {
             _webshopContext._Vats.Remove(t);
-            _webshopContext.SaveChanges();
         }
     }
 }

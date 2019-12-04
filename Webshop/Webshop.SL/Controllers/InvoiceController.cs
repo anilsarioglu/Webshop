@@ -11,40 +11,75 @@ namespace Webshop.SL.Controllers
 {
     public class InvoiceController : ApiController
     {
-        public ILogic<InvoiceDTO> invoiceLogic;
+        private ILogic<InvoiceDTO> _invoiceLogic;
         
         public InvoiceController(InvoiceLogic logic)
         {
-            invoiceLogic = logic;
+            _invoiceLogic = logic;
         }
 
-
-        public void Create(InvoiceDTO invoiceDTO)
+        public IHttpActionResult GetInvoices()
         {
-          invoiceLogic.Create(invoiceDTO);
+            return Ok(_invoiceLogic.GetAll().AsEnumerable());
         }
 
-        public IEnumerable<InvoiceDTO> GetInvoices()
+        public IHttpActionResult GetInvoice(int id)
         {
+            var invoice = _invoiceLogic.FindByID(id);
 
-            return invoiceLogic.GetAll().AsEnumerable();
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(invoice);
         }
 
-        public InvoiceDTO Get(int id)
+        [HttpPost]
+        public IHttpActionResult CreateInvoice(InvoiceDTO invoiceDto)
         {
-          return invoiceLogic.FindByID(id);
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
 
-        [HttpDelete]
-        public void Delete(InvoiceDTO invoiceDTO)
-        {
-          invoiceLogic.Delete(invoiceDTO);
+            _invoiceLogic.Create(invoiceDto);
+            return Created(new Uri(Request.RequestUri + "/" + invoiceDto.Id), invoiceDto);
         }
 
         [HttpPut]
-        public void Update(InvoiceDTO invoiceDTO)
+        public IHttpActionResult UpdateInvoice(InvoiceDTO invoiceDto)
         {
-           invoiceLogic.Update(invoiceDTO);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var invoiceInDb = _invoiceLogic.FindByID(invoiceDto.Id);
+
+            if (invoiceInDb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_invoiceLogic.Update(invoiceInDb));
         }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteInvoice(InvoiceDTO invoiceDto)
+        {
+            var invoiceInDb = _invoiceLogic.FindByID(invoiceDto.Id);
+
+            if (invoiceInDb == null)
+            {
+                return NotFound();
+            }
+
+            _invoiceLogic.Delete(invoiceDto);
+
+            return Ok();
+        }
+
+       
   }
 }

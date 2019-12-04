@@ -17,7 +17,6 @@ namespace Webshop.DAL.Repositories
         public void Add(ProductPrice t)
         {
             _webshopContext._ProductPrices.Add(t);
-            _webshopContext.SaveChanges();
         }
 
         public ProductPrice FindById(int? id)
@@ -28,7 +27,6 @@ namespace Webshop.DAL.Repositories
         public void Modify(ProductPrice productPrice)
         {
             _webshopContext._ProductPrices.AddOrUpdate(productPrice);
-            _webshopContext.SaveChanges();
         }
 
         public List<ProductPrice> GetAll()
@@ -38,9 +36,8 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(ProductPrice t)
         {
-            //_webshopContext._ProductPrices.Remove(t);
-            _webshopContext.Entry(t).State = EntityState.Deleted;
-            _webshopContext.SaveChanges();
+            _webshopContext._ProductPrices.Remove(t);
+            //_webshopContext.Entry(t).State = EntityState.Deleted;
         }
     }
 }

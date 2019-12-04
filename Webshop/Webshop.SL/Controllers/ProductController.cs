@@ -11,37 +11,73 @@ namespace Webshop.SL.Controllers
 {
     public class ProductController : ApiController
     {
-        private ILogic<ProductDTO> productLogic;
+        private ILogic<ProductDTO> _productLogic;
 
         public ProductController(ProductLogic logic)
         {
-            productLogic = logic;
+            _productLogic = logic;
         }
 
-        public IEnumerable<ProductDTO> Get()
+        public IHttpActionResult GetProducts()
         {
-            return productLogic.GetAll().AsEnumerable();
+            return Ok(_productLogic.GetAll().AsEnumerable());
         }
 
-        public ProductDTO Get(int id)
+        public IHttpActionResult GetProduct(int id)
         {
-          return productLogic.FindByID(id);
+            var product = _productLogic.FindByID(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateProduct(ProductDTO productDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            _productLogic.Create(productDto);
+            return Created(new Uri(Request.RequestUri + "/" + productDto.Id), productDto);
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateProduct(ProductDTO productDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var productInDb = _productLogic.FindByID(productDto.Id);
+
+            if (productInDb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_productLogic.Update(productInDb));
         }
 
         [HttpDelete]
-        public void Delete(ProductDTO productDTO)
+        public IHttpActionResult DeleteProduct(ProductDTO productDto)
         {
-          productLogic.Delete(productDTO);
-        }
-        [HttpPut]
-        public void Update(ProductDTO productDTO)
-        {
-          productLogic.Update(productDTO);
-        }
-        [HttpPost]
-        public void Create(ProductDTO productDTO)
-        {
-          productLogic.Create(productDTO);
+            var productInDb = _productLogic.FindByID(productDto.Id);
+
+            if (productInDb == null)
+            {
+                return NotFound();
+            }
+
+            _productLogic.Delete(productDto);
+
+            return Ok();
         }
   }
 }
