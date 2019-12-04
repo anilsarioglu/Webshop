@@ -24,19 +24,20 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(ProductDTO c)
+        public ProductDTO Create(ProductDTO c)
         {
             try
             {
                 _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
-                log.Error("kon geen product toevoegen", e);
-                throw new Exception(e.Message);
+                log.Error("kon geen product toevoegen",e);
+                throw  new Exception(e.Message);
             }
-
+           
 
         }
 
@@ -83,12 +84,13 @@ namespace Webshop.BL
             }
         }
 
-        public void Update(ProductDTO c)
+        public ProductDTO Update(ProductDTO c)
         {
             try
             {
                 _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
                 _uow.Save();
+                return c;
 
             }
             catch (Exception e)

@@ -17,26 +17,25 @@ namespace Webshop.BL
         private UnitOfWork _uow;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public InvoiceDetailLogic()
+        public InvoiceDetailLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-
-
-        public void Create(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Create(InvoiceDetailDTO c)
         {
             try
             {
                 _uow.InvoiceDetailRepo.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
                 log.Error("kon geen factuur toeveogen");
                 throw new Exception(e.Message);
             }
-
+           
         }
 
         public InvoiceDetailDTO FindByID(int? id)
@@ -49,10 +48,10 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen id van factuur vinden", e);
+                log.Error("kon geen id van factuur vinden",e);
                 throw new Exception(e.Message);
             }
-
+           
         }
 
         public void Delete(InvoiceDetailDTO c)
@@ -64,10 +63,10 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen factuur verwijderen", e);
+                log.Error("kon geen factuur verwijderen",e);
                 throw new Exception(e.Message);
             }
-
+            
         }
 
         public List<InvoiceDetailDTO> GetAll()
@@ -78,26 +77,27 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen facturen ophalen", e);
+                log.Error("kon geen facturen ophalen",e);
                 throw new Exception(e.Message);
             }
 
-
+           
         }
 
-        public void Update(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Update(InvoiceDetailDTO c)
         {
             try
             {
                 _uow.InvoiceDetailRepo.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
-                log.Error("kon geen factuur aanpassen", e);
+                log.Error("kon geen factuur aanpassen",e);
                 throw new Exception(e.Message);
             }
-
+        
 
         }
     }

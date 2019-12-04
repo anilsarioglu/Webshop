@@ -23,12 +23,13 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(ProductPriceDTO c)
+        public ProductPriceDTO Create(ProductPriceDTO c)
         {
             try
             {
                 _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
@@ -60,7 +61,7 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen prijs verwijderen", e);
+                log.Error("kon geen prijs verwijderen",e);
                 throw new Exception(e.Message);
             }
         }
@@ -73,22 +74,24 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen producten ophalen", e);
+                log.Error("kon geen producten ophalen",e);
                 throw new Exception(e.Message);
             }
         }
 
-        public void Update(ProductPriceDTO c)
+        public ProductPriceDTO Update(ProductPriceDTO c)
         {
             try
             {
                 _uow.ProductPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                return c;
             }
             catch (Exception e)
             {
-                log.Error("kon geen prijs aanpassen", e);
-                throw new Exception(e.Message);
+               log.Error("kon geen prijs aanpassen",e);
+               throw new Exception(e.Message);
             }
         }
     }
 }
+

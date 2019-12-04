@@ -14,11 +14,10 @@ namespace Webshop.BL
         private UnitOfWork _uow;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CourseLogic()
+        public CourseLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
-
 
         public CourseDTO Create(CourseDTO c)
         {
@@ -30,9 +29,12 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("Kon geen cursus aanmaken", e);
-                throw new Exception(e.Message);
+                log.Error("Kon geen cursus aanmaken",e);
+                throw new  Exception(e.Message);
+                
             }
+           
+
         }
 
         public CourseDTO FindByID(int? id)
@@ -45,9 +47,10 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("Kon id niet vinden", e);
+                log.Error("Kon id niet vinden",e);
                 throw new Exception(e.Message);
             }
+            
         }
 
         public void Delete(CourseDTO c)
@@ -59,9 +62,10 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen cursus verwijderren", e);
+                log.Error("kon geen cursus verwijderren",e);
                 throw new Exception(e.Message);
             }
+         
         }
 
         public List<CourseDTO> GetAll()
@@ -72,10 +76,10 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon niet ophalen", e);
+                log.Error("kon niet ophalen",e);
                 throw new Exception(e.Message);
             }
-
+            
         }
 
         public CourseDTO Update(CourseDTO c)
@@ -91,6 +95,8 @@ namespace Webshop.BL
                 log.Error("kon niet updaten");
                 throw new Exception(e.Message);
             }
+
+            
         }
     }
 }

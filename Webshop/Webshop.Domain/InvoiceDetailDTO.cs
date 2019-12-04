@@ -10,5 +10,6 @@ namespace Webshop.Domain
     {
         public int Id { get; set; }
         public int Pieces { get; set; }
+        public InvoiceDTO InvoiceDto { get; set; }
     }
 }

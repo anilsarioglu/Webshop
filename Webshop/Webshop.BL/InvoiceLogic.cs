@@ -23,19 +23,20 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(InvoiceDTO c)
+        public InvoiceDTO Create(InvoiceDTO c)
         {
             try
             {
                 _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
-                log.Error("kon geen factuur toevoegen", e);
+                log.Error("kon geen factuur toevoegen",e);
                 throw new Exception(e.Message);
             }
-
+          
 
         }
 
@@ -58,10 +59,11 @@ namespace Webshop.BL
             return MapDTO.MapList<InvoiceDTO, Invoice>(_uow.InvoiceRepo.GetAll());
         }
 
-        public void Update(InvoiceDTO c)
+        public InvoiceDTO Update(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
             _uow.Save();
+            return c;
         }
     }
 }

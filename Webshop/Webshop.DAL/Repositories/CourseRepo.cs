@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -11,34 +12,81 @@ namespace Webshop.DAL.Repositories
         private WebshopContext _webshopContext;
         public CourseRepo(WebshopContext context)
         {
-              _webshopContext = context;  
+            _webshopContext = context;  
         }
 
-        public void Add(Course course)
+        public Course Add(Course course)
         {
-            _webshopContext._Courses.Add(course);
+            try
+            {
+                _webshopContext._Courses.Add(course);
+                return course;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
+          
         }
 
         public Course FindById(int? id)
         {
-            return _webshopContext._Courses.Find(id);
+            try
+            {
+                return _webshopContext._Courses.Find(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
-        public void Modify(Course course)
+        public Course Modify(Course course)
         {
-            _webshopContext._Courses.AddOrUpdate(course);
+            try
+            {
+                _webshopContext._Courses.AddOrUpdate(course);
+                return course;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public List<Course> GetAll()
         {
-            return _webshopContext._Courses.ToList();
+            try
+            {
+                return _webshopContext._Courses.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public void Remove(Course t)
         {
-            _webshopContext._Courses.Remove(t);
+            try
+            {
+                _webshopContext.Entry(t).State = EntityState.Deleted;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
-
+       
     }
 }

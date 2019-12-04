@@ -23,19 +23,20 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(VatDTO c)
+        public VatDTO Create(VatDTO c)
         {
             try
             {
                 _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
-                throw new Exception(e.Message);
+               log.Error(e.Message);
+               throw new Exception(e.Message);
             }
-
+            
         }
 
         public VatDTO FindByID(int? id)
@@ -47,8 +48,8 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen btw id vinden", e);
-                throw new Exception(e.Message);
+               log.Error("kon geen btw id vinden",e);
+               throw new Exception(e.Message);
             }
         }
 
@@ -61,7 +62,7 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen btw verwijderen", e);
+                log.Error("kon geen btw verwijderen",e);
                 throw new Exception(e.Message);
             }
         }
@@ -74,22 +75,23 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen btw's vinden", e);
+               log.Error("kon geen btw's vinden",e);
                 throw new Exception(e.Message);
             }
         }
 
-        public void Update(VatDTO c)
+        public VatDTO Update(VatDTO c)
         {
             try
             {
                 _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
                 _uow.Save();
+                return c;
 
             }
             catch (Exception e)
             {
-                log.Error("kon geen btw aanpassen", e);
+                log.Error("kon geen btw aanpassen",e);
                 throw new Exception(e.Message);
             }
         }
