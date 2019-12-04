@@ -15,7 +15,7 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(InvoiceDetail t)
+        public InvoiceDetail Add(InvoiceDetail t)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Webshop.DAL.Repositories
             }
         }
 
-        public void Modify(InvoiceDetail t)
+        public InvoiceDetail Modify(InvoiceDetail t)
         {
             try
             {

@@ -15,7 +15,7 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public Products Add(Product t)
+        public Product Add(Product t)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Webshop.DAL.Repositories
             try
             {
                 _webshopContext._Products.AddOrUpdate();
-                return t;
+                return product;
             }
             catch (Exception e)
             {

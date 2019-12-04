@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -19,7 +20,7 @@ namespace Webshop.DAL.Repositories
             try
             {
                 _webshopContext._Invoices.Add(t);
-                return invoice;
+                return t;
             }
             catch (Exception e)
             {

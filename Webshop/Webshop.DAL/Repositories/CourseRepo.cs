@@ -15,11 +15,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;  
         }
 
-        public void Add(Course course)
+        public Course Add(Course course)
         {
             try
             {
                 _webshopContext._Courses.Add(course);
+                return course;
             }
             catch (Exception e)
             {
@@ -43,11 +44,12 @@ namespace Webshop.DAL.Repositories
             
         }
 
-        public void Modify(Course course)
+        public Course Modify(Course course)
         {
             try
             {
                 _webshopContext._Courses.AddOrUpdate(course);
+                return course;
             }
             catch (Exception e)
             {
@@ -76,7 +78,6 @@ namespace Webshop.DAL.Repositories
             try
             {
                 _webshopContext.Entry(t).State = EntityState.Deleted;
-                return c;
             }
             catch (Exception e)
             {

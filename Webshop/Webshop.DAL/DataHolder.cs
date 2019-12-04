@@ -30,16 +30,16 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(5),
-                new InvoiceDetail(11),
-                new InvoiceDetail(6),
-                new InvoiceDetail(13),
-                new InvoiceDetail(9),
-                new InvoiceDetail(2),
-                new InvoiceDetail(7),
-                new InvoiceDetail(32),
-                new InvoiceDetail(20),
-                new InvoiceDetail(14)
+                new InvoiceDetail(5, null),
+                new InvoiceDetail(11, null),
+                new InvoiceDetail(6, null),
+                new InvoiceDetail(13, null),
+                new InvoiceDetail(9, null),
+                new InvoiceDetail(2, null),
+                new InvoiceDetail(7, null),
+                new InvoiceDetail(32, null),
+                new InvoiceDetail(20, null),
+                new InvoiceDetail(14, null)
             };
 
             return invoiceDetails;
