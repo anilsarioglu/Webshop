@@ -10,9 +10,10 @@
         {
             
         }
-        public InvoiceDetail(int pieces)
+        public InvoiceDetail(int pieces, Invoice invoice)
         {
             Pieces = pieces;
+            Invoice = invoice;
         }
     }
 }

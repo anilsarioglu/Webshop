@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -16,29 +17,74 @@ namespace Webshop.DAL.Repositories
 
         public void Add(Invoice t)
         {
-            _webshopContext._Invoices.Add(t);
+            try
+            {
+                _webshopContext._Invoices.Add(t);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
            
         }
 
         public Invoice FindById(int? id)
         {
-            return _webshopContext._Invoices.Find(id);
+            try
+            {
+                return _webshopContext._Invoices.Find(id);
+            }
+            catch (Exception e)
+            {
+               
+                throw new Exception(e.Message);
+            }
+           
         }
 
         public void Modify(Invoice invoice)
         {
-            _webshopContext._Invoices.AddOrUpdate(invoice);
+            try
+            {
+                _webshopContext._Invoices.AddOrUpdate(invoice);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+          
          
         }
 
         public List<Invoice> GetAll()
         {
-            return _webshopContext._Invoices.ToList();
+            try
+            {
+                return _webshopContext._Invoices.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
         }
 
         public void Remove(Invoice t)
         {
-            _webshopContext.Entry(t).State = EntityState.Deleted;
+            try
+            {
+                _webshopContext.Entry(t).State = EntityState.Deleted;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
         }
 
         

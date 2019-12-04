@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -17,29 +18,71 @@ namespace Webshop.DAL.Repositories
 
         public void Add(ProductPrice t)
         {
-            _webshopContext._ProductPrices.Add(t);
+            try
+            {
+                _webshopContext._ProductPrices.Add(t);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
             
         }
 
         public ProductPrice FindById(int? id)
         {
-            return _webshopContext._ProductPrices.Find(id);
+            try
+            {
+                return _webshopContext._ProductPrices.Find(id);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public void Modify(ProductPrice productPrice)
         {
-            _webshopContext._ProductPrices.AddOrUpdate(productPrice);
+            try
+            {
+                _webshopContext._ProductPrices.AddOrUpdate(productPrice);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             
         }
 
         public List<ProductPrice> GetAll()
         {
-            return _webshopContext._ProductPrices.ToList();
+            try
+            {
+                return _webshopContext._ProductPrices.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
 
         public void Remove(ProductPrice t)
         {
-            _webshopContext.Entry(t).State = EntityState.Deleted;
+            try
+            {
+                _webshopContext.Entry(t).State = EntityState.Deleted;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
           
         }
     }

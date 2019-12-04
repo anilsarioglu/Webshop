@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -16,18 +17,43 @@ namespace Webshop.DAL.Repositories
 
         public void Add(Product t)
         {
-            _webshopContext._Products.Add(t);
+            try
+            {
+                _webshopContext._Products.Add(t);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
          
         }
 
         public Product FindById(int? id)
         {
-            return _webshopContext._Products.Find(id);
+            try
+            {
+                return _webshopContext._Products.Find(id);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
 
         public void Modify(Product product)
         {
-            _webshopContext._Products.AddOrUpdate();
+            try
+            {
+                _webshopContext._Products.AddOrUpdate();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
            
         }
 
@@ -38,7 +64,15 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Product t)
         {
-            _webshopContext.Entry(t).State = EntityState.Deleted;
+            try
+            {
+                _webshopContext.Entry(t).State = EntityState.Deleted;
+            }
+            catch (Exception e)
+            {
+                
+                throw new  Exception(e.Message);
+            }
 
         }
     }
