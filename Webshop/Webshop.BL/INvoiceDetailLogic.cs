@@ -60,6 +60,7 @@ namespace Webshop.BL
             try
             {
                 _uow.InvoiceDetailRepo.Remove(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {

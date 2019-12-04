@@ -28,6 +28,7 @@ namespace Webshop.BL
             try
             {
                 _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {
@@ -56,6 +57,7 @@ namespace Webshop.BL
             try
             {
                 _uow.VatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {
@@ -82,6 +84,8 @@ namespace Webshop.BL
             try
             {
                 _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
+                _uow.Save();
+
             }
             catch (Exception e)
             {

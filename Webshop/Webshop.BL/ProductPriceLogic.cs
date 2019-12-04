@@ -28,6 +28,7 @@ namespace Webshop.BL
             try
             {
                 _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {
@@ -55,6 +56,7 @@ namespace Webshop.BL
             try
             {
                 _uow.ProductPriceRepo.Remove(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {

@@ -28,6 +28,7 @@ namespace Webshop.BL
             try
             {
                 _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+                _uow.Save();
             }
             catch (Exception e)
             {
@@ -48,6 +49,7 @@ namespace Webshop.BL
         public void Delete(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
         }
 
 
@@ -59,6 +61,7 @@ namespace Webshop.BL
     public void Update(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
         }
     }
 }
