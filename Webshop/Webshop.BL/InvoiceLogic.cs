@@ -23,31 +23,31 @@ namespace Webshop.BL
 
         public InvoiceDTO Create(InvoiceDTO c)
         {
-            _uow.Invoices.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
             return c;
         }
 
         public InvoiceDTO FindByID(int? id)
         {
-            Invoice c = _uow.Invoices.FindById(id);
+            Invoice c = _uow.InvoiceRepo.FindById(id);
 
             return MapDTO.Map<InvoiceDTO, Invoice>(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
-            _uow.Invoices.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
         }
 
 
         public List<InvoiceDTO> GetAll()
         {
-            return MapDTO.MapList<InvoiceDTO, Invoice>(_uow.Invoices.GetAll());
+            return MapDTO.MapList<InvoiceDTO, Invoice>(_uow.InvoiceRepo.GetAll());
         }
 
         public InvoiceDTO Update(InvoiceDTO c)
         {
-            _uow.Invoices.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
             return c;
         }
     }

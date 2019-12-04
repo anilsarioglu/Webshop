@@ -23,30 +23,30 @@ namespace Webshop.BL
 
         public VatDTO Create(VatDTO c)
         {
-            _uow.Vats.Add(MapDTO.Map<Vat, VatDTO>(c));
+            _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
             return c;
         }
 
         public VatDTO FindByID(int? id)
         {
-            Vat c = _uow.Vats.FindById(id);
+            Vat c = _uow.VatRepo.FindById(id);
 
             return MapDTO.Map<VatDTO, Vat>(c);
         }
 
         public void Delete(VatDTO c)
         {
-            _uow.Vats.Remove(MapDTO.Map<Vat, VatDTO>(c));
+            _uow.VatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
         }
 
         public List<VatDTO> GetAll()
         {
-            return MapDTO.MapList<VatDTO, Vat>(_uow.Vats.GetAll());
+            return MapDTO.MapList<VatDTO, Vat>(_uow.VatRepo.GetAll());
         }
 
         public VatDTO Update(VatDTO c)
         {
-            _uow.Vats.Modify(MapDTO.Map<Vat, VatDTO>(c));
+            _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
             return c;
         }
     }
