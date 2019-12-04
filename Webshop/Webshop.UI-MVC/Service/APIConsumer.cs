@@ -51,10 +51,7 @@ namespace Webshop.UI_MVC
         postTask.Wait();
 
         var result = postTask.Result;
-        if (result.IsSuccessStatusCode)
-        {
-          Console.WriteLine("qsd");
-        }
+
       }
     }
   }

@@ -39,7 +39,7 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
         // TODO: Add insert logic here
-        APIConsumer<Models.Webshop.Course>.AddObject<Models.Webshop.Course>("course", course);
+                APIConsumer<Models.Webshop.Course>.AddObject<Models.Webshop.Course>("course", course);
                 return RedirectToAction("Index");
             }
             catch
