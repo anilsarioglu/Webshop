@@ -23,12 +23,13 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(ProductPriceDTO c)
+        public ProductPriceDTO Create(ProductPriceDTO c)
         {
             try
             {
                 _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
@@ -78,11 +79,12 @@ namespace Webshop.BL
             }
         }
 
-        public void Update(ProductPriceDTO c)
+        public ProductPriceDTO Update(ProductPriceDTO c)
         {
             try
             {
                 _uow.ProductPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                return c;
             }
             catch (Exception e)
             {

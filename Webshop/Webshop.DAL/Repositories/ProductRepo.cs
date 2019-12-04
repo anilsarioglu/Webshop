@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -15,11 +15,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(Product t)
+        public Products Add(Product t)
         {
             try
             {
                 _webshopContext._Products.Add(t);
+                return t;
             }
             catch (Exception e)
             {
@@ -43,11 +44,12 @@ namespace Webshop.DAL.Repositories
             }
         }
 
-        public void Modify(Product product)
+        public Product Modify(Product product)
         {
             try
             {
                 _webshopContext._Products.AddOrUpdate();
+                return t;
             }
             catch (Exception e)
             {

@@ -23,12 +23,13 @@ namespace Webshop.BL
             _uow = uow;
         }
 
-        public void Create(VatDTO c)
+        public VatDTO Create(VatDTO c)
         {
             try
             {
                 _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
@@ -79,12 +80,13 @@ namespace Webshop.BL
             }
         }
 
-        public void Update(VatDTO c)
+        public VatDTO Update(VatDTO c)
         {
             try
             {
                 _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
                 _uow.Save();
+                return c;
 
             }
             catch (Exception e)

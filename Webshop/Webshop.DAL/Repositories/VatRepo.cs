@@ -16,11 +16,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(Vat t)
+        public Vat Add(Vat t)
         {
             try
             {
                 _webshopContext._Vats.Add(t);
+                return t;
             }
             catch (Exception e)
             {
@@ -44,11 +45,12 @@ namespace Webshop.DAL.Repositories
             }
         }
 
-        public void Modify(Vat vat)
+        public Vat Modify(Vat vat)
         {
             try
             {
                 _webshopContext._Vats.AddOrUpdate();
+                return vat;
             }
             catch (Exception e)
             {

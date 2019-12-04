@@ -1,12 +1,8 @@
-namespace Webshop.DAL.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using Webshop.DAL.Entit;
+using System.Data.Entity.Migrations;
+using Webshop.DAL;
+using Webshop.DAL.Entit;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
+internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
     {
         public Configuration()
         {
@@ -43,6 +39,5 @@ namespace Webshop.DAL.Migrations
               context._Courses.Add(course);
             }
             context.SaveChanges();
-        }
     }
 }

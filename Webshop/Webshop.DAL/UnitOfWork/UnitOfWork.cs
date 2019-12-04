@@ -80,7 +80,7 @@ namespace Webshop.DAL.UnitOfWork
             }
         }
 
-        public  CourseRepo CourseRepo
+        public CourseRepo CourseRepo
         {
             get
             {
@@ -92,7 +92,7 @@ namespace Webshop.DAL.UnitOfWork
                 return _courseRepo;
             }
         }
-      
+
 
         public void Save()
         {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -15,11 +14,12 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(Invoice t)
+        public Invoice Add(Invoice t)
         {
             try
             {
                 _webshopContext._Invoices.Add(t);
+                return invoice;
             }
             catch (Exception e)
             {
@@ -44,11 +44,12 @@ namespace Webshop.DAL.Repositories
            
         }
 
-        public void Modify(Invoice invoice)
+        public Invoice Modify(Invoice invoice)
         {
             try
             {
                 _webshopContext._Invoices.AddOrUpdate(invoice);
+                return invoice;
             }
             catch (Exception e)
             {
@@ -87,6 +88,16 @@ namespace Webshop.DAL.Repositories
            
         }
 
-        
+        public void insertData()
+        {
+            List<Invoice> invoices = DataHolder.GetInvoices();
+            for (int i = 0; i < invoices.Count; i++)
+            {
+                Invoice invoice = invoices[i];
+                invoice.Id = i;
+                _webshopContext._Invoices.Add(invoice);
+            }
+            _webshopContext.SaveChanges();
+        }
     }
 }

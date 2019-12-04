@@ -14,18 +14,18 @@ namespace Webshop.BL
         private UnitOfWork _uow;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CourseLogic()
+        public CourseLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-
-        public void Create(CourseDTO c)
+        public CourseDTO Create(CourseDTO c)
         {
             try
             {
                 _uow.CourseRepo.Add(MapDTO.Map<Course, CourseDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
@@ -82,12 +82,13 @@ namespace Webshop.BL
             
         }
 
-        public void Update(CourseDTO c)
+        public CourseDTO Update(CourseDTO c)
         {
             try
             {
                 _uow.CourseRepo.Modify(MapDTO.Map<Course, CourseDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {

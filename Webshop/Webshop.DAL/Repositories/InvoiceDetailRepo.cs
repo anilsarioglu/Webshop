@@ -22,6 +22,7 @@ namespace Webshop.DAL.Repositories
                 _webshopContext._InvoiceDetails.Add(t);
                 _webshopContext._Invoices.Attach(t.Invoice);
                 _webshopContext.Entry(t.Invoice).State = EntityState.Unchanged;
+                return t;
             }
             catch (Exception e)
             {
@@ -51,6 +52,7 @@ namespace Webshop.DAL.Repositories
                 _webshopContext._InvoiceDetails.AddOrUpdate(t);
                 _webshopContext._Invoices.Attach(t.Invoice);
                 _webshopContext.Entry(t.Invoice).State = EntityState.Modified;
+                return t;
             }
             catch (Exception e)
             {

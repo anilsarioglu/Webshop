@@ -17,19 +17,18 @@ namespace Webshop.BL
         private UnitOfWork _uow;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public InvoiceDetailLogic()
+        public InvoiceDetailLogic(UnitOfWork uow)
         {
-            _uow = new UnitOfWork();
+            _uow = uow;
         }
 
-   
-
-        public void Create(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Create(InvoiceDetailDTO c)
         {
             try
             {
                 _uow.InvoiceDetailRepo.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {
@@ -85,12 +84,13 @@ namespace Webshop.BL
            
         }
 
-        public void Update(InvoiceDetailDTO c)
+        public InvoiceDetailDTO Update(InvoiceDetailDTO c)
         {
             try
             {
                 _uow.InvoiceDetailRepo.Modify(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
                 _uow.Save();
+                return c;
             }
             catch (Exception e)
             {

@@ -1,3 +1,5 @@
+using Ninject.Web.Common.WebHost;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Webshop.UI_MVC.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Webshop.UI_MVC.App_Start.NinjectWebCommon), "Stop")]
 
@@ -10,6 +12,7 @@ namespace Webshop.UI_MVC.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Web.Common.WebHost;
 
     public static class NinjectWebCommon 
     {
