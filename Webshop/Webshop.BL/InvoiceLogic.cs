@@ -15,6 +15,8 @@ namespace Webshop.BL
     public class InvoiceLogic : ILogic<InvoiceDTO>
     {
         private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public InvoiceLogic(UnitOfWork uow)
         {
@@ -23,8 +25,19 @@ namespace Webshop.BL
 
         public InvoiceDTO Create(InvoiceDTO c)
         {
-            _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
-            return c;
+            try
+            {
+                _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
+                _uow.Save();
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen factuur toevoegen",e);
+                throw new Exception(e.Message);
+            }
+          
+
         }
 
         public InvoiceDTO FindByID(int? id)
@@ -37,6 +50,7 @@ namespace Webshop.BL
         public void Delete(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
         }
 
 
@@ -48,6 +62,7 @@ namespace Webshop.BL
         public InvoiceDTO Update(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
             return c;
         }
     }
