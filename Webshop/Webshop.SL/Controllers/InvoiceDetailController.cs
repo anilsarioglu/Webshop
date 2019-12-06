@@ -62,7 +62,7 @@ namespace Webshop.SL.Controllers
                 return NotFound();
             }
 
-            return Ok(_invoiceDetailLogic.Update(invoiceDetailInDb));
+            return Ok(_invoiceDetailLogic.Update(invoiceDetailDto));
         }
 
         [HttpDelete]

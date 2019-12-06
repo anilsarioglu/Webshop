@@ -48,7 +48,7 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext._Products.AddOrUpdate();
+                _webshopContext._Products.AddOrUpdate(product);
                 return product;
             }
             catch (Exception e)
@@ -68,7 +68,8 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+                var product = FindById(t.Id);
+                _webshopContext._Products.Remove(product);
             }
             catch (Exception e)
             {

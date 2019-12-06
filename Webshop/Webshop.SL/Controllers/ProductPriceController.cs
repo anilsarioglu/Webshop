@@ -66,7 +66,7 @@ namespace Webshop.SL.Controllers
                 return NotFound();
             }
 
-            return Ok(_productPriceLogic.Update(productPriceInDb));
+            return Ok(_productPriceLogic.Update(productPriceDto));
         }
 
         //Delete /api/productprice/1

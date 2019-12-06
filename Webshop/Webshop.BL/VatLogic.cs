@@ -27,8 +27,12 @@ namespace Webshop.BL
         {
             try
             {
-                _uow.VatRepo.Add(MapDTO.Map<Vat, VatDTO>(c));
+                var vat = MapDTO.Map<Vat, VatDTO>(c);
+                _uow.VatRepo.Add(vat);
                 _uow.Save();
+
+                c.Id = vat.Id;
+
                 return c;
             }
             catch (Exception e)
@@ -43,8 +47,8 @@ namespace Webshop.BL
         {
             try
             {
-                Vat c = _uow.VatRepo.FindById(id);
-                return MapDTO.Map<VatDTO, Vat>(c);
+                var c = _uow.VatRepo.FindById(id);
+                return c == null ? null : MapDTO.Map<VatDTO, Vat>(c);
             }
             catch (Exception e)
             {
@@ -87,7 +91,6 @@ namespace Webshop.BL
                 _uow.VatRepo.Modify(MapDTO.Map<Vat, VatDTO>(c));
                 _uow.Save();
                 return c;
-
             }
             catch (Exception e)
             {

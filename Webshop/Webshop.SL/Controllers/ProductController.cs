@@ -62,7 +62,7 @@ namespace Webshop.SL.Controllers
                 return NotFound();
             }
 
-            return Ok(_productLogic.Update(productInDb));
+            return Ok(_productLogic.Update(productDto));
         }
 
         [HttpDelete]

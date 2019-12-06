@@ -18,7 +18,7 @@ namespace Webshop.SL.Controllers
           _courseLogic = logic;
         }
 
-        public IHttpActionResult GetAllCourses()
+        public IHttpActionResult GetCourses()
         {
 
           return Ok(_courseLogic.GetAll().AsEnumerable());

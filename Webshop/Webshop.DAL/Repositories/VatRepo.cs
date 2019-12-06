@@ -49,7 +49,7 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext._Vats.AddOrUpdate();
+                _webshopContext._Vats.AddOrUpdate(vat);
                 return vat;
             }
             catch (Exception e)
@@ -78,7 +78,8 @@ namespace Webshop.DAL.Repositories
 
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+                var vat = FindById(t.Id);
+                _webshopContext._Vats.Remove(vat);
             }
             catch (Exception e)
             {

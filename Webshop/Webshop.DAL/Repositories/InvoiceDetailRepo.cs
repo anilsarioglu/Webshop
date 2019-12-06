@@ -81,7 +81,8 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+                var invoiceDetail = FindById(t.Id);
+                _webshopContext._InvoiceDetails.Remove(invoiceDetail);
             }
             catch (Exception e)
             {
