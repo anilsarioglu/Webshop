@@ -76,7 +76,8 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+                var productPrice = FindById(t.Id);
+                _webshopContext._ProductPrices.Remove(productPrice);
             }
             catch (Exception e)
             {

@@ -28,8 +28,12 @@ namespace Webshop.BL
         {
             try
             {
-                _uow.ProductRepo.Add(MapDTO.Map<Product, ProductDTO>(c));
+                var product = MapDTO.Map<Product, ProductDTO>(c);
+                _uow.ProductRepo.Add(product);
                 _uow.Save();
+
+                c.Id = product.Id;
+
                 return c;
             }
             catch (Exception e)
@@ -37,17 +41,15 @@ namespace Webshop.BL
                 log.Error("kon geen product toevoegen",e);
                 throw  new Exception(e.Message);
             }
-           
-
         }
 
         public ProductDTO FindByID(int? id)
         {
             try
             {
-                Product c = _uow.ProductRepo.FindById(id);
+                var c = _uow.ProductRepo.FindById(id);
 
-                return MapDTO.Map<ProductDTO, Product>(c);
+                return c == null ? null : MapDTO.Map<ProductDTO, Product>(c);
             }
             catch (Exception e)
             {
@@ -96,7 +98,6 @@ namespace Webshop.BL
                 _uow.ProductRepo.Modify(MapDTO.Map<Product, ProductDTO>(c));
                 _uow.Save();
                 return c;
-
             }
             catch (Exception e)
             {

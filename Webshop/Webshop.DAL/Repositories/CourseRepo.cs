@@ -83,7 +83,6 @@ namespace Webshop.DAL.Repositories
 
             catch (Exception e)
             {
-                
                 throw new Exception(e.Message);
             }
             
