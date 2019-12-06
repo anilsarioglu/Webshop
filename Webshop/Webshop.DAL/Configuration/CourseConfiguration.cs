@@ -7,12 +7,12 @@ namespace Webshop.DAL.Configuration
     {
         public CourseConfiguration()
         {
-            this.ToTable("Course");
-            this.Property(c => c.Id);
-            this.Property(c => c.Name).HasMaxLength(100);
-            this.Property(c => c.Price).HasPrecision(8, 2);
+            ToTable("Course");
+            Property(c => c.Id);
+            Property(c => c.Name).HasMaxLength(100);
+            Property(c => c.Price).HasPrecision(8, 2);
 
-            this.HasMany(i => i.)
+            HasRequired(c => c.InvoiceDetail);
         }
     }
 }

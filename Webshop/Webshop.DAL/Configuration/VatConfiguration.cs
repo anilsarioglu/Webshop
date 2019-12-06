@@ -7,9 +7,9 @@ namespace Webshop.DAL.Configuration
     {
         public VatConfiguration()
         {
-            this.ToTable("Vat");
-            this.Property(v => v.Id).HasColumnType("int");
-            this.Property(v => v.Percentage).HasColumnType("int");
+            ToTable("Vat");
+            Property(v => v.Id).HasColumnType("int");
+            Property(v => v.Percentage).HasColumnType("int");
         }
     }
 }
