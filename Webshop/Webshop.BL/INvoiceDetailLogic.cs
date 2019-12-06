@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,8 +26,12 @@ namespace Webshop.BL
         {
             try
             {
-                _uow.InvoiceDetailRepo.Add(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+                var invoiceDetail = MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c);
+                _uow.InvoiceDetailRepo.Add(invoiceDetail);
                 _uow.Save();
+
+                c.Id = invoiceDetail.Id;
+
                 return c;
             }
             catch (Exception e)
@@ -35,23 +39,21 @@ namespace Webshop.BL
                 log.Error("kon geen factuur toeveogen");
                 throw new Exception(e.Message);
             }
-           
         }
 
         public InvoiceDetailDTO FindByID(int? id)
         {
             try
             {
-                InvoiceDetail c = _uow.InvoiceDetailRepo.FindById(id);
+                var c = _uow.InvoiceDetailRepo.FindById(id);
 
-                return MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c);
+                return c == null ? null : MapDTO.Map<InvoiceDetailDTO, InvoiceDetail>(c);
             }
             catch (Exception e)
             {
                 log.Error("kon geen id van factuur vinden",e);
                 throw new Exception(e.Message);
-            }
-           
+            }   
         }
 
         public void Delete(InvoiceDetailDTO c)
@@ -66,7 +68,11 @@ namespace Webshop.BL
                 log.Error("kon geen factuur verwijderen",e);
                 throw new Exception(e.Message);
             }
-            
+        }
+
+        public void Delete(int id)
+        {
+          throw new NotImplementedException();
         }
 
         public List<InvoiceDetailDTO> GetAll()
@@ -80,8 +86,6 @@ namespace Webshop.BL
                 log.Error("kon geen facturen ophalen",e);
                 throw new Exception(e.Message);
             }
-
-           
         }
 
         public InvoiceDetailDTO Update(InvoiceDetailDTO c)
@@ -97,8 +101,6 @@ namespace Webshop.BL
                 log.Error("kon geen factuur aanpassen",e);
                 throw new Exception(e.Message);
             }
-        
-
         }
     }
 }

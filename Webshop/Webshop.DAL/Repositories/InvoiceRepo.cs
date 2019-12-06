@@ -79,7 +79,8 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+                var invoice = FindById(t.Id);
+                _webshopContext._Invoices.Remove(invoice);
             }
             catch (Exception e)
             {
@@ -87,18 +88,6 @@ namespace Webshop.DAL.Repositories
                 throw new Exception(e.Message);
             }
            
-        }
-
-        public void insertData()
-        {
-            List<Invoice> invoices = DataHolder.GetInvoices();
-            for (int i = 0; i < invoices.Count; i++)
-            {
-                Invoice invoice = invoices[i];
-                invoice.Id = i;
-                _webshopContext._Invoices.Add(invoice);
-            }
-            _webshopContext.SaveChanges();
         }
     }
 }

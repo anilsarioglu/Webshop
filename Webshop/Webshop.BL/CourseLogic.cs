@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Webshop.DAL;
@@ -23,34 +23,34 @@ namespace Webshop.BL
         {
             try
             {
-                _uow.CourseRepo.Add(MapDTO.Map<Course, CourseDTO>(c));
+                var course = MapDTO.Map<Course, CourseDTO>(c);
+                _uow.CourseRepo.Add(course);
                 _uow.Save();
+
+                c.Id = course.Id;
+
                 return c;
             }
             catch (Exception e)
             {
-                log.Error("Kon geen cursus aanmaken",e);
-                throw new  Exception(e.Message);
-                
+                log.Error("Kon geen cursus aanmaken", e);
+                throw new Exception(e.Message);
             }
-           
-
         }
 
         public CourseDTO FindByID(int? id)
         {
             try
             {
-                Course c = _uow.CourseRepo.FindById(id);
+                var c = _uow.CourseRepo.FindById(id);
 
-                return MapDTO.Map<CourseDTO, Course>(c);
+                return c == null ? null : MapDTO.Map<CourseDTO, Course>(c);
             }
             catch (Exception e)
             {
-                log.Error("Kon id niet vinden",e);
+                log.Error("Kon id niet vinden", e);
                 throw new Exception(e.Message);
             }
-            
         }
 
         public void Delete(CourseDTO c)
@@ -62,10 +62,25 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon geen cursus verwijderren",e);
+                log.Error("kon geen cursus verwijderren", e);
                 throw new Exception(e.Message);
             }
-         
+
+        }
+        public void Delete(int id)
+        {
+            var c = FindByID(id);
+            try
+            {
+                _uow.CourseRepo.Remove(MapDTO.Map<Course, CourseDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen cursus verwijderren", e);
+                throw new Exception(e.Message);
+            }
+
         }
 
         public List<CourseDTO> GetAll()
@@ -76,10 +91,9 @@ namespace Webshop.BL
             }
             catch (Exception e)
             {
-                log.Error("kon niet ophalen",e);
+                log.Error("kon niet ophalen", e);
                 throw new Exception(e.Message);
             }
-            
         }
 
         public CourseDTO Update(CourseDTO c)
@@ -95,8 +109,6 @@ namespace Webshop.BL
                 log.Error("kon niet updaten");
                 throw new Exception(e.Message);
             }
-
-            
         }
     }
 }

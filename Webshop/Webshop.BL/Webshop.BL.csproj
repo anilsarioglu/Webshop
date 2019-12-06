@@ -87,15 +87,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CourseLogic.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>log4net.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="CourseLogic.cs" />
     <Compile Include="ILogic.cs" />
     <Compile Include="InvoiceDetailLogic.cs" />
     <Compile Include="InvoiceLogic.cs" />
+    <Compile Include="log4net.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>log4net.config</DependentUpon>
+    </Compile>
     <Compile Include="ProductLogic.cs" />
     <Compile Include="ProductPriceLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

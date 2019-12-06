@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ namespace Webshop.BL
         T Create(T t);
         T FindByID(int? id);
         void Delete(T t);
+        void Delete(int id);
         List<T> GetAll();
         T Update(T t);
     }

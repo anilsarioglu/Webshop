@@ -18,36 +18,66 @@ namespace Webshop.SL.Controller
             _vatLogic = logic;
         }
 
-        public IEnumerable<VatDTO> Get()
+        public IHttpActionResult GetVats()
         {
-            return _vatLogic.GetAll().AsEnumerable();
+            return Ok(_vatLogic.GetAll().AsEnumerable());
         }
 
-        public VatDTO GetById(int id)
+        public IHttpActionResult GetVat(int id)
         {
-            return _vatLogic.FindByID(id);
+            var vat = _vatLogic.FindByID(id);
+
+            if (vat == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vat);
         }
 
         [HttpPost]
-        public void Create(VatDTO vatDto)
+        public IHttpActionResult CreateVat(VatDTO vatDto)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _vatLogic.Create(vatDto);
+                return BadRequest();
             }
 
+            _vatLogic.Create(vatDto);
+            return Created(new Uri(Request.RequestUri + "/" + vatDto.Id), vatDto);
         }
 
         [HttpPut]
-        public void Put(VatDTO vatDto)
+        public IHttpActionResult UpdateVat(VatDTO vatDto)
         {
-            _vatLogic.Update(vatDto);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var vatInDb = _vatLogic.FindByID(vatDto.Id);
+
+            if (vatInDb == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_vatLogic.Update(vatDto));
         }
 
         [HttpDelete]
-        public void Delete(VatDTO vatDto)
+        public IHttpActionResult DeleteVat(VatDTO vatDto)
         {
+            var vatInDb = _vatLogic.FindByID(vatDto.Id);
+
+            if (vatInDb == null)
+            {
+                return NotFound();
+            }
+
             _vatLogic.Delete(vatDto);
+
+            return Ok();
         }
     }
 }

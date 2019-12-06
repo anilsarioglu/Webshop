@@ -18,9 +18,6 @@ namespace Webshop.DAL
         public DbSet<Product> _Products { get; set; }
         public DbSet<ProductPrice> _ProductPrices { get; set; }
     
-
-
-
         IQueryable<Invoice> IWebshopDataSource.Invoices => _Invoices;
         IQueryable<InvoiceDetail> IWebshopDataSource.InvoiceDetails => _InvoiceDetails;
         IQueryable<Vat> IWebshopDataSource.Vats => _Vats;
@@ -38,7 +35,5 @@ namespace Webshop.DAL
             modelBuilder.Configurations.Add(new ProductPriceConfiguration());
 
         }
-
-        public System.Data.Entity.DbSet<Webshop.Domain.CourseDTO> CourseDTOes { get; set; }
     }
 }

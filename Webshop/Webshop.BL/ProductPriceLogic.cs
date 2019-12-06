@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +27,12 @@ namespace Webshop.BL
         {
             try
             {
-                _uow.ProductPriceRepo.Add(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                var productPrice = MapDTO.Map<ProductPrice, ProductPriceDTO>(c);
+                _uow.ProductPriceRepo.Add(productPrice);
                 _uow.Save();
+
+                c.Id = productPrice.Id;
+
                 return c;
             }
             catch (Exception e)
@@ -42,8 +46,8 @@ namespace Webshop.BL
         {
             try
             {
-                ProductPrice c = _uow.ProductPriceRepo.FindById(id);
-                return MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
+                var c = _uow.ProductPriceRepo.FindById(id);
+                return c == null ? null : MapDTO.Map<ProductPriceDTO, ProductPrice>(c);
             }
             catch (Exception e)
             {
@@ -66,6 +70,11 @@ namespace Webshop.BL
             }
         }
 
+        public void Delete(int id)
+        {
+          throw new NotImplementedException();
+        }
+
         public List<ProductPriceDTO> GetAll()
         {
             try
@@ -84,6 +93,7 @@ namespace Webshop.BL
             try
             {
                 _uow.ProductPriceRepo.Modify(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                _uow.Save();
                 return c;
             }
             catch (Exception e)
