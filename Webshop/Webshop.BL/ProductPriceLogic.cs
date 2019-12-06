@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +64,11 @@ namespace Webshop.BL
                 log.Error("kon geen prijs verwijderen",e);
                 throw new Exception(e.Message);
             }
+        }
+
+        public void Delete(int id)
+        {
+          throw new NotImplementedException();
         }
 
         public List<ProductPriceDTO> GetAll()

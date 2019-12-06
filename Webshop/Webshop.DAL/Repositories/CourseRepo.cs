@@ -77,8 +77,10 @@ namespace Webshop.DAL.Repositories
         {
             try
             {
-                _webshopContext.Entry(t).State = EntityState.Deleted;
+              var course = FindById(t.Id);
+              _webshopContext._Courses.Remove(course);
             }
+
             catch (Exception e)
             {
                 

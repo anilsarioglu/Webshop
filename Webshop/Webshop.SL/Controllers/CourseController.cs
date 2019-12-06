@@ -35,9 +35,9 @@ namespace Webshop.SL.Controllers
     }
 
     [HttpDelete]
-    public void Delete(CourseDTO courseDTO)
+    public void Delete(int id)
     {
-      courseLogic.Delete(courseDTO);
+      courseLogic.Delete(id);
     }
     [HttpPut]
     public void Update(CourseDTO courseDTO)

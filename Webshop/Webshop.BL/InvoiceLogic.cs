@@ -53,6 +53,11 @@ namespace Webshop.BL
             _uow.Save();
         }
 
+        public void Delete(int id)
+        {
+          throw new NotImplementedException();
+        }
+
 
         public List<InvoiceDTO> GetAll()
         {

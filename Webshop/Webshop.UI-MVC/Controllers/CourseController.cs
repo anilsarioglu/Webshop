@@ -21,7 +21,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Details/5
         public ActionResult Details(int id)
         {
-            return View(courses.ElementAt(id - 1));
+            return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // GET: Course/Create
@@ -51,7 +51,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(courses.ElementAt(id - 1));
+            return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // POST: Course/Edit/5
@@ -62,8 +62,8 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
         // TODO: Add update logic here
-        APIConsumer<Models.Webshop.Course>.EditObject<Models.Webshop.Course>("course" , course.Id.ToString(), course);
-        return RedirectToAction("Index");
+          APIConsumer<Models.Webshop.Course>.EditObject<Models.Webshop.Course>("course" , course.Id.ToString(), course);
+          return RedirectToAction("Index");
             }
             catch
             {
@@ -74,19 +74,19 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(courses.ElementAt(id - 1));
+            return View(APIConsumer<Course>.GetObject("course" , id.ToString()));
         }
 
         // POST: Course/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Course course)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+        // TODO: Add delete logic here
+            APIConsumer<Models.Webshop.Course>.DeleteObject("course", (course.Id).ToString() , course);
+            return RedirectToAction("Index");
             }
             catch
             {
