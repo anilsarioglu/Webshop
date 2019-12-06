@@ -51,7 +51,7 @@ namespace Webshop.UI_MVC
           }
         }
 
-        internal static void AddObject<T>(string path , T t)
+        internal static void AddObject(string path , T t)
     {
       using (var client = new HttpClient())
       {
@@ -59,11 +59,9 @@ namespace Webshop.UI_MVC
 
         var postTask = client.PostAsJsonAsync<T>(path, t);
         postTask.Wait();
-
-        var result = postTask.Result;
       }
     }
-    internal static void EditObject<T>(string path, string id, T t)
+    internal static void EditObject(string path, string id, T t)
     {
       using (var client = new HttpClient())
       {
@@ -71,9 +69,6 @@ namespace Webshop.UI_MVC
 
         var putTask = client.PutAsJsonAsync<T>(path , t);
         putTask.Wait();
-
-        var result = putTask.Result;
-
       }
 
     }
@@ -85,13 +80,6 @@ namespace Webshop.UI_MVC
         string url = client.BaseAddress + path + "/" + id;
         var deleteTask = client.DeleteAsync(url);
         deleteTask.Wait();
-
-        var result = deleteTask.Result;
-        if (result.IsSuccessStatusCode)
-        {
-          Console.WriteLine("sqd");
-        }
-
       }
     }
   }

@@ -39,7 +39,7 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
         // TODO: Add insert logic here
-                APIConsumer<Models.Webshop.Course>.AddObject<Models.Webshop.Course>("course", course);
+                APIConsumer<Models.Webshop.Course>.AddObject("course", course);
                 return RedirectToAction("Index");
             }
             catch
@@ -62,7 +62,7 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
         // TODO: Add update logic here
-          APIConsumer<Models.Webshop.Course>.EditObject<Models.Webshop.Course>("course" , course.Id.ToString(), course);
+          APIConsumer<Models.Webshop.Course>.EditObject("course" , course.Id.ToString(), course);
           return RedirectToAction("Index");
             }
             catch
