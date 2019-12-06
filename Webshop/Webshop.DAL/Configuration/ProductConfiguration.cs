@@ -13,8 +13,8 @@ namespace Webshop.DAL.Configuration
             this.Property(p => p.EndDate).HasColumnType("Date");
             this.Property(p => p.StartDate).HasColumnType("Date");
             this.Property(p => p.Name).HasColumnType("varchar").HasMaxLength(150);
-            
-            
+
+            this.HasRequired(i => i.InvoiceDetail);
         }
     }
 }

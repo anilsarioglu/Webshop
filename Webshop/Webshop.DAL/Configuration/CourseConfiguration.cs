@@ -12,6 +12,7 @@ namespace Webshop.DAL.Configuration
             this.Property(c => c.Name).HasMaxLength(100);
             this.Property(c => c.Price).HasPrecision(8, 2);
 
+            this.HasMany(i => i.)
         }
     }
 }
