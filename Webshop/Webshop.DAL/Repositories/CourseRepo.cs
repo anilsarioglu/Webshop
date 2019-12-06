@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -27,6 +27,7 @@ namespace Webshop.DAL.Repositories
         public void Modify(Course course)
         {
             _webshopContext._Courses.AddOrUpdate(course);
+            _webshopContext.SaveChanges();
         }
 
         public List<Course> GetAll()

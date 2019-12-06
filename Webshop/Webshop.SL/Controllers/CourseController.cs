@@ -35,14 +35,14 @@ namespace Webshop.SL.Controllers
     }
 
     [HttpDelete]
-    public void Delete(CourseDTO invoiceDTO)
+    public void Delete(CourseDTO courseDTO)
     {
-      courseLogic.Delete(invoiceDTO);
+      courseLogic.Delete(courseDTO);
     }
     [HttpPut]
-    public void Update(CourseDTO invoiceDTO)
+    public void Update(CourseDTO courseDTO)
     {
-      courseLogic.Update(invoiceDTO);
+      courseLogic.Update(courseDTO);
     }
   }
 }

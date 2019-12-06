@@ -46,8 +46,7 @@ namespace Webshop.UI_MVC
         client.BaseAddress = new Uri("https://localhost:44366/api/");
 
         //HTTP POST
-        string fullPath = path + "/" + id;
-        var postTask = client.PostAsJsonAsync<T>(path +"/" + id, t);
+        var postTask = client.PutAsJsonAsync<T>(path , t);
         postTask.Wait();
 
         var result = postTask.Result;
