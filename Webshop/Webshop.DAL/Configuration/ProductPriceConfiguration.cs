@@ -7,11 +7,14 @@ namespace Webshop.DAL.Configuration
     {
         public ProductPriceConfiguration()
         {
-            this.ToTable("ProductPrice");
-            this.Property(pp => pp.Id).HasColumnType("int");
-            this.Property(pp => pp.BeginDate).HasColumnType("Date");
-            this.Property(pp => pp.EndTime).HasColumnType("Date");
-            this.Property(pp => pp.ProductPrices).HasColumnType("decimal").HasPrecision(8, 2);
+            ToTable("ProductPrice");
+            Property(pp => pp.Id).HasColumnType("int");
+            Property(pp => pp.BeginDate).HasColumnType("Date");
+            Property(pp => pp.EndTime).HasColumnType("Date");
+            Property(pp => pp.ProductPrices).HasColumnType("decimal").HasPrecision(8, 2);
+
+            HasRequired(p => p.Product)
+                .WithOptional(p => p.ProductPrice);
         }
     }
 }

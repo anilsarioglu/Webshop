@@ -11,16 +11,16 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Entity Framework", 150),
-                new Course("Unit Testing", 80),
-                new Course("ASP.NET MVC", 200),
-                new Course("ASP.NET Web API", 130),
-                new Course("Blazor", 300),
-                new Course("Identity Framework", 180),
-                new Course("Fundamentals", 100),
-                new Course("Front End", 200),
-                new Course("History of .NET", 75),
-                new Course("NHibernate", 200)
+                new Course("Entity Framework", 150, null, null),
+                new Course("Unit Testing", 80, null, null),
+                new Course("ASP.NET MVC", 200, null, null),
+                new Course("ASP.NET Web API", 130, null, null),
+                new Course("Blazor", 300, null, null),
+                new Course("Identity Framework", 180, null, null),
+                new Course("Fundamentals", 100, null, null),
+                new Course("Front End", 200, null, null),
+                new Course("History of .NET", 75, null, null),
+                new Course("NHibernate", 200, null, null)
             };
 
             return courses;
@@ -30,16 +30,16 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(5),
-                new InvoiceDetail(11),
-                new InvoiceDetail(6),
-                new InvoiceDetail(13),
-                new InvoiceDetail(9),
-                new InvoiceDetail(2),
-                new InvoiceDetail(7),
-                new InvoiceDetail(32),
-                new InvoiceDetail(20),
-                new InvoiceDetail(14)
+                new InvoiceDetail(5, null, null),
+                new InvoiceDetail(11, null, null),
+                new InvoiceDetail(6, null, null),
+                new InvoiceDetail(13, null, null),
+                new InvoiceDetail(9, null, null),
+                new InvoiceDetail(2, null, null),
+                new InvoiceDetail(7, null, null),
+                new InvoiceDetail(32, null, null),
+                new InvoiceDetail(20, null, null),
+                new InvoiceDetail(14, null, null)
             };
 
             return invoiceDetails;
@@ -92,16 +92,16 @@ namespace Webshop.DAL
         {
             List<Product> products = new List<Product>
             {
-                new Product("Angular", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Vue", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Sass", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("React", 30, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("TypeScript", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Django", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Express", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("CouchDb", 15, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("MongoDb", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Ionic", 40, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices())
+                new Product("Angular", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("Vue", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("Sass", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("React", 30, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("TypeScript", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("Django", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("Express", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("CouchDb", 15, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("MongoDb", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null),
+                new Product("Ionic", 40, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), null)
             };
 
             return products;
@@ -111,16 +111,16 @@ namespace Webshop.DAL
         {
             List<ProductPrice> productPrices = new List<ProductPrice>
             {
-                new ProductPrice(20, DateTime.Now, DateTime.Now),
-                new ProductPrice(10, DateTime.Now, DateTime.Now),
-                new ProductPrice(10, DateTime.Now, DateTime.Now),
-                new ProductPrice(30, DateTime.Now, DateTime.Now),
-                new ProductPrice(10, DateTime.Now, DateTime.Now),
-                new ProductPrice(5, DateTime.Now, DateTime.Now),
-                new ProductPrice(5, DateTime.Now, DateTime.Now),
-                new ProductPrice(15, DateTime.Now, DateTime.Now),
-                new ProductPrice(20, DateTime.Now, DateTime.Now),
-                new ProductPrice(40, DateTime.Now, DateTime.Now)
+                new ProductPrice(20, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(10, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(10, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(30, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(10, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(5, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(5, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(15, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(20, DateTime.Now, DateTime.Now, null),
+                new ProductPrice(40, DateTime.Now, DateTime.Now, null)
             };
 
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -13,31 +15,81 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(InvoiceDetail t)
+        public InvoiceDetail Add(InvoiceDetail t)
         {
-            _webshopContext._InvoiceDetails.Add(t);
-            _webshopContext.SaveChanges();
+            try
+            {
+                _webshopContext._InvoiceDetails.Add(t);
+                _webshopContext._Invoices.Attach(t.Invoice);
+                _webshopContext.Entry(t.Invoice).State = EntityState.Unchanged;
+                return t;
+            }
+            catch (Exception e)
+            {
+               
+                throw new Exception(e.Message);
+            }
+           
+
         }
 
         public InvoiceDetail FindById(int? id)
         {
-            return _webshopContext._InvoiceDetails.Find(id);
+            try
+            {
+                return _webshopContext._InvoiceDetails.Find(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        public void Modify(InvoiceDetail t)
+        public InvoiceDetail Modify(InvoiceDetail t)
         {
-            _webshopContext._InvoiceDetails.AddOrUpdate();
+            try
+            {
+                _webshopContext._InvoiceDetails.AddOrUpdate(t);
+                _webshopContext._Invoices.Attach(t.Invoice);
+                _webshopContext.Entry(t.Invoice).State = EntityState.Modified;
+                return t;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+
 
         }
 
         public List<InvoiceDetail> GetAll()
         {
-            return _webshopContext._InvoiceDetails.ToList();
+            try
+            {
+                return _webshopContext._InvoiceDetails.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public void Remove(InvoiceDetail t)
         {
-            _webshopContext._InvoiceDetails.Remove(t);
+            try
+            {
+                var invoiceDetail = FindById(t.Id);
+                _webshopContext._InvoiceDetails.Remove(invoiceDetail);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
     }
 }

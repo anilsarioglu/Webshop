@@ -7,12 +7,14 @@ namespace Webshop.DAL.Configuration
     {
         public InvoiceConfiguration()
         {
-            this.ToTable("Invoice");
-            this.Property(i => i.Id).HasColumnType("int");
-            this.Property(i => i.Date).HasColumnType("Date");
-            this.Property(i => i.IsPaid).HasColumnType("Bit");
-            this.Property(i => i.InvoiceCode).HasColumnType("Varchar");
-            
+            ToTable("Invoice");
+            Property(i => i.Id).HasColumnType("int");
+            Property(i => i.Date).HasColumnType("Date");
+            Property(i => i.IsPaid).HasColumnType("Bit");
+            Property(i => i.InvoiceCode).HasColumnType("Varchar");
+
+            this.HasMany(i => i.InvoiceDetails)
+                .WithRequired(i => i.Invoice);
         }
     }
 }

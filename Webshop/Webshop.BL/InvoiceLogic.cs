@@ -15,6 +15,8 @@ namespace Webshop.BL
     public class InvoiceLogic : ILogic<InvoiceDTO>
     {
         private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public InvoiceLogic(UnitOfWork uow)
         {
@@ -23,20 +25,39 @@ namespace Webshop.BL
 
         public InvoiceDTO Create(InvoiceDTO c)
         {
-            _uow.InvoiceRepo.Add(MapDTO.Map<Invoice, InvoiceDTO>(c));
-            return c;
+            try
+            {
+                var invoiceRepo = MapDTO.Map<Invoice, InvoiceDTO>(c);
+                _uow.InvoiceRepo.Add(invoiceRepo);
+                _uow.Save();
+
+                c.Id = invoiceRepo.Id;
+
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen factuur toevoegen",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public InvoiceDTO FindByID(int? id)
         {
-            Invoice c = _uow.InvoiceRepo.FindById(id);
+            var c = _uow.InvoiceRepo.FindById(id);
 
-            return MapDTO.Map<InvoiceDTO, Invoice>(c);
+            return c == null ? null : MapDTO.Map<InvoiceDTO, Invoice>(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
             _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
+        }
+
+        public void Delete(int id)
+        {
+          throw new NotImplementedException();
         }
 
 
@@ -47,8 +68,17 @@ namespace Webshop.BL
 
         public InvoiceDTO Update(InvoiceDTO c)
         {
-            _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
-            return c;
+            try
+            {
+                _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
+                _uow.Save();
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon niet updaten");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

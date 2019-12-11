@@ -12,14 +12,14 @@ namespace Webshop.DAL.Entit
         public DateTime EndDate { get; set; }
         public ICollection<Course> Courses { get; set; }
         public ICollection<Vat> Vats { get; set; }
-        public ICollection<ProductPrice> ProductPrices { get; set; }
+        public ProductPrice ProductPrice { get; set; }
 
         public Product()
         {
 
         }
 
-        public Product(string name, int duration, DateTime startDate, DateTime endDate, ICollection<Course> courses, ICollection<Vat> vats, ICollection<ProductPrice> productPrices)
+        public Product(string name, int duration, DateTime startDate, DateTime endDate, ICollection<Course> courses, ICollection<Vat> vats, ProductPrice productPrice)
         {
             Name = name;
             Duration = duration;
@@ -27,7 +27,7 @@ namespace Webshop.DAL.Entit
             EndDate = endDate;
             Courses = courses;
             Vats = vats;
-            ProductPrices = productPrices;
+            ProductPrice = productPrice;
         }
     }
 }

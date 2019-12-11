@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -13,45 +15,79 @@ namespace Webshop.DAL.Repositories
             _webshopContext = context;
         }
 
-        public void Add(Invoice t)
+        public Invoice Add(Invoice t)
         {
-            _webshopContext._Invoices.Add(t);
-            _webshopContext.SaveChanges();
+            try
+            {
+                _webshopContext._Invoices.Add(t);
+                return t;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
+           
         }
 
         public Invoice FindById(int? id)
         {
-            return _webshopContext._Invoices.Find(id);
+            try
+            {
+                return _webshopContext._Invoices.Find(id);
+            }
+            catch (Exception e)
+            {
+               
+                throw new Exception(e.Message);
+            }
+           
         }
 
-        public void Modify(Invoice invoice)
+        public Invoice Modify(Invoice invoice)
         {
-            _webshopContext._Invoices.AddOrUpdate(invoice);
-            _webshopContext.SaveChanges();
+            try
+            {
+                _webshopContext._Invoices.AddOrUpdate(invoice);
+                return invoice;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+          
+         
         }
 
         public List<Invoice> GetAll()
         {
-            return _webshopContext._Invoices.ToList();
+            try
+            {
+                return _webshopContext._Invoices.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
         }
 
         public void Remove(Invoice t)
         {
-      //_webshopContext._Invoices.Remove(t);
-          _webshopContext.Entry(t).State = System.Data.Entity.EntityState.Deleted;
-          _webshopContext.SaveChanges();
-        }
-
-        public void insertData()
-        {
-            List<Invoice> invoices = DataHolder.GetInvoices();
-            for (int i = 0; i < invoices.Count; i++)
+            try
             {
-                Invoice invoice = invoices[i];
-                invoice.Id = i;
-                _webshopContext._Invoices.Add(invoice);
+                var invoice = FindById(t.Id);
+                _webshopContext._Invoices.Remove(invoice);
             }
-            _webshopContext.SaveChanges();
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
         }
     }
 }
