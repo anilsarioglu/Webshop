@@ -25,19 +25,11 @@ internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.Webs
                 context._Products.Add(product);
             }
 
-            foreach (InvoiceDetail detail in DataHolder.GetInvoiceDetails())
-            {
-                context._InvoiceDetails.Add(detail);
-            }
-
             foreach (ProductPrice productPrice in DataHolder.GetProductPrices())
             {
                 context._ProductPrices.Add(productPrice);
             }
-            foreach (Course course in DataHolder.GetCourses())
-            {
-              context._Courses.Add(course);
-            }
+
             context.SaveChanges();
     }
 }
