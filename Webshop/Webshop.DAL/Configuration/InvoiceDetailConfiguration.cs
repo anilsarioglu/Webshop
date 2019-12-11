@@ -11,7 +11,8 @@ namespace Webshop.DAL.Configuration
             Property(id => id.Id).HasColumnType("int");
             Property(id => id.Pieces).HasColumnType("int");
 
-            HasRequired(i => i.Course);
+            HasRequired(i => i.Course)
+                .WithOptional(c => c.InvoiceDetail);
         }
     }
 }

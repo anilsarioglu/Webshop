@@ -33,7 +33,6 @@ namespace Webshop.DAL
             modelBuilder.Configurations.Add(new CourseConfiguration());
             modelBuilder.Configurations.Add(new ProductConfiguration());
             modelBuilder.Configurations.Add(new ProductPriceConfiguration());
-
         }
     }
 }
