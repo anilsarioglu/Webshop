@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Webshop.UI_MVC.Models.Webshop
 {
-    public class ShoppingCard
+    public class ShoppingCart
     {
         public Course Course { get; set; }
         public int Quantity { get; set; }

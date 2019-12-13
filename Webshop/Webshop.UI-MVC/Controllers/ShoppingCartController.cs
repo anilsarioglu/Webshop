@@ -7,7 +7,7 @@ using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
-    public class ShoppinCartController : Controller
+    public class ShoppingCartController : Controller
     {
         // GET: ShoppinCart
         public ActionResult Index()
@@ -25,13 +25,13 @@ namespace Webshop.UI_MVC.Controllers
                 if (Session["cart"] == null)
                 {
 //                    List<ShoppingCard> cart = Session["cart"];
-                    List<ShoppingCard> cart = new List<ShoppingCard>();
-                    cart.Add(new ShoppingCard() {Course = courses, Quantity = 1});
+                    List<ShoppingCart> cart = new List<ShoppingCart>();
+                    cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
                     Session["cart"] = cart;
                 }
                 else
                 {
-                    List<ShoppingCard> cart = (List<ShoppingCard>) Session["cart"];
+                    List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
 
                     int index = ItemExists(id);
                     if (index != -1)
@@ -41,7 +41,7 @@ namespace Webshop.UI_MVC.Controllers
                     else
                     {
                         
-                        cart.Add(new ShoppingCard() {Course = courses, Quantity = 1});
+                        cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
                     }
 
                     Session["card"] = cart;
@@ -53,7 +53,7 @@ namespace Webshop.UI_MVC.Controllers
 
         public ActionResult Remove(int id)
         {
-            List<Course> cart = (List<Course>)Session["cart"];
+            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
             int index = ItemExists(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
@@ -61,7 +61,7 @@ namespace Webshop.UI_MVC.Controllers
         }
         private int ItemExists(int? id)
         {
-            List<ShoppingCard> cart = (List<ShoppingCard>)Session["cart"];
+            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
 
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].Course.Id.Equals(id))
