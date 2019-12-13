@@ -5,19 +5,18 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Webshop.Domain;
 using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class ProductController : Controller
     {
-        IEnumerable<ProductDTO> productsDTO = APIConsumer<ProductDTO>.GetAPI("product");
+        IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(MapDTO.MapList<Product, ProductDTO>(productsDTO));
+            return View(products);
         }
 
         // GET: Product/Details/5

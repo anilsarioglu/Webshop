@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Webshop.DAL.Entit;
+using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
