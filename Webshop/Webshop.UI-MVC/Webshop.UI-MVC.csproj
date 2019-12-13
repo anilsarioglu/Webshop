@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="Controllers\ShoppinCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\Webshop\ShoppingCard.cs" />
     <Compile Include="Service\APIConsumer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

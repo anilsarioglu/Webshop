@@ -1,23 +1,21 @@
 ﻿@using Webshop.UI_MVC.Models.Webshop
-@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Course>
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.ShoppingCard>
 
 @{
     ViewBag.Title = "Index";
 }
 <h3>Cart Page</h3>
-<table>
+<table class="table">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </th>
+        <th></th>
     </tr>
 </table>
-@foreach (Course item in (List<Course>)Session["cart"])
+@foreach (ShoppingCard item in (List<ShoppingCard>)Session["cart"])
 {
-    <tr>
-        <td>@item.Product.Id</td>
-        <td>@item.Product.Name</td>
-        <td>@item.InvoiceDetail.Pieces</td>
-    </tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Course.Name)
+    </td>
 }
