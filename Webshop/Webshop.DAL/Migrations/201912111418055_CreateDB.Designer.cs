@@ -4,14 +4,14 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Infrastructure;
 using System.Resources;
 
-[GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-public sealed partial class fourth : IMigrationMetadata
+[GeneratedCode("EntityFramework.Migrations", "6.4.0")]
+public sealed partial class CreateDB : IMigrationMetadata
 {
-    private readonly ResourceManager Resources = new ResourceManager(typeof(fourth));
+    private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB));
     
     string IMigrationMetadata.Id
     {
-        get { return "201912041327289_fourth"; }
+        get { return "201912111418055_CreateDB"; }
     }
     
     string IMigrationMetadata.Source
