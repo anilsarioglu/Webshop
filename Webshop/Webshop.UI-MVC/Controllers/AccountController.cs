@@ -173,18 +173,18 @@ namespace Webshop.UI_MVC.Controllers
                 {
                     //  Comment the following line to prevent log in until the user is confirmed.
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                     service.SendMail(user.Email, user.Id, "Confirm your account",
-                         "Please confirm your account by clicking "+ callbackUrl);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     //Assign Role to user Here       
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                     service.SendMail(user.Email, user.Id, "Confirm your account",
+                         "Please confirm your account by clicking "+ callbackUrl);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    
                     ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
                                        + "before you can log in.";
 
@@ -200,6 +200,56 @@ namespace Webshop.UI_MVC.Controllers
             return View(model);
         }
 
+        // GET: /Account/RegisterUser
+        [Authorize(Roles = "Admin")]
+        public ActionResult RegisterUser()
+        {
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Customer"))
+                .ToList(), "Name", "Name");
+            return View();
+        }
+
+        //
+        // POST: /Account/RegisterUser
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterUser(RegisterViewModel model, Webshop.BL.EmailService service)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    //  Comment the following line to prevent log in until the user is confirmed.
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    //Assign Role to user Here       
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    service.SendMail(user.Email, user.Id, "Confirm your account",
+                        "Please confirm your account by clicking " + callbackUrl);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
+                                       + "before you can log in.";
+
+                    return View("Info");
+                    //return RedirectToAction("Index", "Home");
+                }
+                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Customer"))
+                    .ToList(), "Name", "Name");
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

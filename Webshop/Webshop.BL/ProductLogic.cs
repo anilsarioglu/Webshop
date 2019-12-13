@@ -60,7 +60,6 @@ namespace Webshop.BL
 
         public void Delete(ProductDTO c)
         {
-
             try
             {
                 _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
@@ -75,7 +74,17 @@ namespace Webshop.BL
 
         public void Delete(int id)
         {
-          throw new NotImplementedException();
+            var c = FindByID(id);
+            try
+            {
+                _uow.ProductRepo.Remove(MapDTO.Map<Product, ProductDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen product verwijderren", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<ProductDTO> GetAll()

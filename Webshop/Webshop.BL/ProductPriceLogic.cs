@@ -72,7 +72,17 @@ namespace Webshop.BL
 
         public void Delete(int id)
         {
-          throw new NotImplementedException();
+            var c = FindByID(id);
+            try
+            {
+                _uow.ProductPriceRepo.Remove(MapDTO.Map<ProductPrice, ProductPriceDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen prijs verwijderren", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<ProductPriceDTO> GetAll()

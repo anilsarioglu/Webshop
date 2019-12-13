@@ -65,8 +65,8 @@ namespace Webshop.BL
                 log.Error("kon geen cursus verwijderren", e);
                 throw new Exception(e.Message);
             }
-
         }
+
         public void Delete(int id)
         {
             var c = FindByID(id);
@@ -80,7 +80,6 @@ namespace Webshop.BL
                 log.Error("kon geen cursus verwijderren", e);
                 throw new Exception(e.Message);
             }
-
         }
 
         public List<CourseDTO> GetAll()
