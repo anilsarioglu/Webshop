@@ -60,24 +60,6 @@ namespace Webshop.UI_MVC
                 roleManager.Create(role);
 
             }
-
-            // creating Creating Manager role     
-            if (!roleManager.RoleExists("TestUser"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "TestUser";
-                roleManager.Create(role);
-
-            }
-
-            // creating Creating Employee role     
-            if (!roleManager.RoleExists("TestUser2"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "TestUser2";
-                roleManager.Create(role);
-
-            }
         }
     }
 }

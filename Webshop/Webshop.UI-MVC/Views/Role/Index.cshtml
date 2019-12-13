@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Add Role";
+}
+<br />
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="10">No Record's found.</td>
+            </tr>
+        }
+        else
+        {
+            <thead colspan="3">
+            <tr class="active">
+                <th data-defaultsign="_19"> Existing roles</th>
+            </tr>
+            </thead>
+            foreach (var item in Model)
+            {
+                <tr>
+                    @if (item.Name == "Admin")
+                    {
+                        <td>@item.Name</td>
+                        <td>not editable</td>
+                        <td>not deletable</td>
+                    }
+                    else
+                    {
+                        <td>@item.Name</td>
+                        <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                        <td>@Html.ActionLink("Delete", "Delete", new {id = item.Id})</td>
+                    }
+                </tr>
+            }
+        }
+    </table>
+</div>
+<p> @Html.ActionLink("Click here to create a new role", "Create", "Role") </p>
