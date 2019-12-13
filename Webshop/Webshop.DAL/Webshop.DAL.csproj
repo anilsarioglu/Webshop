@@ -75,10 +75,6 @@
     <Compile Include="Migrations\201912111418055_CreateDB.designer.cs">
       <DependentUpon>201912111418055_CreateDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912111422216_CreateAspIdentity.cs" />
-    <Compile Include="Migrations\201912111422216_CreateAspIdentity.designer.cs">
-      <DependentUpon>201912111422216_CreateAspIdentity.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CourseRepo.cs" />
@@ -105,9 +101,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912111418055_CreateDB.resx">
       <DependentUpon>201912111418055_CreateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912111422216_CreateAspIdentity.resx">
-      <DependentUpon>201912111422216_CreateAspIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
