@@ -31,6 +31,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             @Html.ActionLink("Add new user", "RegisterUser", "Account", new {area = ""}, new {@class = "navbar-brand"})
+                            @Html.ActionLink("Manage roles", "Index", "Role", new {area = ""}, new {@class = "navbar-brand"})
+
                         </div>
                     </li>
                 }
