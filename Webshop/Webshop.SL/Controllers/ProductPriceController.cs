@@ -71,16 +71,16 @@ namespace Webshop.SL.Controllers
 
         //Delete /api/productprice/1
         [HttpDelete]
-        public IHttpActionResult DeleteProductPrice(ProductPriceDTO productPriceDto)
+        public IHttpActionResult DeleteProductPrice(int id)
         {
-            var productPriceInDb = _productPriceLogic.FindByID(productPriceDto.Id);
+            var productPriceInDb = _productPriceLogic.FindByID(id);
 
             if (productPriceInDb == null)
             {
                 return NotFound();
             }
 
-            _productPriceLogic.Delete(productPriceDto);
+            _productPriceLogic.Delete(productPriceInDb);
 
             return Ok();
         }

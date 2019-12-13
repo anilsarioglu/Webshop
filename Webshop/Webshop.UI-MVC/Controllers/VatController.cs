@@ -9,6 +9,7 @@ namespace Webshop.UI_MVC.Controllers
 {
     public class VatController : Controller
     {
+        private const string PATH = "vat";
         private IEnumerable<Vat> vats = APIConsumer<Vat>.GetAPI("vat");
 
         // GET: Vat
@@ -20,7 +21,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Vat/Details/5
         public ActionResult Details(int id)
         {
-            return View(vats.ElementAt(id + 1));
+            return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Vat/Create
@@ -31,12 +32,12 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Vat/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Vat vat)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                APIConsumer<Models.Webshop.Vat>.AddObject(PATH, vat);
                 return RedirectToAction("Index");
             }
             catch
@@ -48,17 +49,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Vat/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(vats.ElementAt(id + 1));
+            return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Vat/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Vat vat)
         {
             try
             {
                 // TODO: Add update logic here
-
+                APIConsumer<Models.Webshop.Vat>.EditObject(PATH, vat.Id.ToString(), vat);
                 return RedirectToAction("Index");
             }
             catch
@@ -70,17 +71,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Vat/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(vats.ElementAt(id + 1));
+            return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Vat/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Vat vat)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                APIConsumer<Models.Webshop.Vat>.DeleteObject(PATH, (vat.Id).ToString(), vat);
                 return RedirectToAction("Index");
             }
             catch

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ namespace Webshop.UI_MVC.Controllers
 {
     public class InvoiceController : Controller
     {
+        private const string PATH = "invoice";
         private IEnumerable<Invoice> invoices = APIConsumer<Invoice>.GetAPI("invoice");
 
         // GET: Invoice
@@ -20,7 +22,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Invoice/Details/5
         public ActionResult Details(int id)
         {
-            return View(invoices.ElementAt(id + 1));
+            return View(APIConsumer<Invoice>.GetObject(PATH , id.ToString()));
         }
 
         // GET: Invoice/Create
@@ -31,12 +33,12 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Invoice/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Invoice invoice)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                APIConsumer<Models.Webshop.Invoice>.AddObject(PATH, invoice);
                 return RedirectToAction("Index");
             }
             catch
@@ -48,17 +50,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Invoice/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(invoices.ElementAt(id + 1));
+            return View(APIConsumer<Invoice>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Invoice/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Invoice invoice)
         {
             try
             {
                 // TODO: Add update logic here
-
+                APIConsumer<Models.Webshop.Invoice>.EditObject(PATH, invoice.Id.ToString(), invoice);
                 return RedirectToAction("Index");
             }
             catch
@@ -70,17 +72,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Invoice/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(invoices.ElementAt(id + 1));
+            return View(APIConsumer<Invoice>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Invoice/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Invoice invoice)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                APIConsumer<Models.Webshop.Invoice>.DeleteObject(PATH, (invoice.Id).ToString(), invoice);
                 return RedirectToAction("Index");
             }
             catch
