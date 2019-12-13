@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Price)</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Name)</p>
-                        <a href="#" class="btn btn-primary">Bestellen</a>
+                        <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id})" class="btn btn-primary">Bestellen</a>
                     </div>
                 </div>
                 <br/>
@@ -31,3 +31,4 @@
             count++;
         }
     </div>
+</div>

@@ -196,7 +196,9 @@
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Models\Webshop\ShoppingCart.cs" />
     <Compile Include="Service\APIConsumer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -398,6 +400,7 @@
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Account\RegisterUser.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
