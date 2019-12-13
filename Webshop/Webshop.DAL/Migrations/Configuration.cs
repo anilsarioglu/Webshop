@@ -1,8 +1,11 @@
-using System.Data.Entity.Migrations;
-using Webshop.DAL;
-using Webshop.DAL.Entit;
+﻿namespace Webshop.DAL.Migrations
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
     {
         public Configuration()
         {
@@ -31,5 +34,6 @@ internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.Webs
             }
 
             context.SaveChanges();
+        }
     }
 }
