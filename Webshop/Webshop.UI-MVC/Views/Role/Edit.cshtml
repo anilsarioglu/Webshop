@@ -1,0 +1,14 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        Role name
+    </div>
+    <p>
+        @Html.TextBoxFor(model => model.Name)
+    </p>
+    <input type="submit" value="Save" />
+}

@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Service\APIConsumer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -392,6 +393,11 @@
     <Content Include="Views\Course\Details.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Account\RegisterUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
