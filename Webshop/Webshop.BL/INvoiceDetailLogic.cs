@@ -72,7 +72,17 @@ namespace Webshop.BL
 
         public void Delete(int id)
         {
-          throw new NotImplementedException();
+            var c = FindByID(id);
+            try
+            {
+                _uow.InvoiceDetailRepo.Remove(MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen factuur verwijderren", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<InvoiceDetailDTO> GetAll()

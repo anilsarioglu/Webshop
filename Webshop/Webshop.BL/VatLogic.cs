@@ -73,7 +73,17 @@ namespace Webshop.BL
 
         public void Delete(int id)
         {
-          throw new NotImplementedException();
+            var c = FindByID(id);
+            try
+            {
+                _uow.VatRepo.Remove(MapDTO.Map<Vat, VatDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen btw verwijderren", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<VatDTO> GetAll()
