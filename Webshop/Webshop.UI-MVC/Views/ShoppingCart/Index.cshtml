@@ -4,31 +4,34 @@
 @{
     ViewBag.Title = "Index";
 }
-<h3>Cart Page</h3>
+<h3><img src="../../shopping-cart(1).svg" width="25" height="25"/> &nbsp;Winkelmandje</h3>
+
 
 <div class="table-responsive">
-    <table class="table table-bordered table-condensed table-striped table-hover">
+    <table class="table">
         @if (Session["cart"] == null)
         {
             <tr>
-                <td colspan="10">No items in shoppingcart.</td>
+                <td colspan="10">Geen items in winkelmandje</td>
             </tr>
         }
         else
         {
-            <thead colspan="3">
-            <tr class="danger">
-                <th data-defaultsign="_19">
-                    @Html.DisplayNameFor(model => model.Course.Name)
-                </th>
-                <th data-defaultsign="_19">
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th data-defaultsign="_19">
-                    @Html.DisplayNameFor(model => model.Course.Price)
-                </th>
-                <th></th>
-            </tr>
+            <thead class="thead-dark">
+                <tr>
+                    <th data-defaultsign="_19">
+                        Opleiding
+                    </th>
+                    <th data-defaultsign="_19">
+                        Aantal 
+                    </th>
+                    <th data-defaultsign="_19">
+                        Prijs
+                    </th>
+                    <th>
+                        Verwijderen
+                    </th>
+                </tr>
             </thead>
 
             foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
@@ -39,34 +42,45 @@
                     </td>
 
                     <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                        <a href="@Url.Action("Buy", new {id = item.Course.Id, inShoppingCart = true})">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a> |
+                        <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id})">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a> 
                     </td>
                     <td>
                         @(item.Course.Price * item.Quantity)
                     </td>
                     <td>
-                        @Html.ActionLink("Delete", "Remove", "ShoppingCart", new { id = item.Course.Id }, null)
+                        <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id})">
+                            <img src="../../trash-alt-solid.svg" width="15" height="15" />
+                        </a>
                     </td>
+                    
                 </tr>
+                
             }
+            <div>
+                <h4>
+                    @{
+                        List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
+                        var total = cart.Sum(item => item.Course.Price * item.Quantity);
+                    }
+            
+                    <div>
+                        <strong style="text-decoration: underline">Totaal</strong>
+                    </div>
+                    <h5>
+                        <strong>Prijs : €@total</strong>
+                    </h5>
+          
+                </h4>
+
+            </div>
            
         }
     </table>
-    <div>
-        <h4>
-            @{
-                List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
-                var total = cart.Sum(item => item.Course.Price * item.Quantity);
-            }
-            
-            <div>
-                <strong style="text-decoration: underline">Totaal</strong>
-            </div>
-            <h5>
-                <strong>Prijs : @total</strong>
-            </h5>
-          
-        </h4>
-
-    </div>
+    
 </div>

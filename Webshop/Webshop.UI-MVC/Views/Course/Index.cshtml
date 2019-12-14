@@ -17,13 +17,17 @@
                 @:<div class="row">
             }
 
-            <div class="cols-md-3">
+            <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://img.pixers.pics/pho_wat(s3:700/FO/54/86/94/93/700_FO54869493_9a97f2d028a3ad79c6e601ef8ed7c56e.jpg,467,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,247,650,jpg)/fotobehang-pembroke-welsh-corgi-puppy-geisoleerd-op-een-witte-achtergrond.jpg.jpg" class="card-img-top" alt="corgi">
+                    <img src="https://img.pixers.pics/pho_wat(s3:700/FO/54/86/94/93/700_FO54869493_9a97f2d028a3ad79c6e601ef8ed7c56e.jpg,467,700,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,247,650,jpg)/fotobehang-pembroke-welsh-corgi-puppy-geisoleerd-op-een-witte-achtergrond.jpg.jpg" class="card-img-top" alt="corgi" width="150" height="200">
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Price)</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Name)</p>
-                        <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id})" class="btn btn-primary">Bestellen</a>
+                        <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id})" class="btn btn-primary">
+                                <img src="../../shopping-cart(1).svg" width="25" height="25"/> &nbsp;
+                                In winkelmandje
+                            </a>
+
                     </div>
                 </div>
                 <br/>

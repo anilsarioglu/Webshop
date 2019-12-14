@@ -28,6 +28,7 @@ namespace Webshop.UI_MVC.Controllers
                     List<ShoppingCart> cart = new List<ShoppingCart>();
                     cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
                     Session["cart"] = cart;
+                    Session["count"] = 1;
                 }
                 else
                 {
@@ -42,6 +43,7 @@ namespace Webshop.UI_MVC.Controllers
                     {
                         
                         cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
+                        Session["count"] = Convert.ToInt32(Session["count"]) + 1;
                     }
 
                     Session["card"] = cart;
@@ -51,12 +53,31 @@ namespace Webshop.UI_MVC.Controllers
 
         }
 
+        public ActionResult RemoveQuantity(int id)
+        {
+            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+            int index = ItemExists(id);
+            if (cart[index].Quantity > 1 )
+            {
+                cart[index].Quantity--;
+            }
+            else
+            {
+                cart.RemoveAt(index);
+                Session["count"] = Convert.ToInt32(Session["count"]) - 1;
+            }
+            
+            Session["cart"] = cart;
+           
+            return RedirectToAction("Index");
+        }
         public ActionResult Remove(int id)
         {
             List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
             int index = ItemExists(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
+            Session["count"] = Convert.ToInt32(Session["count"]) - 1;
             return RedirectToAction("Index");
         }
         private int ItemExists(int? id)
