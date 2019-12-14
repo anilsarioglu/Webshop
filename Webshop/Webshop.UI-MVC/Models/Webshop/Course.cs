@@ -10,5 +10,7 @@ namespace Webshop.UI_MVC.Models.Webshop
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+        public InvoiceDetail InvoiceDetail { get; set; }
+        public Product Product { get; set; }
     }
 }

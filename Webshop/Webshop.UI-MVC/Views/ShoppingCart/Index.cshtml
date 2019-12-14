@@ -1,0 +1,61 @@
+﻿@using Webshop.UI_MVC.Models.Webshop
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.ShoppingCart>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Cart Page</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-condensed table-striped table-hover">
+        @if (Session["cart"] == null)
+        {
+            <tr>
+                <td colspan="10">No items in shoppingcart.</td>
+            </tr>
+        }
+        else
+        {
+            <thead colspan="3">
+            <tr class="danger">
+                <th data-defaultsign="_19">
+                    @Html.DisplayNameFor(model => model.Course.Name)
+                </th>
+                <th data-defaultsign="_19">
+                    @Html.DisplayNameFor(model => model.Course.Price)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+
+            foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Remove", "ShoppingCart", new {id = item.Course.Id}, null)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </th>
+        <th></th>
+    </tr>
+</table>
+@foreach (ShoppingCard item in (List<ShoppingCard>)Session["cart"])
+{
+    <td>
+        @Html.DisplayFor(modelItem => item.Course.Name)
+    </td>
+}*@
