@@ -18,8 +18,14 @@ namespace Webshop.UI_MVC.Controllers
         public ActionResult Buy(int id)
         {
             Course courses = APIConsumer<Course>.GetObject("course", id.ToString());
+<<<<<<< Updated upstream
           
             
+=======
+
+
+
+>>>>>>> Stashed changes
             if (courses != null)
             {
                 if (Session["cart"] == null)
@@ -41,7 +47,11 @@ namespace Webshop.UI_MVC.Controllers
                     }
                     else
                     {
+<<<<<<< Updated upstream
                         
+=======
+
+>>>>>>> Stashed changes
                         cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
                         Session["count"] = Convert.ToInt32(Session["count"]) + 1;
                     }
