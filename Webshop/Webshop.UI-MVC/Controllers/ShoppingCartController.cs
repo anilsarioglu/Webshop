@@ -52,15 +52,16 @@ namespace Webshop.UI_MVC.Controllers
                     Session["card"] = cart;
                 }
             }
+
             return RedirectToAction("Index");
 
         }
 
         public ActionResult RemoveQuantity(int id)
         {
-            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+            List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
             int index = ItemExists(id);
-            if (cart[index].Quantity > 1 )
+            if (cart[index].Quantity > 1)
             {
                 cart[index].Quantity--;
                 Session["count"] = Convert.ToInt32(Session["count"]) - 1;
@@ -70,29 +71,32 @@ namespace Webshop.UI_MVC.Controllers
                 cart.RemoveAt(index);
                 Session["count"] = Convert.ToInt32(Session["count"]) - 1;
             }
-            
+
             Session["cart"] = cart;
-           
+
             return RedirectToAction("Index");
         }
+
         public ActionResult Remove(int id)
         {
-            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+            List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
             int index = ItemExists(id);
             cart.RemoveAt(index);
             Session["cart"] = cart;
+            int counter = Convert.ToInt32(Session["count"]);
             Session["count"] = Convert.ToInt32(Session["count"]) - 1;
             return RedirectToAction("Index");
         }
+
         private int ItemExists(int? id)
         {
-            List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+            List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
 
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].Course.Id.Equals(id))
                     return i;
             return -1;
         }
-
     }
+
 }
