@@ -36,30 +36,30 @@
 
             foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Course.Name)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
-                        <a href="@Url.Action("Buy", new {id = item.Course.Id, inShoppingCart = true})">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a> |
-                        <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id})">
-                            <span class="glyphicon glyphicon-minus"></span>
-                        </a> 
-                    </td>
-                    <td>
-                        @(item.Course.Price * item.Quantity)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id})">
-                            <img src="../../trash-alt-solid.svg" width="15" height="15" />
-                        </a>
-                    </td>
-                    
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                    <a href="@Url.Action("Buy", new {id = item.Course.Id, inShoppingCart = true})">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a> |
+                    <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id})">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </a>
+                </td>
+                <td>
+                    €@(item.Course.Price * item.Quantity)
+                </td>
+                <td>
+                    <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id})">
+                        <img src="../../trash-alt-solid.svg" width="15" height="15" />
+                    </a>
+                </td>
+
+            </tr>
                 
             }
             <div>
