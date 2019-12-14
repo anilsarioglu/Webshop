@@ -66,16 +66,16 @@ namespace Webshop.SL.Controller
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteVat(VatDTO vatDto)
+        public IHttpActionResult DeleteVat(int id)
         {
-            var vatInDb = _vatLogic.FindByID(vatDto.Id);
+            var vatInDb = _vatLogic.FindByID(id);
 
             if (vatInDb == null)
             {
                 return NotFound();
             }
 
-            _vatLogic.Delete(vatDto);
+            _vatLogic.Delete(vatInDb);
 
             return Ok();
         }
