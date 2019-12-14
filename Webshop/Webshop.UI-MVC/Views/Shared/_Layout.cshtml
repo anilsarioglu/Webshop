@@ -22,6 +22,7 @@
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Cursussen", "Index", "Course", new { area = "" }, new { @class = "navbar-brand" })</li>
                 <li>@Html.ActionLink("Producten", "Index", "Product", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <li><a href="@Url.Action("Index", "ShoppingCart")"><img src="../../shopping-cart-solid.svg" alt="SHopping cart" width="25" height="25"></a></li>
                 @if (User.IsInRole("Admin"))
                 {
                     <li class="nav-item dropdown">
@@ -32,11 +33,10 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             @Html.ActionLink("Add new user", "RegisterUser", "Account", new { area = "" }, new { @class = "navbar-brand" })
                             @Html.ActionLink("Manage roles", "Index", "Role", new { area = "" }, new { @class = "navbar-brand" })
-
                         </div>
                     </li>
                 }
-                @Html.ActionLink("ShoppingCart", "Index", "ShoppingCart", new { area = "" }, new { @class = "navbar-brand" })
+
             </ul>
             <li>@Html.Partial("_LoginPartial")</li>
         </div>
