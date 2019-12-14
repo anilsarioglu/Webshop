@@ -66,16 +66,16 @@ namespace Webshop.SL.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteProduct(ProductDTO productDto)
+        public IHttpActionResult DeleteProduct(int id)
         {
-            var productInDb = _productLogic.FindByID(productDto.Id);
+            var productInDb = _productLogic.FindByID(id);
 
             if (productInDb == null)
             {
                 return NotFound();
             }
 
-            _productLogic.Delete(productDto);
+            _productLogic.Delete(productInDb);
 
             return Ok();
         }

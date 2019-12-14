@@ -11,6 +11,7 @@ namespace Webshop.UI_MVC.Controllers
 {
     public class ProductController : Controller
     {
+        private const string PATH = "product";
         IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
 
         // GET: Product
@@ -22,7 +23,7 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Product/Create
@@ -33,12 +34,12 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Product product)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                APIConsumer<Models.Webshop.Product>.AddObject(PATH, product);
                 return RedirectToAction("Index");
             }
             catch
@@ -50,17 +51,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Product product)
         {
             try
             {
                 // TODO: Add update logic here
-
+                APIConsumer<Models.Webshop.Product>.EditObject(PATH, product.Id.ToString(), product);
                 return RedirectToAction("Index");
             }
             catch
@@ -72,17 +73,17 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Product/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Product product)
         {
-            try
+       try
             {
                 // TODO: Add delete logic here
-
+                APIConsumer<Models.Webshop.Product>.DeleteObject(PATH, (product.Id).ToString(), product);
                 return RedirectToAction("Index");
             }
             catch

@@ -66,16 +66,16 @@ namespace Webshop.SL.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteInvoice(InvoiceDTO invoiceDto)
+        public IHttpActionResult DeleteInvoice(int id)
         {
-            var invoiceInDb = _invoiceLogic.FindByID(invoiceDto.Id);
+            var invoiceInDb = _invoiceLogic.FindByID(id);
 
             if (invoiceInDb == null)
             {
                 return NotFound();
             }
 
-            _invoiceLogic.Delete(invoiceDto);
+            _invoiceLogic.Delete(invoiceInDb);
 
             return Ok();
         }

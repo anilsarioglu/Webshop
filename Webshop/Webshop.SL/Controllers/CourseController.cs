@@ -67,16 +67,16 @@ namespace Webshop.SL.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(CourseDTO courseDto)
+        public IHttpActionResult Delete(int id)
         {
-            var courseInDb = _courseLogic.FindByID(courseDto.Id);
+            var courseInDb = _courseLogic.FindByID(id);
 
             if (courseInDb == null)
             {
                 return NotFound();
             }
 
-            _courseLogic.Delete(courseDto);
+            _courseLogic.Delete(courseInDb);
 
             return Ok();
         }
