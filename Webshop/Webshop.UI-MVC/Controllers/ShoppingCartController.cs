@@ -79,10 +79,21 @@ namespace Webshop.UI_MVC.Controllers
         {
             List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
             int index = ItemExists(id);
-            cart.RemoveAt(index);
             Session["cart"] = cart;
-            int counter = Convert.ToInt32(Session["count"]);
-            Session["count"] = Convert.ToInt32(Session["count"]) - 1;
+            //int counter = Convert.ToInt32(Session["count"]);
+            //Session["count"] = Convert.ToInt32(Session["count"]) - 1;
+            
+            if (index != -1)
+            {
+                int aantal = cart[index].Quantity;
+                Session["count"] = Convert.ToInt32(Session["count"]) - aantal;
+            }
+            else if (cart.Count == 0)
+            {
+                Session["count"] = 0;
+            }
+
+            cart.RemoveAt(index);
             return RedirectToAction("Index");
         }
 
