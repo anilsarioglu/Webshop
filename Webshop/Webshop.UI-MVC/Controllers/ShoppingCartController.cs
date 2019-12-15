@@ -41,10 +41,8 @@ namespace Webshop.UI_MVC.Controllers
                     }
                     else
                     {
-
-                        cart.Add(new ShoppingCart() { Course = courses, Quantity = 1});
+                        cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
                         Session["count"] = Convert.ToInt32(Session["count"]) + 1;
-
                     }
 
                     Session["card"] = cart;
@@ -52,7 +50,6 @@ namespace Webshop.UI_MVC.Controllers
             }
 
             return RedirectToAction("Index");
-
         }
 
         public ActionResult RemoveQuantity(int id)
@@ -72,6 +69,11 @@ namespace Webshop.UI_MVC.Controllers
 
             Session["cart"] = cart;
 
+            if (cart.Count == 0)
+            {
+                Session.Clear();
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -82,18 +84,21 @@ namespace Webshop.UI_MVC.Controllers
             Session["cart"] = cart;
             //int counter = Convert.ToInt32(Session["count"]);
             //Session["count"] = Convert.ToInt32(Session["count"]) - 1;
-            
+
             if (index != -1)
             {
                 int aantal = cart[index].Quantity;
                 Session["count"] = Convert.ToInt32(Session["count"]) - aantal;
             }
-            else if (cart.Count == 0)
-            {
-                Session["count"] = 0;
-            }
 
             cart.RemoveAt(index);
+
+            if (cart.Count == 0)
+            {
+                Session["count"] = 0;
+                Session.Clear();
+            }
+
             return RedirectToAction("Index");
         }
 
@@ -107,5 +112,4 @@ namespace Webshop.UI_MVC.Controllers
             return -1;
         }
     }
-
 }

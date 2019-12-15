@@ -18,48 +18,48 @@
         else
         {
             <thead class="thead-dark">
-                <tr>
-                    <th data-defaultsign="_19">
-                        Opleiding
-                    </th>
-                    <th data-defaultsign="_19">
-                        Aantal 
-                    </th>
-                    <th data-defaultsign="_19">
-                        Prijs
-                    </th>
-                    <th>
-                        Verwijderen
-                    </th>
-                </tr>
+            <tr>
+                <th data-defaultsign="_19">
+                    Opleiding
+                </th>
+                <th data-defaultsign="_19">
+                    Aantal 
+                </th>
+                <th data-defaultsign="_19">
+                    Prijs
+                </th>
+                <th>
+                    Verwijderen
+                </th>
+            </tr>
             </thead>
 
             foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Course.Name)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
-                    <a href="@Url.Action("Buy", new {id = item.Course.Id, inShoppingCart = true})">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a> |
-                    <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id})">
-                        <span class="glyphicon glyphicon-minus"></span>
-                    </a>
-                </td>
-                <td>
-                    €@(item.Course.Price * item.Quantity)
-                </td>
-                <td>
-                    <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id})">
-                        <img src="../../trash-alt-solid.svg" width="15" height="15" />
-                    </a>
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                        <a href="@Url.Action("Buy", new {id = item.Course.Id, inShoppingCart = true})">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a> |
+                        <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id})">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+                    </td>
+                    <td>
+                        €@(item.Course.Price * item.Quantity)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id})">
+                            <img src="../../trash-alt-solid.svg" width="15" height="15" />
+                        </a>
+                    </td>
 
-            </tr>
+                </tr>
                 
             }
             <div>
@@ -82,5 +82,11 @@
            
         }
     </table>
-    
+    @if (Session["cart"] != null)
+    {
+        <a href="@Url.Action("Index", "Purchase")" class="btn btn-primary">
+            Bestelling plaatsen
+        </a>
+    }
+
 </div>
