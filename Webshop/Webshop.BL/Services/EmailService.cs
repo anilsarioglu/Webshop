@@ -24,5 +24,29 @@ namespace Webshop.BL
 
             SmtpServer.Send(mail);
         }
+
+        public void SendInvoice(string email, string subject, string body)
+        {
+            //TODO aanpassen waarden email!
+            // Plug in your email service here to send an email.
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            mail.From = new MailAddress("xxxxxxx@gmail.com");
+            mail.To.Add(email);
+            mail.Subject = subject;
+            mail.Body = body;
+            mail.Attachments.Add(new Attachment(@"F:\SCHOOL\AP\3e jaar\Integratie Project .NET\Webshop\Webshop\Webshop.UI-MVC\Invoices\Output.pdf"));
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("xxxxxx@gmail.com", "xxxxxxx");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+
+            foreach (Attachment attachment in mail.Attachments)
+            {
+                attachment.Dispose();
+            }
+        }
     }
 }
