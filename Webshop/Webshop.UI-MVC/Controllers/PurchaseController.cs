@@ -52,9 +52,12 @@ namespace Webshop.UI_MVC.Controllers
             PdfPen borderPen = new PdfPen(borderColor, 1f);
 
             //Create TrueType font.
-            PdfTrueTypeFont headerFont = new PdfTrueTypeFont(new Font("Arial", 30, System.Drawing.FontStyle.Regular), true);
-            PdfTrueTypeFont arialRegularFont = new PdfTrueTypeFont(new Font("Arial", 9, System.Drawing.FontStyle.Regular), true);
-            PdfTrueTypeFont arialBoldFont = new PdfTrueTypeFont(new Font("Arial", 11, System.Drawing.FontStyle.Bold), true);
+            PdfTrueTypeFont headerFont =
+                new PdfTrueTypeFont(new Font("Arial", 30, System.Drawing.FontStyle.Regular), true);
+            PdfTrueTypeFont arialRegularFont =
+                new PdfTrueTypeFont(new Font("Arial", 9, System.Drawing.FontStyle.Regular), true);
+            PdfTrueTypeFont arialBoldFont =
+                new PdfTrueTypeFont(new Font("Arial", 11, System.Drawing.FontStyle.Bold), true);
 
             const float margin = 30;
             const float lineSpace = 7;
@@ -78,7 +81,8 @@ namespace Webshop.UI_MVC.Controllers
 
             graphics.DrawRectangle(darkBlueBrush, headerAmountBounds);
 
-            graphics.DrawString("Totaal te betalen", arialRegularFont, whiteBrush, headerAmountBounds, new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
+            graphics.DrawString("Totaal te betalen", arialRegularFont, whiteBrush, headerAmountBounds,
+                new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
 
             PdfTextElement textElement = new PdfTextElement("Factuurnr.: *hier komt factuurnr.*", arialRegularFont);
 
@@ -108,10 +112,10 @@ namespace Webshop.UI_MVC.Controllers
             dataTable.Columns.Add("Prijs");
 
             ////Add rows to the DataTable
-            cart = (List<ShoppingCart>)Session["cart"];
-            foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
+            cart = (List<ShoppingCart>) Session["cart"];
+            foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
             {
-                dataTable.Rows.Add(new object[] { item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity) });
+                dataTable.Rows.Add(new object[] {item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity)});
             }
 
             grid.DataSource = dataTable;
@@ -126,16 +130,19 @@ namespace Webshop.UI_MVC.Controllers
 
             textElement.Text = "Totaal: ";
             textElement.Font = arialBoldFont;
-            layoutResult = textElement.Draw(page, new PointF(headerAmountBounds.X - 40, layoutResult.Bounds.Bottom + lineSpace));
+            layoutResult = textElement.Draw(page,
+                new PointF(headerAmountBounds.X - 40, layoutResult.Bounds.Bottom + lineSpace));
 
-            float totalAmount = (float)cart.Sum(item => item.Course.Price * item.Quantity);
+            float totalAmount = (float) cart.Sum(item => item.Course.Price * item.Quantity);
             textElement.Text = "€" + totalAmount.ToString();
             layoutResult = textElement.Draw(page, new PointF(layoutResult.Bounds.Right + 4, layoutResult.Bounds.Y));
 
-            graphics.DrawString("€" + totalAmount.ToString(), arialBoldFont, whiteBrush, new RectangleF(400, lineSpace, pageWidth - 400, headerHeight + 15), new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
+            graphics.DrawString("€" + totalAmount.ToString(), arialBoldFont, whiteBrush,
+                new RectangleF(400, lineSpace, pageWidth - 400, headerHeight + 15),
+                new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
 
             borderPen.DashStyle = PdfDashStyle.Custom;
-            borderPen.DashPattern = new float[] { 3, 3 };
+            borderPen.DashPattern = new float[] {3, 3};
 
             PdfLine line = new PdfLine(borderPen, new PointF(0, 0), new PointF(pageWidth, 0));
             layoutResult = line.Draw(page, new PointF(0, pageHeight - 100));
@@ -149,7 +156,7 @@ namespace Webshop.UI_MVC.Controllers
             layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
 
             //Save the document
-            doc.Save(@"\Invoices\Output.pdf");
+            doc.Save(@"\Invoices\Bestelling.pdf");
             //Close the document
             doc.Close(true);
 
@@ -157,7 +164,14 @@ namespace Webshop.UI_MVC.Controllers
             string mail = user.Email;
             //string email = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
-            return Index();
+            return RedirectToAction("Success", "Purchase");
+        }
+
+        // GET: Purchase/Success
+        public ActionResult Success()
+        {
+            Session.Clear();
+            return View();
         }
     }
 }

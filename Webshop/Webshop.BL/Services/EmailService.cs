@@ -35,10 +35,10 @@ namespace Webshop.BL
             mail.To.Add(email);
             mail.Subject = subject;
             mail.Body = body;
-            mail.Attachments.Add(new Attachment(@"\Invoices\Output.pdf"));
+            mail.Attachments.Add(new Attachment(@"\Invoices\Bestelling.pdf"));
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("xxxxxx@gmail.com", "xxxx");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("yaramis.naseyb@gmail.com", "Nasy1995");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
