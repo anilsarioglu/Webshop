@@ -41,34 +41,128 @@ namespace Webshop.UI_MVC.Controllers
             PdfDocument doc = new PdfDocument();
             //Add a page
             PdfPage page = doc.Pages.Add();
-            //Create a PdfGrid
-            PdfGrid pdfGrid = new PdfGrid();
-            PdfGrid pdfGrid2 = new PdfGrid();
 
-            //Create a DataTable
+            //Create border color.
+            PdfColor borderColor = new PdfColor(Color.FromArgb(255, 142, 170, 219));
+            PdfBrush lightBlueBrush = new PdfSolidBrush(new PdfColor(Color.FromArgb(255, 91, 126, 215)));
+
+            PdfBrush darkBlueBrush = new PdfSolidBrush(new PdfColor(Color.FromArgb(255, 65, 104, 209)));
+
+            PdfBrush whiteBrush = new PdfSolidBrush(new PdfColor(Color.FromArgb(255, 255, 255, 255)));
+            PdfPen borderPen = new PdfPen(borderColor, 1f);
+
+            //Create TrueType font.
+            PdfTrueTypeFont headerFont = new PdfTrueTypeFont(new Font("Arial", 30, System.Drawing.FontStyle.Regular), true);
+            PdfTrueTypeFont arialRegularFont = new PdfTrueTypeFont(new Font("Arial", 9, System.Drawing.FontStyle.Regular), true);
+            PdfTrueTypeFont arialBoldFont = new PdfTrueTypeFont(new Font("Arial", 11, System.Drawing.FontStyle.Bold), true);
+
+            const float margin = 30;
+            const float lineSpace = 7;
+            const float headerHeight = 90;
+
+            //Add Ghrapics
+            PdfGraphics graphics = page.Graphics;
+
+            //Get the page width and height.
+            float pageWidth = page.GetClientSize().Width;
+            float pageHeight = page.GetClientSize().Height;
+            //Draw page border
+            graphics.DrawRectangle(borderPen, new RectangleF(0, 0, pageWidth, pageHeight));
+
+            //Fill the header with light Brush.
+            graphics.DrawRectangle(lightBlueBrush, new RectangleF(0, 0, pageWidth, headerHeight));
+
+            RectangleF headerAmountBounds = new RectangleF(400, 0, pageWidth - 400, headerHeight);
+
+            graphics.DrawString("Bestelbon", headerFont, whiteBrush, new PointF(margin, headerAmountBounds.Height / 3));
+
+            graphics.DrawRectangle(darkBlueBrush, headerAmountBounds);
+
+            graphics.DrawString(".DOTNetAcademy", arialRegularFont, whiteBrush, headerAmountBounds, new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
+
+            PdfTextElement textElement = new PdfTextElement("Factuurnr.: *hier komt factuurnr.*", arialRegularFont);
+
+            PdfLayoutResult layoutResult = textElement.Draw(page, new PointF(headerAmountBounds.X - margin, 120));
+
+            textElement.Text = "Datum : " + DateTime.Now.ToString("dd MMMM yyyy");
+            textElement.Draw(page, new PointF(layoutResult.Bounds.X, layoutResult.Bounds.Bottom + lineSpace));
+
+            textElement.Text = "Aan:";
+            layoutResult = textElement.Draw(page, new PointF(margin, 120));
+
+            textElement.Text = user.Firstname + " " + user.Surname;
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
+            textElement.Text = user.Address + " , Postcode: " + user.ZIPCode;
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
+            textElement.Text = user.PhoneNumber;
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
+            textElement.Text = user.Email;
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
+
+            PdfGrid grid = new PdfGrid();
+
             DataTable dataTable = new DataTable();
-            DataTable dataTable2 = new DataTable();
-
-            //Add columns to the DataTable
+            ////Add columns to the DataTable
             dataTable.Columns.Add("Product");
             dataTable.Columns.Add("Aantal");
             dataTable.Columns.Add("Prijs");
-            //Add rows to the DataTable
+
+            ////Add rows to the DataTable
             cart = (List<ShoppingCart>)Session["cart"];
-            foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
+            foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
             {
                 dataTable.Rows.Add(new object[] { item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity) });
             }
 
-            dataTable2.Columns.Add("Totaal");
-            dataTable2.Rows.Add(new object[] { cart.Sum(item => item.Course.Price * item.Quantity) });
+            grid.DataSource = dataTable;
 
-            //Assign data source
-            pdfGrid.DataSource = dataTable;
-            pdfGrid2.DataSource = dataTable2;
-            //Draw grid to the page of PDF document
-            PdfLayoutResult articles =  pdfGrid.Draw(page, new PointF(10, 200));
-            pdfGrid2.Draw(articles.Page, new PointF(10, articles.Bounds.Bottom + 5));
+            grid.Columns[1].Width = 150;
+            grid.Style.Font = arialRegularFont;
+            grid.Style.CellPadding.All = 5;
+
+            grid.ApplyBuiltinStyle(PdfGridBuiltinStyle.ListTable4Accent5);
+
+            layoutResult = grid.Draw(page, new PointF(0, layoutResult.Bounds.Bottom + 40));
+
+            textElement.Text = "Totaal: ";
+            textElement.Font = arialBoldFont;
+            layoutResult = textElement.Draw(page, new PointF(headerAmountBounds.X - 40, layoutResult.Bounds.Bottom + lineSpace));
+
+            float totalAmount = (float)cart.Sum(item => item.Course.Price * item.Quantity);
+            textElement.Text = "€" + totalAmount.ToString();
+            layoutResult = textElement.Draw(page, new PointF(layoutResult.Bounds.Right + 4, layoutResult.Bounds.Y));
+
+            graphics.DrawString("€" + totalAmount.ToString(), arialBoldFont, whiteBrush, new RectangleF(400, lineSpace, pageWidth - 400, headerHeight + 15), new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
+
+            ////Create a PdfGrid
+            //PdfGrid pdfGrid = new PdfGrid();
+            //PdfGrid pdfGrid2 = new PdfGrid();
+
+            ////Create a DataTable
+            //DataTable dataTable = new DataTable();
+            //DataTable dataTable2 = new DataTable();
+
+            ////Add columns to the DataTable
+            //dataTable.Columns.Add("Product");
+            //dataTable.Columns.Add("Aantal");
+            //dataTable.Columns.Add("Prijs");
+            ////Add rows to the DataTable
+            //cart = (List<ShoppingCart>)Session["cart"];
+            //foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
+            //{
+            //    dataTable.Rows.Add(new object[] { item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity) });
+            //}
+
+            //dataTable2.Columns.Add("Totaal");
+            //dataTable2.Rows.Add(new object[] { cart.Sum(item => item.Course.Price * item.Quantity) });
+
+            ////Assign data source
+            //pdfGrid.DataSource = dataTable;
+            //pdfGrid2.DataSource = dataTable2;
+            ////Draw grid to the page of PDF document
+            //PdfLayoutResult articles = pdfGrid.Draw(page, new PointF(10, layoutResult.Bounds.Bottom + 40));
+            //pdfGrid2.Draw(articles.Page, new PointF(10, articles.Bounds.Bottom + 5));
+
             //Save the document
             doc.Save(@"\Invoices\Output.pdf");
             //Close the document
