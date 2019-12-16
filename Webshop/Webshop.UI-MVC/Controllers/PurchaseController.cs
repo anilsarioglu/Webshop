@@ -78,7 +78,7 @@ namespace Webshop.UI_MVC.Controllers
 
             graphics.DrawRectangle(darkBlueBrush, headerAmountBounds);
 
-            graphics.DrawString(".DOTNetAcademy", arialRegularFont, whiteBrush, headerAmountBounds, new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
+            graphics.DrawString("Totaal te betalen", arialRegularFont, whiteBrush, headerAmountBounds, new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
 
             PdfTextElement textElement = new PdfTextElement("Factuurnr.: *hier komt factuurnr.*", arialRegularFont);
 
@@ -134,34 +134,19 @@ namespace Webshop.UI_MVC.Controllers
 
             graphics.DrawString("€" + totalAmount.ToString(), arialBoldFont, whiteBrush, new RectangleF(400, lineSpace, pageWidth - 400, headerHeight + 15), new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
 
-            ////Create a PdfGrid
-            //PdfGrid pdfGrid = new PdfGrid();
-            //PdfGrid pdfGrid2 = new PdfGrid();
+            borderPen.DashStyle = PdfDashStyle.Custom;
+            borderPen.DashPattern = new float[] { 3, 3 };
 
-            ////Create a DataTable
-            //DataTable dataTable = new DataTable();
-            //DataTable dataTable2 = new DataTable();
+            PdfLine line = new PdfLine(borderPen, new PointF(0, 0), new PointF(pageWidth, 0));
+            layoutResult = line.Draw(page, new PointF(0, pageHeight - 100));
 
-            ////Add columns to the DataTable
-            //dataTable.Columns.Add("Product");
-            //dataTable.Columns.Add("Aantal");
-            //dataTable.Columns.Add("Prijs");
-            ////Add rows to the DataTable
-            //cart = (List<ShoppingCart>)Session["cart"];
-            //foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
-            //{
-            //    dataTable.Rows.Add(new object[] { item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity) });
-            //}
-
-            //dataTable2.Columns.Add("Totaal");
-            //dataTable2.Rows.Add(new object[] { cart.Sum(item => item.Course.Price * item.Quantity) });
-
-            ////Assign data source
-            //pdfGrid.DataSource = dataTable;
-            //pdfGrid2.DataSource = dataTable2;
-            ////Draw grid to the page of PDF document
-            //PdfLayoutResult articles = pdfGrid.Draw(page, new PointF(10, layoutResult.Bounds.Bottom + 40));
-            //pdfGrid2.Draw(articles.Page, new PointF(10, articles.Bounds.Bottom + 5));
+            textElement.Text = "dotNET academy Antwerpen";
+            textElement.Font = arialRegularFont;
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + (lineSpace * 3)));
+            textElement.Text = "Komiteitstraat 46-52 (de Koekenfabriek), 2170 Antwerpen";
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
+            textElement.Text = "Vragen? \n tel: +32 16 35 93 78 \n email: info@dotnetacademy.be";
+            layoutResult = textElement.Draw(page, new PointF(margin, layoutResult.Bounds.Bottom + lineSpace));
 
             //Save the document
             doc.Save(@"\Invoices\Output.pdf");

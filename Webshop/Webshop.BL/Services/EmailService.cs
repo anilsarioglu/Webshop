@@ -13,7 +13,7 @@ namespace Webshop.BL
             // Plug in your email service here to send an email.
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("yaramis.naseyb@gmail.com");
+            mail.From = new MailAddress("xxxxx@gmail.com");
             mail.To.Add(email);
             mail.Subject = subject;
             mail.Body = body;
