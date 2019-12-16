@@ -21,12 +21,14 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Product/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -34,6 +36,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Product/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Product product)
         {
             try
@@ -49,6 +52,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
@@ -56,6 +60,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Product/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Product product)
         {
             try
@@ -71,6 +76,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
@@ -78,6 +84,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Product/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Product product)
         {
        try

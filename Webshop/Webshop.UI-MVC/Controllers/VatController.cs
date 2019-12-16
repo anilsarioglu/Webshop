@@ -19,12 +19,14 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Vat/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Vat/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -32,6 +34,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Vat/Create
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Vat vat)
         {
             try
@@ -47,6 +50,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Vat/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
@@ -54,6 +58,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Vat/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Vat vat)
         {
             try
@@ -69,6 +74,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Vat/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(APIConsumer<Vat>.GetObject(PATH, id.ToString()));
@@ -76,6 +82,7 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Vat/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Vat vat)
         {
             try

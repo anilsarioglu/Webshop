@@ -38,7 +38,7 @@ namespace Webshop.BL
             mail.Attachments.Add(new Attachment(@"\Invoices\Bestelling.pdf"));
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("yaramis.naseyb@gmail.com", "Nasy1995");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("xxxxx@gmail.com", "xxxxx");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);
