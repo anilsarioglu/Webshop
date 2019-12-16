@@ -7,7 +7,10 @@ using System.Web.Mvc;
 using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.Drawing;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Syncfusion.Pdf.Grid;
+using Webshop.UI_MVC.Models;
 using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
@@ -30,6 +33,10 @@ namespace Webshop.UI_MVC.Controllers
         [HttpPost]
         public ActionResult Index(List<ShoppingCart> cart)
         {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext()
+                .GetUserManager<ApplicationUserManager>()
+                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
             Webshop.BL.EmailService service = new Webshop.BL.EmailService();
             PdfDocument doc = new PdfDocument();
             //Add a page
@@ -63,12 +70,14 @@ namespace Webshop.UI_MVC.Controllers
             PdfLayoutResult articles =  pdfGrid.Draw(page, new PointF(10, 200));
             pdfGrid2.Draw(articles.Page, new PointF(10, articles.Bounds.Bottom + 5));
             //Save the document
-            doc.Save(@"F:\SCHOOL\AP\3e jaar\Integratie Project .NET\Webshop\Webshop\Webshop.UI-MVC\Invoices\Output.pdf");
+            doc.Save(@"\Invoices\Output.pdf");
             //Close the document
             doc.Close(true);
 
             //TODO CUSTOMER MAIL AND PERSONAL INFO ON INVOICE
-            service.SendInvoice("HIER KOMT CUSTOMER ZIJN EMAIL", "factuur", "Als bijlage je bestelbon.");
+            string mail = user.Email;
+            //string email = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
             return Index();
         }
     }
