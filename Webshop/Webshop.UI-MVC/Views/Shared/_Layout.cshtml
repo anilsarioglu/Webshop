@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="https://www.dotnetacademy.be/wp-content/themes/dotnetacademy/assets/images/compressed/favicon.ico">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -37,7 +38,8 @@
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if(!User.IsInRole("Admin")){
+                @if (!User.IsInRole("Admin"))
+                {
                     <li>
                         <a href="@Url.Action("Index", "ShoppingCart")">
                             <img src="../../shopping-cart(1).svg" alt="SHopping cart" width="25" height="25"><span class='badge badge-warning' id='lblCartCount'>@Session["count"]</span>
@@ -46,7 +48,7 @@
                 }
                 <li>@Html.Partial("_LoginPartial")</li>
             </ul>
-            
+
         </div>
     </div>
 </div>
