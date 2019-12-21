@@ -131,11 +131,11 @@ namespace Webshop.DAL
         {
             List<Invoice> invoices = new List<Invoice>
             {
-                new Invoice(DateTime.Now, true, "randomCode123", GetFrontEndInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "random123", GetBasicsInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "Code123", GetAdvancedInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "randomCode", GetTestingInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "randomCode548", GetMobileInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false, "randomCode123", GetFrontEndInvoiceDetails()),
+                new Invoice(DateTime.Now, false, false,"random123", GetBasicsInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false,"Code123", GetAdvancedInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false,"randomCode", GetTestingInvoiceDetails()),
+                new Invoice(DateTime.Now, false, false,"randomCode548", GetMobileInvoiceDetails()),
             };
 
             return invoices;

@@ -12,16 +12,17 @@ namespace Webshop.UI_MVC.Models.Webshop
         public bool IsPaid { get; set; }
         public string InvoiceCode { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public bool Deleted { get; set; }
 
         public Invoice()
         {
                 
         }
-        public Invoice(DateTime date, bool isPaid, string invoiceCode)
+        public Invoice(DateTime date, bool isPaid, bool deleted, string invoiceCode)
         {
-            this.InvoiceDetails = new List<InvoiceDetail>();
             this.Date = date;
             this.IsPaid = isPaid;
+            this.Deleted = deleted;
             this.InvoiceCode = invoiceCode;
         }
     }
