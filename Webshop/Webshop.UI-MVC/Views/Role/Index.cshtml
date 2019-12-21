@@ -21,7 +21,7 @@
             foreach (var item in Model)
             {
                 <tr>
-                    @if (item.Name == "Admin")
+                    @if ((item.Name == "Admin") || (item.Name == "Customer"))
                     {
                         <td>@item.Name</td>
                         <td>not editable</td>

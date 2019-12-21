@@ -159,11 +159,24 @@ namespace Webshop.UI_MVC.Controllers
             doc.Save(@"\Invoices\Bestelling.pdf");
             //Close the document
             doc.Close(true);
+            Invoice invoice = new Invoice(DateTime.Today, false, DateTime.Now.ToString());
 
-            //TODO CUSTOMER MAIL AND PERSONAL INFO ON INVOICE
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
+
+            foreach (ShoppingCart item in cart)
+            {
+                InvoiceDetail detail = new InvoiceDetail(item.Quantity, invoice, item.Course);
+                invoiceDetails.Add(detail);
+                invoice.InvoiceDetails.Add(detail);
+                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("detail", detail);
+            }
+
+            invoice.InvoiceDetails = invoiceDetails;
+            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
+
             string mail = user.Email;
-            //string email = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
+
             return RedirectToAction("Success", "Purchase");
         }
 
