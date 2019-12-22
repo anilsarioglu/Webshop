@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
+using Newtonsoft.Json;
 using Owin;
 using Webshop.UI_MVC.Models;
 
@@ -12,7 +13,12 @@ namespace Webshop.UI_MVC
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+          JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+          {
+            Formatting = Newtonsoft.Json.Formatting.Indented,
+            ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+          };
+      ConfigureAuth(app);
             CreateRolesandUsers();
         }
 

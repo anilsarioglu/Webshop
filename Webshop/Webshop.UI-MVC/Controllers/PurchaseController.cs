@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -165,19 +165,19 @@ namespace Webshop.UI_MVC.Controllers
 
             foreach (ShoppingCart item in cart)
             {
-                InvoiceDetail detail = new InvoiceDetail(item.Quantity, invoice, item.Course);
+                InvoiceDetail detail = new InvoiceDetail(item.Quantity);
                 invoiceDetails.Add(detail);
                 //invoice.InvoiceDetails.Add(detail);
                 APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("detail", detail);
             }
 
             //invoice.InvoiceDetails = invoiceDetails;
+            
+            invoice.InvoiceDetails = invoiceDetails;
             APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
-            Invoice getInvoice = APIConsumer<Models.Webshop.Invoice>.GetObject("invoice", (invoice.Id).ToString());
-            getInvoice.InvoiceDetails = invoiceDetails;
-            APIConsumer<Models.Webshop.Invoice>.EditObject("invoice", invoice.Id.ToString(), invoice);
 
-            string mail = user.Email;
+
+      string mail = user.Email;
             service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
 
             return RedirectToAction("Success", "Purchase");
