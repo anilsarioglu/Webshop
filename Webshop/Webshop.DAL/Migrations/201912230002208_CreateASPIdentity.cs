@@ -97,5 +97,4 @@ public partial class CreateASPIdentity : DbMigration
         DropTable("dbo.AspNetUserRoles");
         DropTable("dbo.AspNetRoles");
     }
-
 }

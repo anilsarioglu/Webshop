@@ -10,9 +10,6 @@ namespace Webshop.DAL.Configuration
             ToTable("InvoiceDetail");
             Property(id => id.Id).HasColumnType("int");
             Property(id => id.Pieces).HasColumnType("int");
-
-            HasRequired(i => i.Course)
-                .WithOptional(c => c.InvoiceDetail);
         }
     }
 }

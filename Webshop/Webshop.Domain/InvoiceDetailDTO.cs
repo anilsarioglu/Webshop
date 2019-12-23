@@ -10,7 +10,7 @@ namespace Webshop.Domain
     {
         public int Id { get; set; }
         public int Pieces { get; set; }
-        public InvoiceDTO InvoiceDto { get; set; }
-        public int InvoiceId { get; set; }    
+        public int CourseId { get; set; }
+        public int InvoiceId { get; set; }
     }
 }

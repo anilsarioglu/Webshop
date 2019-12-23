@@ -165,15 +165,13 @@ namespace Webshop.UI_MVC.Controllers
 
             foreach (ShoppingCart item in cart)
             {
-                InvoiceDetail detail = new InvoiceDetail(item.Quantity);
+                InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id, invoice.Id);
                 invoiceDetails.Add(detail);
                 //invoice.InvoiceDetails.Add(detail);
                 APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("detail", detail);
             }
-
-            //invoice.InvoiceDetails = invoiceDetails;
             
-            invoice.InvoiceDetails = invoiceDetails;
+            //invoice.InvoiceDetails = invoiceDetails;
             APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
 

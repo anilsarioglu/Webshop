@@ -5,13 +5,13 @@ using System.Data.Entity.Migrations.Infrastructure;
 using System.Resources;
 
 [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-public sealed partial class CreateASPIdentity : IMigrationMetadata
+public sealed partial class CreateDB1 : IMigrationMetadata
 {
-    private readonly ResourceManager Resources = new ResourceManager(typeof(CreateASPIdentity));
+    private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB1));
     
     string IMigrationMetadata.Id
     {
-        get { return "201912131047128_CreateASPIdentity"; }
+        get { return "201912230006187_CreateDB1"; }
     }
     
     string IMigrationMetadata.Source

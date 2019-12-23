@@ -6,20 +6,18 @@ namespace Webshop.DAL.Entit
     {
         public int Id { get; set; }
         public int Pieces { get; set; }
-        public Invoice Invoice { get; set; }
+        public int CourseId { get; set; }
         public int InvoiceId { get; set; }
-        [Required]
-        public Course Course { get; set; }
 
         public InvoiceDetail()
         {
-            
         }
-        public InvoiceDetail(int pieces, Invoice invoice, Course course)
+
+        public InvoiceDetail(int pieces, int courseId, int invoiceId)
         {
-            Pieces = pieces;
-            Invoice = invoice;
-            Course = course;
+            this.Pieces = pieces;
+            this.CourseId = courseId;
+            this.InvoiceId = invoiceId;
         }
     }
 }

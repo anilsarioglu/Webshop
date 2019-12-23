@@ -13,9 +13,6 @@ namespace Webshop.DAL.Configuration
             Property(i => i.IsPaid).HasColumnType("Bit");
             Property(i => i.InvoiceCode).HasColumnType("Varchar");
             Property(i => i.Deleted).HasColumnType("Bit");
-
-            this.HasMany(i => i.InvoiceDetails)
-                .WithRequired(i => i.Invoice);
         }
     }
 }
