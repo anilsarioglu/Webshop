@@ -12,8 +12,6 @@ namespace Webshop.DAL.Configuration
             Property(c => c.Name).HasMaxLength(100);
             Property(c => c.Price).HasPrecision(8, 2);
 
-            HasOptional(c => c.InvoiceDetail)
-                .WithRequired(i => i.Course);
         }
     }
 }

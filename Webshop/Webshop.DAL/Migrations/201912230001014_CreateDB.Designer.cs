@@ -11,7 +11,7 @@ public sealed partial class CreateDB : IMigrationMetadata
     
     string IMigrationMetadata.Id
     {
-        get { return "201912111418055_CreateDB"; }
+        get { return "201912230001014_CreateDB"; }
     }
     
     string IMigrationMetadata.Source
