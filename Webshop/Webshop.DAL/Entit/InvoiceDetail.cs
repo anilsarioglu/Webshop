@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Webshop.DAL.Entit
 {
@@ -7,6 +7,7 @@ namespace Webshop.DAL.Entit
         public int Id { get; set; }
         public int Pieces { get; set; }
         public Invoice Invoice { get; set; }
+        public int InvoiceId { get; set; }
         [Required]
         public Course Course { get; set; }
 

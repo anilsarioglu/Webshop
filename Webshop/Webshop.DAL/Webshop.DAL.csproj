@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201912212226063_CreateDB1.designer.cs">
       <DependentUpon>201912212226063_CreateDB1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912221949105_FixInvoiceDetal.cs" />
+    <Compile Include="Migrations\201912221949105_FixInvoiceDetal.designer.cs">
+      <DependentUpon>201912221949105_FixInvoiceDetal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CourseRepo.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912212226063_CreateDB1.resx">
       <DependentUpon>201912212226063_CreateDB1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912221949105_FixInvoiceDetal.resx">
+      <DependentUpon>201912221949105_FixInvoiceDetal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
