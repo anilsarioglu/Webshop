@@ -165,10 +165,10 @@ namespace Webshop.UI_MVC.Controllers
 
             foreach (ShoppingCart item in cart)
             {
-                InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id, invoice.Id);
+                InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
                 invoiceDetails.Add(detail);
                 //invoice.InvoiceDetails.Add(detail);
-                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("detail", detail);
+                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
             }
             
             //invoice.InvoiceDetails = invoiceDetails;
@@ -176,7 +176,7 @@ namespace Webshop.UI_MVC.Controllers
 
 
       string mail = user.Email;
-            service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
+            //service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
 
             return RedirectToAction("Success", "Purchase");
         }

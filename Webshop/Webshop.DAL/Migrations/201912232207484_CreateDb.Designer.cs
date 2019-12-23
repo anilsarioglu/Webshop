@@ -6,14 +6,14 @@ namespace Webshop.DAL.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.3.0")]
-    public sealed partial class SeedProductPrice : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
+    public sealed partial class CreateDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedProductPrice));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911221419592_SeedProductPrice"; }
+            get { return "201912232207484_CreateDb"; }
         }
         
         string IMigrationMetadata.Source

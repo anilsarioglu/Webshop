@@ -16,10 +16,12 @@ namespace Webshop.BL
     {
         private UnitOfWork _uow;
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
+        private InvoiceLogic _invoiceLogic;
         public InvoiceDetailLogic(UnitOfWork uow)
         {
             _uow = uow;
+            _invoiceLogic = new InvoiceLogic(uow);
+
         }
 
         public InvoiceDetailDTO Create(InvoiceDetailDTO c)
@@ -27,6 +29,8 @@ namespace Webshop.BL
             try
             {
                 var invoiceDetail = MapDTO.Map<InvoiceDetail, InvoiceDetailDTO>(c);
+                InvoiceDTO invoice = _invoiceLogic.GetAll().Last();
+                invoiceDetail.InvoiceId = invoice.Id;
                 _uow.InvoiceDetailRepo.Add(invoiceDetail);
                 _uow.Save();
 

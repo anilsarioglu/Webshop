@@ -18,11 +18,11 @@ namespace Webshop.UI_MVC.Models.Webshop
         {
         }
 
-        public InvoiceDetail(int pieces, int courseId, int invoiceId)
+        public InvoiceDetail(int pieces, int courseId)
         {
             this.Pieces = pieces;
             this.CourseId = courseId;
-            this.InvoiceId = invoiceId;
+            
         }
     }
 }

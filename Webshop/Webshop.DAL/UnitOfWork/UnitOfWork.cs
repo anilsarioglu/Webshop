@@ -1,5 +1,8 @@
-﻿using System;
+using System;
+using System.Data.Entity.Core.Objects;
+using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.Domain;
 
 
 namespace Webshop.DAL.UnitOfWork
@@ -93,9 +96,9 @@ namespace Webshop.DAL.UnitOfWork
             }
         }
 
-
         public void Save()
         {
+          
             context.SaveChanges();
         }
 
