@@ -9,6 +9,7 @@ namespace Webshop.DAL.Entit
         public Invoice Invoice { get; set; }
         [Required]
         public Course Course { get; set; }
+
         public InvoiceDetail()
         {
             
