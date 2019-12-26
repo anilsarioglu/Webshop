@@ -1,6 +1,7 @@
 ﻿namespace Webshop.DAL.Migrations
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -18,6 +19,17 @@
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
+
+            SeedList(DataHolder.GetInvoices(), context._Invoices);
+            SeedList(DataHolder.GetProductPrices(), context._ProductPrices);
+        }
+
+        private void SeedList<TEntity>(List<TEntity> items, DbSet<TEntity> dbSet) where TEntity : class
+        {
+            foreach (TEntity item in items)
+            {
+                dbSet.AddOrUpdate(item);
+            }
         }
     }
 }
