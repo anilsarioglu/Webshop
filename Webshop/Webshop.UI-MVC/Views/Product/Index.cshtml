@@ -44,7 +44,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })|
-            <a href="@Url.Action("Buy", "ShoppinCart", new { id = item.Id })" class="btn btn-primary">Bestellen</a>
+            <a href="@Url.Action("Buy", "ShoppingCart", new { id = item.Id } , null)" class="btn btn-primary">Bestellen</a>
         </td>
     </tr>
 }

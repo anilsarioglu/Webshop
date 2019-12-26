@@ -18,20 +18,23 @@
         else
         {
             <thead class="thead-dark">
-                <tr>
-                    <th data-defaultsign="_19">
-                        Opleiding
-                    </th>
-                    <th data-defaultsign="_19">
-                        Aantal 
-                    </th>
-                    <th data-defaultsign="_19">
-                        Prijs
-                    </th>
-                    <th>
-                        Verwijderen
-                    </th>
-                </tr>
+            <tr>
+                <th data-defaultsign="_19">
+                    Product
+                </th>
+                <th data-defaultsign="_19">
+                    Opleiding
+                </th>
+                <th data-defaultsign="_19">
+                    Aantal
+                </th>
+                <th data-defaultsign="_19">
+                    Prijs
+                </th>
+                <th>
+                    Verwijderen
+                </th>
+            </tr>
             </thead>
 
             foreach (ShoppingCart item in (List<ShoppingCart>)Session["cart"])
@@ -39,6 +42,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Course.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
                 </td>
 
                 <td>

@@ -18,6 +18,7 @@ namespace Webshop.UI_MVC.Controllers
         public ActionResult Buy(int id)
         {
             Course courses = APIConsumer<Course>.GetObject("course", id.ToString());
+            Product products = APIConsumer<Product>.GetObject("product", id.ToString());
 
             if (courses != null)
             {
@@ -25,7 +26,7 @@ namespace Webshop.UI_MVC.Controllers
                 {
 //                    List<ShoppingCard> cart = Session["cart"];
                     List<ShoppingCart> cart = new List<ShoppingCart>();
-                    cart.Add(new ShoppingCart() {Course = courses, Quantity = 1});
+                    cart.Add(new ShoppingCart() {Course = courses, Product = products,Quantity = 1});
                     Session["cart"] = cart;
                     Session["count"] = 1;
                 }
@@ -42,7 +43,7 @@ namespace Webshop.UI_MVC.Controllers
                     else
                     {
 
-                        cart.Add(new ShoppingCart() { Course = courses, Quantity = 1});
+                        cart.Add(new ShoppingCart() { Course = courses, Product = products,Quantity = 1});
                         Session["count"] = Convert.ToInt32(Session["count"]) + 1;
 
                     }
