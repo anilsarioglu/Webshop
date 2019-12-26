@@ -6,6 +6,10 @@
 }
 
 <h2>Kies een opleiding</h2>
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Create new course", "Create", "Course")
+}
 <div class="card-deck">
     <div class="row">
         @foreach (var item in Model)

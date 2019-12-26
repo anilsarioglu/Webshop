@@ -31,14 +31,14 @@ namespace Webshop.BL
             // Plug in your email service here to send an email.
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-            mail.From = new MailAddress("vladik1719@hotmail.com");
+            mail.From = new MailAddress("apschoolnet@gmail.com");
             mail.To.Add(email);
             mail.Subject = subject;
             mail.Body = body;
             mail.Attachments.Add(new Attachment(@"\Invoices\Bestelling.pdf"));
 
             SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("vladik1719@hotmail.com", "19951902Vl");
+            SmtpServer.Credentials = new System.Net.NetworkCredential("apschoolnet@gmail.com", "apNet123");
             SmtpServer.EnableSsl = true;
 
             SmtpServer.Send(mail);

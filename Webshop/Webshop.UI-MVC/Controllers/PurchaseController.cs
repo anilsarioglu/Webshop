@@ -159,7 +159,9 @@ namespace Webshop.UI_MVC.Controllers
             doc.Save(@"\Invoices\Bestelling.pdf");
             //Close the document
             doc.Close(true);
+
             Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString());
+            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
 
@@ -167,16 +169,11 @@ namespace Webshop.UI_MVC.Controllers
             {
                 InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
                 invoiceDetails.Add(detail);
-                //invoice.InvoiceDetails.Add(detail);
                 APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
             }
-            
-            //invoice.InvoiceDetails = invoiceDetails;
-            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
-
-      string mail = user.Email;
-            //service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
+            string mail = user.Email;
+            service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
 
             return RedirectToAction("Success", "Purchase");
         }
