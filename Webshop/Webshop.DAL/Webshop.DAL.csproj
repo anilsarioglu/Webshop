@@ -71,17 +71,9 @@
     <Compile Include="Entit\ProductPrice.cs" />
     <Compile Include="Entit\Product.cs" />
     <Compile Include="Entit\Vat.cs" />
-    <Compile Include="Migrations\201912111418055_CreateDB.cs" />
-    <Compile Include="Migrations\201912111418055_CreateDB.designer.cs">
-      <DependentUpon>201912111418055_CreateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912131047128_CreateASPIdentity.cs" />
-    <Compile Include="Migrations\201912131047128_CreateASPIdentity.designer.cs">
-      <DependentUpon>201912131047128_CreateASPIdentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912212226063_CreateDB1.cs" />
-    <Compile Include="Migrations\201912212226063_CreateDB1.designer.cs">
-      <DependentUpon>201912212226063_CreateDB1.cs</DependentUpon>
+    <Compile Include="Migrations\201912260238413_Create.cs" />
+    <Compile Include="Migrations\201912260238413_Create.designer.cs">
+      <DependentUpon>201912260238413_Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,14 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912111418055_CreateDB.resx">
-      <DependentUpon>201912111418055_CreateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912131047128_CreateASPIdentity.resx">
-      <DependentUpon>201912131047128_CreateASPIdentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912212226063_CreateDB1.resx">
-      <DependentUpon>201912212226063_CreateDB1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201912260238413_Create.resx">
+      <DependentUpon>201912260238413_Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

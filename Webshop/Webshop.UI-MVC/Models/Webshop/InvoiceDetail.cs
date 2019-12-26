@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,19 +10,19 @@ namespace Webshop.UI_MVC.Models.Webshop
     {
         public int Id { get; set; }
         public int Pieces { get; set; }
-        public virtual Invoice Invoice { get; set; }
-        [Required]
-        public Course Course { get; set; }
+        public int CourseId { get; set; }
+        public int InvoiceId { get; set; }
+
 
         public InvoiceDetail()
         {
-
         }
-        public InvoiceDetail(int pieces, Invoice invoice, Course course)
+
+        public InvoiceDetail(int pieces, int courseId)
         {
-            Pieces = pieces;
-            Invoice = invoice;
-            Course = course;
+            this.Pieces = pieces;
+            this.CourseId = courseId;
+            
         }
     }
 }

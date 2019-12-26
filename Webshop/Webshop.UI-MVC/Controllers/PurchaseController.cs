@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -159,23 +159,18 @@ namespace Webshop.UI_MVC.Controllers
             doc.Save(@"\Invoices\Bestelling.pdf");
             //Close the document
             doc.Close(true);
+
             Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString());
+            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
 
             foreach (ShoppingCart item in cart)
             {
-                InvoiceDetail detail = new InvoiceDetail(item.Quantity, invoice, item.Course);
+                InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
                 invoiceDetails.Add(detail);
-                //invoice.InvoiceDetails.Add(detail);
-                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("detail", detail);
+                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
             }
-
-            //invoice.InvoiceDetails = invoiceDetails;
-            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
-            Invoice getInvoice = APIConsumer<Models.Webshop.Invoice>.GetObject("invoice", (invoice.Id).ToString());
-            getInvoice.InvoiceDetails = invoiceDetails;
-            APIConsumer<Models.Webshop.Invoice>.EditObject("invoice", invoice.Id.ToString(), invoice);
 
             string mail = user.Email;
             service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");

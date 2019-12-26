@@ -11,8 +11,9 @@ namespace Webshop.UI_MVC.Models.Webshop
         public DateTime Date { get; set; }
         public bool IsPaid { get; set; }
         public string InvoiceCode { get; set; }
-        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public bool Deleted { get; set; }
+        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+
 
         public Invoice()
         {

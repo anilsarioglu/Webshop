@@ -39,16 +39,29 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create(Product product)
         {
-            try
+            if (product.EndDate < product.StartDate)
             {
-                // TODO: Add insert logic here
-                APIConsumer<Models.Webshop.Product>.AddObject(PATH, product);
-                return RedirectToAction("Index");
+                ModelState.AddModelError("EndDate", "Einddatum moet groter dan startdatum zijn");
             }
-            catch
+            else if (product.StartDate < DateTime.Today)
             {
-                return View();
+                ModelState.AddModelError("StartDate", "Startdatum moet groter of gelijk zijn dan vandaag");
             }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    APIConsumer<Models.Webshop.Product>.AddObject(PATH, product);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+
+            return View();
         }
 
         // GET: Product/Edit/5
@@ -63,16 +76,30 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(Product product)
         {
-            try
+            if (product.EndDate < product.StartDate)
             {
-                // TODO: Add update logic here
-                APIConsumer<Models.Webshop.Product>.EditObject(PATH, product.Id.ToString(), product);
-                return RedirectToAction("Index");
+                ModelState.AddModelError("EndDate", "Einddatum moet groter dan startdatum zijn");
             }
-            catch
+            else if (product.StartDate < DateTime.Today)
             {
-                return View();
+                ModelState.AddModelError("StartDate", "Startdatum moet groter dan dag van vandaag zijn");
             }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // TODO: Add update logic here
+                    APIConsumer<Models.Webshop.Product>.EditObject(PATH, product.Id.ToString(), product);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+
+            return View();
         }
 
         // GET: Product/Delete/5
@@ -87,7 +114,7 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(Product product)
         {
-       try
+            try
             {
                 // TODO: Add delete logic here
                 APIConsumer<Models.Webshop.Product>.DeleteObject(PATH, (product.Id).ToString(), product);
