@@ -10,6 +10,7 @@ using System.Drawing;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Syncfusion.Pdf.Grid;
+using Webshop.BL;
 using Webshop.UI_MVC.Models;
 using Webshop.UI_MVC.Models.Webshop;
 
@@ -36,6 +37,9 @@ namespace Webshop.UI_MVC.Controllers
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext()
                 .GetUserManager<ApplicationUserManager>()
                 .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+
+            Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString());
+            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
             Webshop.BL.EmailService service = new Webshop.BL.EmailService();
             PdfDocument doc = new PdfDocument();
@@ -84,7 +88,9 @@ namespace Webshop.UI_MVC.Controllers
             graphics.DrawString("Totaal te betalen", arialRegularFont, whiteBrush, headerAmountBounds,
                 new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle));
 
-            PdfTextElement textElement = new PdfTextElement("Factuurnr.: *hier komt factuurnr.*", arialRegularFont);
+            List<Invoice> invoices = APIConsumer<Invoice>.GetAPI("invoice").ToList();
+
+            PdfTextElement textElement = new PdfTextElement("Factuurnr.: " + invoices.Count, arialRegularFont);
 
             PdfLayoutResult layoutResult = textElement.Draw(page, new PointF(headerAmountBounds.X - margin, 120));
 
@@ -160,15 +166,10 @@ namespace Webshop.UI_MVC.Controllers
             //Close the document
             doc.Close(true);
 
-            Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString());
-            APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
-
-            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
 
             foreach (ShoppingCart item in cart)
             {
                 InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
-                invoiceDetails.Add(detail);
                 APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
             }
 
