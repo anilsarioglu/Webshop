@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,7 +19,11 @@ namespace Webshop.UI_MVC.Controllers
         public ActionResult Buy(int id)
         {
             Course courses = APIConsumer<Course>.GetObject("course", id.ToString());
-            Product products = APIConsumer<Product>.GetObject("product", id.ToString());
+            IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
+            Product product = APIConsumer<Product>.GetObject("product", id.ToString());
+            List<Product> products1 = products.ToList();
+            Product product2 = products1.Where(i => i.StartDate == product.StartDate && i.Id == product.Id).First();
+            
 
             if (courses != null)
             {
@@ -26,7 +31,8 @@ namespace Webshop.UI_MVC.Controllers
                 {
 //                    List<ShoppingCard> cart = Session["cart"];
                     List<ShoppingCart> cart = new List<ShoppingCart>();
-                    cart.Add(new ShoppingCart() {Course = courses, Product = products,Quantity = 1});
+                    cart.Add(new ShoppingCart() {Course = courses, Product = product2
+                        ,Quantity = 1});
                     Session["cart"] = cart;
                     Session["count"] = 1;
                 }
@@ -43,7 +49,7 @@ namespace Webshop.UI_MVC.Controllers
                     else
                     {
 
-                        cart.Add(new ShoppingCart() { Course = courses, Product = products,Quantity = 1});
+                        cart.Add(new ShoppingCart() { Course = courses, Product = product2,Quantity = 1});
                         Session["count"] = Convert.ToInt32(Session["count"]) + 1;
 
                     }
@@ -104,7 +110,14 @@ namespace Webshop.UI_MVC.Controllers
 
             for (int i = 0; i < cart.Count; i++)
                 if (cart[i].Course.Id.Equals(id))
+                {
                     return i;
+                }
+                else if (cart[i].Product.Id.Equals(id))
+                {
+                    return i;
+                }
+
             return -1;
         }
     }
