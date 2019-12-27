@@ -55,13 +55,13 @@ namespace Webshop.UI_MVC.Controllers
                 if (Session["cart"] == null)
                 {
                     List<ShoppingCart> cart = new List<ShoppingCart>();
-                    cart.Add(new ShoppingCart() { Product = products, Quantity = 1 });
+                    cart.Add(new ShoppingCart() {Product = products, Quantity = 1});
                     Session["cart"] = cart;
                     Session["count"] = 1;
                 }
                 else
                 {
-                    List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+                    List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
 
                     int index = ItemExists(id, true);
                     if (index != -1)
@@ -71,7 +71,7 @@ namespace Webshop.UI_MVC.Controllers
                     }
                     else
                     {
-                        cart.Add(new ShoppingCart() { Product = products, Quantity = 1 });
+                        cart.Add(new ShoppingCart() {Product = products, Quantity = 1});
                         Session["count"] = Convert.ToInt32(Session["count"]) + 1;
                     }
 
@@ -86,7 +86,7 @@ namespace Webshop.UI_MVC.Controllers
         {
             if (getBool == false)
             {
-                List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+                List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
                 int index = ItemExists(id, false);
                 if (cart[index].Quantity > 1)
                 {
@@ -103,7 +103,7 @@ namespace Webshop.UI_MVC.Controllers
             }
             else
             {
-                List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+                List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
                 int index = ItemExists(id, true);
                 if (cart[index].Quantity > 1)
                 {
@@ -126,7 +126,7 @@ namespace Webshop.UI_MVC.Controllers
         {
             if (getBool == false)
             {
-                List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+                List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
                 int index = ItemExists(id, false);
                 Session["cart"] = cart;
 
@@ -144,7 +144,7 @@ namespace Webshop.UI_MVC.Controllers
             }
             else
             {
-                List<ShoppingCart> cart = (List<ShoppingCart>)Session["cart"];
+                List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
                 int index = ItemExists(id, true);
                 Session["cart"] = cart;
 
@@ -160,6 +160,7 @@ namespace Webshop.UI_MVC.Controllers
 
                 cart.RemoveAt(index);
             }
+
             return RedirectToAction("Index");
         }
 
@@ -167,21 +168,29 @@ namespace Webshop.UI_MVC.Controllers
         {
             List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
 
-            for (int i = 1; i < cart.Count; i++)
+            for (int i = 0; i < cart.Count; i++)
+            {
                 if (isProduct == false)
                 {
-                    if (cart[i].Course.Id.Equals(id))
+                    if (cart[i].Product == null)
                     {
-                        return i;
+                        if (cart[i].Course.Id.Equals(id))
+                        {
+
+                            return i;
+                        }
                     }
                 }
-                else
-                {
-                    if (cart[i].Product.Id.Equals(id))
+                else {
+                    if (cart[i].Course == null)
                     {
-                        return i;
+                        if (cart[i].Product.Id.Equals(id))
+                        {
+                            return i;
+                        }
                     }
                 }
+            }
 
             return -1;
         }
