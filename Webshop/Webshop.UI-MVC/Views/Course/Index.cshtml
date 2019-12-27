@@ -29,7 +29,7 @@
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Name)</p>
                         @if (!User.IsInRole("Admin"))
                         {
-                        <a href="@Url.Action(" Buy", "ShoppingCart" , new {id=item.Id, getBool=false})" class="btn btn-primary">
+                        <a href="@Url.Action("Buy", "ShoppingCart" , new {id=item.Id, getBool=false})" class="btn btn-primary">
                             <img src="../../shopping-cart(1).svg" width="25" height="25" /> &nbsp;
                             In winkelmandje
                         </a>

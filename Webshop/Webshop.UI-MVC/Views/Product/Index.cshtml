@@ -55,7 +55,7 @@
             @if (!User.IsInRole("Admin"))
             {
                 <td>
-                    <a href="@Url.Action("BuyProduct", "ShoppingCart", new {id = item.Id})" class="btn btn-primary">Bestellen</a>
+                    <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id, getBool = true})" class="btn btn-primary">Bestellen</a>
                 </td>
             }
 
