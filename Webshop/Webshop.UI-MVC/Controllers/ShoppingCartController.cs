@@ -22,7 +22,7 @@ namespace Webshop.UI_MVC.Controllers
             IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
             Product product = APIConsumer<Product>.GetObject("product", id.ToString());
             List<Product> products1 = products.ToList();
-            Product product2 = products1.Where(i => i.StartDate == product.StartDate && i.Id == product.Id).First();
+            Product product2 = products1.First(i => i.StartDate == product.StartDate && i.Id == product.Id);
             
 
             if (courses != null)
