@@ -168,22 +168,31 @@ namespace Webshop.UI_MVC.Controllers
             List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
 
             for (int i = 1; i < cart.Count; i++)
-                if (isProduct == false)
+                try
                 {
-                    if (cart[i].Course.Id.Equals(id))
+                    if (isProduct == false)
                     {
-                        return i;
+                        if (cart[i].Course.Id.Equals(id))
+                        {
+                            return i;
+                        }
                     }
-                }
-                else
-                {
-                    if (cart[i].Product.Id.Equals(id))
+                    else
                     {
-                        return i;
+                        if (cart[i].Product.Id.Equals(id))
+                        {
+                            return i;
+                        }
                     }
-                }
 
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw new Exception(e.Message);
+                }
             return -1;
+
         }
     }
 }
