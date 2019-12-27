@@ -18,12 +18,14 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
             return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // GET: Course/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             
@@ -33,6 +35,7 @@ namespace Webshop.UI_MVC.Controllers
         // POST: Course/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Course course)
         {
             try
@@ -48,6 +51,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             return View(APIConsumer<Course>.GetObject("course", id.ToString()));
@@ -56,6 +60,7 @@ namespace Webshop.UI_MVC.Controllers
         // POST: Course/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Course course)
         {
             try
@@ -71,6 +76,7 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             return View(APIConsumer<Course>.GetObject("course" , id.ToString()));
@@ -79,6 +85,7 @@ namespace Webshop.UI_MVC.Controllers
         // POST: Course/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(Course course)
         {
             try

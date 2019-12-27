@@ -1,8 +1,12 @@
-using System.Data.Entity.Migrations;
-using Webshop.DAL;
-using Webshop.DAL.Entit;
+﻿namespace Webshop.DAL.Migrations
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
-internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.WebshopContext>
     {
         public Configuration()
         {
@@ -15,21 +19,17 @@ internal sealed class Configuration : DbMigrationsConfiguration<Webshop.DAL.Webs
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            foreach (Invoice invoice in DataHolder.GetInvoices())
-            {
-                context._Invoices.Add(invoice);
-            }
 
-            foreach(Product product in DataHolder.GetProducts())
-            {
-                context._Products.Add(product);
-            }
+            SeedList(DataHolder.GetInvoices(), context._Invoices);
+            SeedList(DataHolder.GetProductPrices(), context._ProductPrices);
+        }
 
-            foreach (ProductPrice productPrice in DataHolder.GetProductPrices())
+        private void SeedList<TEntity>(List<TEntity> items, DbSet<TEntity> dbSet) where TEntity : class
+        {
+            foreach (TEntity item in items)
             {
-                context._ProductPrices.Add(productPrice);
+                dbSet.AddOrUpdate(item);
             }
-
-            context.SaveChanges();
+        }
     }
 }

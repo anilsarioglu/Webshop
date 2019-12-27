@@ -10,7 +10,7 @@ using Webshop.UI_MVC.Models;
 
 namespace Webshop.UI_MVC.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
 

@@ -100,7 +100,6 @@
     <Compile Include="ProductPriceLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EmailService.cs" />
-    <Compile Include="Services\GeneratePDF.cs" />
     <Compile Include="Services\MapDTO.cs" />
     <Compile Include="VatLogic.cs" />
   </ItemGroup>

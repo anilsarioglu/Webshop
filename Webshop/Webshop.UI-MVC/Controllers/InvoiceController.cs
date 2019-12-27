@@ -12,11 +12,32 @@ namespace Webshop.UI_MVC.Controllers
     {
         private const string PATH = "invoice";
         private IEnumerable<Invoice> invoices = APIConsumer<Invoice>.GetAPI("invoice");
+        private List<Invoice> activeInvoices = new List<Invoice>();
+        private List<Invoice> deletedInvoices = new List<Invoice>();
 
         // GET: Invoice
         public ActionResult Index()
         {
-            return View(invoices);
+            foreach (Invoice item in invoices)
+            {
+                if (item.Deleted == false)
+                {
+                    activeInvoices.Add(item);
+                }
+            }
+            return View(activeInvoices);
+        }
+
+        public ActionResult DeletedIndex()
+        {
+            foreach (Invoice item in invoices)
+            {
+                if (item.Deleted == true)
+                {
+                    deletedInvoices.Add(item);
+                }
+            }
+            return View(deletedInvoices);
         }
 
         // GET: Invoice/Details/5
@@ -50,7 +71,12 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Invoice/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(APIConsumer<Invoice>.GetObject(PATH, id.ToString()));
+            Invoice invoice = APIConsumer<Invoice>.GetObject(PATH, id.ToString());
+            if (invoice.Deleted == false)
+            {
+                return View(invoice);
+            }
+            else return RedirectToAction("DeletedIndex");
         }
 
         // POST: Invoice/Edit/5
@@ -72,7 +98,12 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Invoice/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(APIConsumer<Invoice>.GetObject(PATH, id.ToString()));
+            Invoice invoice = APIConsumer<Invoice>.GetObject(PATH, id.ToString());
+            if (invoice.Deleted == false)
+            {
+                return View(invoice);
+            }
+            else return RedirectToAction("DeletedIndex");
         }
 
         // POST: Invoice/Delete/5
@@ -82,7 +113,9 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
                 // TODO: Add delete logic here
-                APIConsumer<Models.Webshop.Invoice>.DeleteObject(PATH, (invoice.Id).ToString(), invoice);
+                invoice = APIConsumer<Invoice>.GetObject(PATH, (invoice.Id).ToString());
+                invoice.Deleted = true;
+                APIConsumer<Models.Webshop.Invoice>.EditObject(PATH, invoice.Id.ToString(), invoice);
                 return RedirectToAction("Index");
             }
             catch

@@ -13,6 +13,8 @@ namespace Webshop.Domain
             public bool IsPaid { get; set; }
             public string InvoiceCode { get; set; }
             public ICollection<InvoiceDetailDTO> InvoiceDetails { get; set; }
+            public bool Deleted { get; set; }
+
             public InvoiceDTO()
             {
 

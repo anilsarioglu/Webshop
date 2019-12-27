@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -20,8 +20,6 @@ namespace Webshop.DAL.Repositories
             try
             {
                 _webshopContext._InvoiceDetails.Add(t);
-                _webshopContext._Invoices.Attach(t.Invoice);
-                _webshopContext.Entry(t.Invoice).State = EntityState.Unchanged;
                 return t;
             }
             catch (Exception e)
@@ -50,8 +48,7 @@ namespace Webshop.DAL.Repositories
             try
             {
                 _webshopContext._InvoiceDetails.AddOrUpdate(t);
-                _webshopContext._Invoices.Attach(t.Invoice);
-                _webshopContext.Entry(t.Invoice).State = EntityState.Modified;
+                _webshopContext.Entry(t).State = EntityState.Modified;
                 return t;
             }
             catch (Exception e)

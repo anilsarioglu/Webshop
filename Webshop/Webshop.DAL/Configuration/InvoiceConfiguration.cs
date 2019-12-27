@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Configuration
@@ -12,9 +12,7 @@ namespace Webshop.DAL.Configuration
             Property(i => i.Date).HasColumnType("Date");
             Property(i => i.IsPaid).HasColumnType("Bit");
             Property(i => i.InvoiceCode).HasColumnType("Varchar");
-
-            this.HasMany(i => i.InvoiceDetails)
-                .WithRequired(i => i.Invoice);
+            Property(i => i.Deleted).HasColumnType("Bit");
         }
     }
 }

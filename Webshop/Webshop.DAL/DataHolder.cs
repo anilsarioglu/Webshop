@@ -11,9 +11,9 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Objective C", 50, null, null),
-                new Course("Ionic", 50, null, null),
-                new Course("Android Studio", 20, null, null),
+                new Course("Objective C", 50, null),
+                new Course("Ionic", 50, null),
+                new Course("Android Studio", 20, null),
             };
 
             return courses;
@@ -23,9 +23,9 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Unit testing", 50, null, null),
-                new Course("Functional testing", 15, null, null),
-                new Course("Regression testing", 15, null, null),
+                new Course("Unit testing", 50, null),
+                new Course("Functional testing", 15, null),
+                new Course("Regression testing", 15, null),
             };
 
             return courses;
@@ -35,9 +35,9 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Blazor", 50, null, null),
-                new Course("History of .NET", 10, null, null),
-                new Course("NHibernate", 30, null, null),
+                new Course("Blazor", 50, null),
+                new Course("History of .NET", 10, null),
+                new Course("NHibernate", 30, null),
             };
 
             return courses;
@@ -47,9 +47,9 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Entity Framework", 20, null, null),
-                new Course("Web API", 30, null, null),
-                new Course("MVC", 30, null, null),
+                new Course("Entity Framework", 20, null),
+                new Course("Web API", 30, null),
+                new Course("MVC", 30, null),
             };
 
             return courses;
@@ -59,9 +59,9 @@ namespace Webshop.DAL
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Sass", 20, null, null),
-                new Course("Vue", 20, null, null),
-                new Course("Bootstrap", 30, null, null),
+                new Course("Sass", 20, null),
+                new Course("Vue", 20, null),
+                new Course("Bootstrap", 30, null),
             };
 
             return courses;
@@ -71,9 +71,9 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(7, null, GetFrontEndCourses().ElementAt(0)),
-                new InvoiceDetail(9, null, GetFrontEndCourses().ElementAt(1)),
-                new InvoiceDetail(6, null, GetFrontEndCourses().ElementAt(2)),
+                new InvoiceDetail(7, GetFrontEndCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(9, GetFrontEndCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(6, GetFrontEndCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
@@ -83,9 +83,9 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(15, null, GetBasicsCourses().ElementAt(0)),
-                new InvoiceDetail(15, null, GetBasicsCourses().ElementAt(1)),
-                new InvoiceDetail(10, null, GetBasicsCourses().ElementAt(2)),
+                new InvoiceDetail(15, GetBasicsCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(15, GetBasicsCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(10, GetBasicsCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
@@ -95,9 +95,9 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(5, null, GetAdvancedCourses().ElementAt(0)),
-                new InvoiceDetail(11, null, GetAdvancedCourses().ElementAt(1)),
-                new InvoiceDetail(6, null, GetAdvancedCourses().ElementAt(2)),
+                new InvoiceDetail(5, GetAdvancedCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(11, GetAdvancedCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(6, GetAdvancedCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
@@ -107,9 +107,9 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(10, null, GetTestingCourses().ElementAt(0)),
-                new InvoiceDetail(3, null, GetTestingCourses().ElementAt(1)),
-                new InvoiceDetail(2, null, GetTestingCourses().ElementAt(2)),
+                new InvoiceDetail(10, GetTestingCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(3, GetTestingCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(2, GetTestingCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
@@ -119,9 +119,9 @@ namespace Webshop.DAL
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(7, null, GetMobileCourses().ElementAt(0)),
-                new InvoiceDetail(15, null, GetMobileCourses().ElementAt(1)),
-                new InvoiceDetail(3, null, GetMobileCourses().ElementAt(2)),
+                new InvoiceDetail(7, GetMobileCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(15, GetMobileCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(3, GetMobileCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
@@ -131,11 +131,11 @@ namespace Webshop.DAL
         {
             List<Invoice> invoices = new List<Invoice>
             {
-                new Invoice(DateTime.Now, true, "randomCode123", GetFrontEndInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "random123", GetBasicsInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "Code123", GetAdvancedInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "randomCode", GetTestingInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "randomCode548", GetMobileInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false, "randomCode123", GetFrontEndInvoiceDetails()),
+                new Invoice(DateTime.Now, false, false, "random123", GetBasicsInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false, "Code123", GetAdvancedInvoiceDetails()),
+                new Invoice(DateTime.Now, true, false, "randomCode", GetTestingInvoiceDetails()),
+                new Invoice(DateTime.Now, false, false, "randomCode548", GetMobileInvoiceDetails()),
             };
 
             return invoices;
