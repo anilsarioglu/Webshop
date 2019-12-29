@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - dotNet Academy Webshop</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="icon" href="https://www.dotnetacademy.be/wp-content/themes/dotnetacademy/assets/images/compressed/favicon.ico">
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -39,7 +40,8 @@
                 }
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if(!User.IsInRole("Admin")){
+                @if (!User.IsInRole("Admin"))
+                {
                     <li>
                         <a href="@Url.Action("Index", "ShoppingCart")">
                             <img src="../../shopping-cart(1).svg" alt="SHopping cart" width="25" height="25"><span class='badge badge-warning' id='lblCartCount'>@Session["count"]</span>
@@ -48,7 +50,7 @@
                 }
                 <li>@Html.Partial("_LoginPartial")</li>
             </ul>
-            
+
         </div>
     </div>
 </div>
@@ -56,7 +58,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <p>&copy; @DateTime.Now.Year - dotNet Academy Webshop</p>
     </footer>
 </div>
 
