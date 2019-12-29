@@ -8,6 +8,7 @@ using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InvoiceController : Controller
     {
         private const string PATH = "invoice";

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Webshop.UI_MVC.Models;
 
 namespace Webshop.UI_MVC.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -101,6 +102,50 @@ namespace Webshop.UI_MVC.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        // GET: User/Details
+        public ActionResult Details()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userid = User.Identity.GetUserId();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+                ApplicationUser user = userManager.FindByIdAsync(userid).Result;
+
+                return View(user);
+            }
+            else return RedirectToAction("Login", "Account");
+        }
+
+        //GET: Users/Edit/{id}
+        public ActionResult Edit(string id)
+        {
+            ApplicationUser user = context.Users.Find(id);
+
+            return View(user);
+        }
+
+        //POST: Users/Edit/{id}
+        [HttpPost]
+        public ActionResult Edit(ApplicationUser user)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    context.Entry(user).State = EntityState.Modified;
+                    context.SaveChanges();
+                    return RedirectToAction("Details", "User");
+                }
+
+                return View(user);
+            }
+            catch
+            {
+                return View(user);
+            }
         }
 
         private void AddErrors(IdentityResult result)
