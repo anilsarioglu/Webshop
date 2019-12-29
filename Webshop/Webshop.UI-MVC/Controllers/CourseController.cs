@@ -28,7 +28,8 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            
+            IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
+            ViewBag.products = products;
             return View();
         }
 
@@ -40,7 +41,8 @@ namespace Webshop.UI_MVC.Controllers
         {
             try
             {
-        // TODO: Add insert logic here
+                string PId = Request.Form["products"];
+                course.ProductId = int.Parse(PId);
                 APIConsumer<Models.Webshop.Course>.AddObject("course", course);
                 return RedirectToAction("Index");
             }
