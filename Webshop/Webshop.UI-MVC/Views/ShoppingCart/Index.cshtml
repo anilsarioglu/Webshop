@@ -1,4 +1,5 @@
-﻿@using Webshop.UI_MVC.Models.Webshop
+﻿@using Microsoft.Ajax.Utilities
+@using Webshop.UI_MVC.Models.Webshop
 @model IEnumerable<Webshop.UI_MVC.Models.Webshop.ShoppingCart>
 
 @{
@@ -36,80 +37,82 @@
 
             foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
             {
-                <tr>
-                    @if (item.Product == null)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Course.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
-                            <a href="@Url.Action("Buy", new {id = item.Course.Id, getBool = false})">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a> |
-                            <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id, getBool = false})">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </a>
-                        </td>
-                        <td>
-                            €@(item.Course.Price * item.Quantity)
-                        </td>
-                    }
-                    @if (item.Course == null)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Product.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
-                            <a href="@Url.Action("Buy", new {id = item.Product.Id, getBool = true})">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a> |
-                            <a href="@Url.Action("RemoveQuantity", new {id = item.Product.Id, getBool = true})">
-                                <span class="glyphicon glyphicon-minus"></span>
-                            </a>
-                        </td>
-                        <td>
-                           
-                        </td>
-                    }
+            <tr>
+                @if (item.Product == null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                        <a href="@Url.Action("Buy", new {id = item.Course.Id, getBool = false})">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a> |
+                        <a href="@Url.Action("RemoveQuantity", new {id = item.Course.Id, getBool = false})">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+                    </td>
+                    <td>
+                        €@(item.Course.Price * item.Quantity)
+                    </td>
+                }
+                @if (item.Course == null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                        <a href="@Url.Action("Buy", new {id = item.Product.Id, getBool = true})">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </a> |
+                        <a href="@Url.Action("RemoveQuantity", new {id = item.Product.Id, getBool = true})">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </a>
+                    </td>
+                    <td>
+                        €@(item.Product.Price * item.Quantity)
+                    </td>
+                }
 
 
-                    @if (item.Product == null)
-                    {
-                        <td>
-                            <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id, getBool = false})">
-                                <img src="../../trash-alt-solid.svg" width="15" height="15"/>
-                            </a>
-                        </td>
-                    }
-                    @if (item.Course == null)
-                    {
-                        <td>
-                            <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Product.Id, getBool = true})">
-                                <img src="../../trash-alt-solid.svg" width="15" height="15"/>
-                            </a>
-                        </td>
-                    }
-                </tr>
+                @if (item.Product == null)
+                {
+                    <td>
+                        <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Course.Id, getBool = false})">
+                            <img src="../../trash-alt-solid.svg" width="15" height="15" />
+                        </a>
+                    </td>
+                }
+                @if (item.Course == null)
+                {
+                    <td>
+                        <a href="@Url.Action("Remove", "ShoppingCart", new {id = item.Product.Id, getBool = true})">
+                            <img src="../../trash-alt-solid.svg" width="15" height="15" />
+                        </a>
+                    </td>
+                }
+            </tr>
             }
-            @*<div>
+            <div>
                 <h4>
                     @{
                         List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
-                        var total = cart.Sum(item => item.Course.Price * item.Quantity);
+                        var total = cart.Where(item => item.Course != null).Sum(item => item.Course.Price * item.Quantity);
+                        var total2 = cart.Where(item => item.Product != null).Sum(item => item.Product.Price * item.Quantity);
+                        var total3 = total + total2;
                     }
 
                     <div>
                         <strong style="text-decoration: underline">Totaal</strong>
                     </div>
                     <h5>
-                        <strong>Prijs : €@total</strong>
+                        <strong>Prijs : @total3</strong>
                     </h5>
 
                 </h4>
 
-            </div>*@
+            </div>
         }
     </table>
     @if (Session["cart"] != null)

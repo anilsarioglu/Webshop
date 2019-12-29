@@ -28,30 +28,48 @@
         @foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Course.Name)
-                </td>
+                @if (item.Product == null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Name)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
-                </td>
-                <td>
-                    €@(item.Course.Price * item.Quantity)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                    </td>
+                    <td>
+                        €@(item.Course.Price * item.Quantity)
+                    </td>
+                }
+                @if (item.Course == null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)&nbsp;
+                    </td>
+                    <td>
+                        €@(item.Product.Price * item.Quantity)
+                    </td>
+                }
             </tr>
         }
         <div>
             <h4>
                 @{
                     List<ShoppingCart> cart = (List<ShoppingCart>) Session["cart"];
-                    var total = cart.Sum(item => item.Course.Price * item.Quantity);
+                    var total = cart.Where(item => item.Course != null).Sum(item => item.Course.Price * item.Quantity);
+                    var total2 = cart.Where(item => item.Product != null).Sum(item => item.Product.Price * item.Quantity);
+                    var total3 = total + total2;
                 }
 
                 <div>
                     <strong style="text-decoration: underline">Totaal</strong>
                 </div>
                 <h5>
-                    <strong>Prijs : €@total</strong>
+                    <strong>Prijs : €@total3</strong>
                 </h5>
 
             </h4>
@@ -66,9 +84,9 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Bestel!" class="btn btn-default" /> |
-        @Html.ActionLink("Terug naar je winkelmand", "Index", "ShoppingCart")
-    </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Bestel!" class="btn btn-default"/> |
+            @Html.ActionLink("Terug naar je winkelmand", "Index", "ShoppingCart")
+        </div>
     }
 </div>

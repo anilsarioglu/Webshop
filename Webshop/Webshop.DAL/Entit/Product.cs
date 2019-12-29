@@ -12,6 +12,8 @@ namespace Webshop.DAL.Entit
         public DateTime EndDate { get; set; }
         public ICollection<Course> Courses { get; set; }
         public ICollection<Vat> Vats { get; set; }
+        public int PriceId { get; set; }
+        public decimal Price { get; set; }
         public ProductPrice ProductPrice { get; set; }
 
         public Product()

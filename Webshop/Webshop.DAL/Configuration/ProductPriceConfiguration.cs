@@ -13,8 +13,6 @@ namespace Webshop.DAL.Configuration
             Property(pp => pp.EndTime).HasColumnType("Date");
             Property(pp => pp.ProductPrices).HasColumnType("decimal").HasPrecision(8, 2);
 
-            HasRequired(p => p.Product)
-                .WithOptional(p => p.ProductPrice);
         }
     }
 }

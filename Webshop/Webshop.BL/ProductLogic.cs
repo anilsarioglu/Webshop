@@ -20,9 +20,12 @@ namespace Webshop.BL
         private static readonly log4net.ILog log = log4net.LogManager
             .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private ProductPriceLogic _prdPriceLogic;
+
         public ProductLogic(UnitOfWork uow)
         {
             _uow = uow;
+            _prdPriceLogic = new ProductPriceLogic(uow);
         }
 
         public ProductDTO Create(ProductDTO c)
@@ -30,6 +33,8 @@ namespace Webshop.BL
             try
             {
                 var product = MapDTO.Map<Product, ProductDTO>(c);
+                ProductPriceDTO price = _prdPriceLogic.GetAll().Last();
+                product.PriceId = price.Id;
                 _uow.ProductRepo.Add(product);
                 _uow.Save();
 

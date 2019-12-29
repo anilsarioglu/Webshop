@@ -11,5 +11,17 @@ namespace Webshop.UI_MVC.Models.Webshop
         public decimal ProductPrices { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndTime { get; set; }
+
+        public ProductPrice()
+        {
+            
+        }
+
+        public ProductPrice(decimal price, DateTime begin, DateTime end)
+        {
+            ProductPrices = price;
+            BeginDate = begin;
+            EndTime = end;
+        }
     }
 }

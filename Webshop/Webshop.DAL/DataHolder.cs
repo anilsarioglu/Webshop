@@ -145,11 +145,11 @@ namespace Webshop.DAL
         {
             List<Product> products = new List<Product>
             {
-                new Product("Front-end", 20, DateTime.Now, DateTime.Now, GetFrontEndCourses(), GetVats(), null),
-                new Product(".NET Basics", 10, DateTime.Now, DateTime.Now, GetBasicsCourses(), GetVats(), null),
-                new Product(".NET Advanced", 10, DateTime.Now, DateTime.Now, GetAdvancedCourses(), GetVats(), null),
-                new Product("Testing", 30, DateTime.Now, DateTime.Now, GetTestingCourses(), GetVats(), null),
-                new Product("Mobile", 10, DateTime.Now, DateTime.Now, GetMobileCourses(), GetVats(), null),
+                new Product("Front-end", 20, DateTime.Now, DateTime.Now, GetFrontEndCourses(), GetVats(), GetProductPrices()[0]),
+                new Product(".NET Basics", 10, DateTime.Now, DateTime.Now, GetBasicsCourses(), GetVats(), GetProductPrices()[1]),
+                new Product(".NET Advanced", 10, DateTime.Now, DateTime.Now, GetAdvancedCourses(), GetVats(), GetProductPrices()[2]),
+                new Product("Testing", 30, DateTime.Now, DateTime.Now, GetTestingCourses(), GetVats(), GetProductPrices()[3]),
+                new Product("Mobile", 10, DateTime.Now, DateTime.Now, GetMobileCourses(), GetVats(), GetProductPrices()[4]),
             };
 
             return products;
@@ -159,11 +159,11 @@ namespace Webshop.DAL
         {
             List<ProductPrice> productPrices = new List<ProductPrice>
             {
-                new ProductPrice(70, DateTime.Now, DateTime.Now, GetProducts().ElementAt(0)),
-                new ProductPrice(80, DateTime.Now, DateTime.Now, GetProducts().ElementAt(1)),
-                new ProductPrice(10, DateTime.Now, DateTime.Now, GetProducts().ElementAt(2)),
-                new ProductPrice(30, DateTime.Now, DateTime.Now, GetProducts().ElementAt(3)),
-                new ProductPrice(10, DateTime.Now, DateTime.Now, GetProducts().ElementAt(4)),
+                new ProductPrice(70, DateTime.Now, DateTime.Now),
+                new ProductPrice(80, DateTime.Now, DateTime.Now),
+                new ProductPrice(10, DateTime.Now, DateTime.Now),
+                new ProductPrice(30, DateTime.Now, DateTime.Now),
+                new ProductPrice(10, DateTime.Now, DateTime.Now),
             };
 
             return productPrices;

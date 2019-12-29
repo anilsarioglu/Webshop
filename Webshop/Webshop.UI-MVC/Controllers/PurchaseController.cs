@@ -121,7 +121,16 @@ namespace Webshop.UI_MVC.Controllers
             cart = (List<ShoppingCart>) Session["cart"];
             foreach (ShoppingCart item in (List<ShoppingCart>) Session["cart"])
             {
-                dataTable.Rows.Add(new object[] {item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity)});
+                if (item.Course == null)
+                {
+                    dataTable.Rows.Add(new object[]
+                        {item.Product.Name, item.Quantity, (item.Product.Price * item.Quantity)});
+                }
+                else
+                {
+                    dataTable.Rows.Add(new object[]
+                        {item.Course.Name, item.Quantity, (item.Course.Price * item.Quantity)});
+                }
             }
 
             grid.DataSource = dataTable;
@@ -139,7 +148,9 @@ namespace Webshop.UI_MVC.Controllers
             layoutResult = textElement.Draw(page,
                 new PointF(headerAmountBounds.X - 40, layoutResult.Bounds.Bottom + lineSpace));
 
-            float totalAmount = (float) cart.Sum(item => item.Course.Price * item.Quantity);
+            float totalAmountCourses = (float) cart.Where(item => item.Course != null).Sum(item => item.Course.Price * item.Quantity);
+            float totalAmountProducts = (float)cart.Where(item => item.Product != null).Sum(item => item.Product.Price * item.Quantity);
+            float totalAmount = totalAmountProducts + totalAmountCourses;
             textElement.Text = "€" + totalAmount.ToString();
             layoutResult = textElement.Draw(page, new PointF(layoutResult.Bounds.Right + 4, layoutResult.Bounds.Y));
 
@@ -169,8 +180,16 @@ namespace Webshop.UI_MVC.Controllers
 
             foreach (ShoppingCart item in cart)
             {
-                InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
-                APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
+                if (item.Course == null)
+                {
+                    InvoiceDetail detail = new InvoiceDetail(item.Quantity, 0, item.Product.Id);
+                    APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
+                }
+                else
+                {
+                    InvoiceDetail detail = new InvoiceDetail(item.Quantity, item.Course.Id);
+                    APIConsumer<Models.Webshop.InvoiceDetail>.AddObject("InvoiceDetail", detail);
+                }
             }
 
             string mail = user.Email;

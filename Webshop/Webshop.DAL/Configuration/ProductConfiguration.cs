@@ -14,9 +14,6 @@ namespace Webshop.DAL.Configuration
             Property(p => p.StartDate).HasColumnType("Date");
             Property(p => p.Name).HasColumnType("varchar").HasMaxLength(150);
 
-            HasOptional(p => p.ProductPrice)
-                .WithRequired(p => p.Product);
-
             HasMany(p => p.Courses)
                 .WithRequired(c => c.Product);
         }

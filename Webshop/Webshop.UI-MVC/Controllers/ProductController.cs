@@ -52,6 +52,8 @@ namespace Webshop.UI_MVC.Controllers
             {
                 try
                 {
+                    ProductPrice productPrice = new ProductPrice(product.Price, product.StartDate, product.EndDate);
+                    APIConsumer<ProductPrice>.AddObject("productprice", productPrice);
                     APIConsumer<Models.Webshop.Product>.AddObject(PATH, product);
                     return RedirectToAction("Index");
                 }
