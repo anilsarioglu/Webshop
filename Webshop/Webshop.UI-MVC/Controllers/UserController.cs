@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -52,6 +53,15 @@ namespace Webshop.UI_MVC.Controllers
                 _userManager = value;
             }
         }
+
+        // GET: Users
+        [Authorize(Roles = "Admin")]
+        public ActionResult Index()
+        {
+            var allUsers = context.Users.Where(user => user.UserName != "admin") .ToList();
+            return View(allUsers);
+        }
+
         //
         // GET: /User/Register
         [Authorize(Roles = "Admin")]
@@ -122,29 +132,73 @@ namespace Webshop.UI_MVC.Controllers
         //GET: Users/Edit/{id}
         public ActionResult Edit(string id)
         {
-            ApplicationUser user = context.Users.Find(id);
+            ApplicationUser appUser = new ApplicationUser();
+            appUser = UserManager.FindById(id);
+            ApplicationUser user = new ApplicationUser();
+            user.Address = appUser.Address;
+            user.Email = appUser.Email;
+            user.Firstname = appUser.Firstname;
+            user.Surname = appUser.Surname;
+            user.Address = appUser.Address;
+            user.ZIPCode = appUser.ZIPCode;
+            user.PhoneNumber = appUser.PhoneNumber;
 
             return View(user);
         }
 
         //POST: Users/Edit/{id}
         [HttpPost]
-        public ActionResult Edit(ApplicationUser user)
+        public async Task<ActionResult> Edit(ApplicationUser model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    context.Entry(user).State = EntityState.Modified;
-                    context.SaveChanges();
-                    return RedirectToAction("Details", "User");
-                }
-
-                return View(user);
+                return View(model);
             }
-            catch
+            var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
+            var manager = new UserManager<ApplicationUser>(store);
+            var currentUser = manager.FindByEmail(model.Email);
+            currentUser.Address = model.Address;
+            currentUser.Email = model.Email;
+            currentUser.Firstname = model.Firstname;
+            currentUser.Surname = model.Surname;
+            currentUser.Address = model.Address;
+            currentUser.ZIPCode = model.ZIPCode;
+            currentUser.PhoneNumber = model.PhoneNumber;
+            await manager.UpdateAsync(currentUser);
+            TempData["msg"] = "Profile Changes Saved !";
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
             {
-                return View(user);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var user = context.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(ApplicationUser user)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            context.Users.Attach(user);
+            var result = await userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                TempData["UserDeleted"] = "User Successfully Deleted";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["UserDeleted"] = "Error Deleting User";
+                return RedirectToAction("Index");
             }
         }
 

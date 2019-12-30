@@ -29,12 +29,13 @@
 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Administration
+                            Administratie
                             <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            @Html.ActionLink("Add new user", "RegisterUser", "Account", new {area = ""}, new {@class = "navbar-brand"})
-                            @Html.ActionLink("Manage roles", "Index", "Role", new {area = ""}, new {@class = "navbar-brand"})
+                            @Html.ActionLink("Nieuwe gebruiker", "RegisterUser", "Account", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Rollen beheren", "Index", "Role", new { area = "" }, new { @class = "navbar-brand" })
+                            @Html.ActionLink("Alle gebruikers", "Index", "User", new { area = "" }, new { @class = "navbar-brand" })
                         </div>
                     </li>
                 }
