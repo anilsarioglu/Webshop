@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
+
+@{
+    ViewBag.Title = "Rapport van producten";
+}
+
+<h2>Index</h2>
+@if (!Model.Any())
+{
+    <p>Er zijn nog geen producten.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Duur</th>
+            <th>Prijs</th>
+            <th>Aantal Verkocht</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@Html.ActionLink(product.Name, "Details", "ProductReport", null)</td>
+                    <td>@product.Duration</td>
+                    <td>@product.Price</td>
+                    <td>[TODO]</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
