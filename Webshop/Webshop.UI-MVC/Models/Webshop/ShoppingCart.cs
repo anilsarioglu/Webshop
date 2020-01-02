@@ -10,6 +10,5 @@ namespace Webshop.UI_MVC.Models.Webshop
         public Course Course { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
-      
     }
 }

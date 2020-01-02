@@ -7,13 +7,13 @@ namespace Webshop.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class CreateDB1 : IMigrationMetadata
+    public sealed partial class CreateASPIdentity : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateASPIdentity));
         
         string IMigrationMetadata.Id
         {
-            get { return "201912292033146_CreateDB1"; }
+            get { return "202001021617199_CreateASPIdentity"; }
         }
         
         string IMigrationMetadata.Source

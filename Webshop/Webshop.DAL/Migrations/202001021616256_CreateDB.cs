@@ -67,6 +67,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Pieces = c.Int(nullable: false),
                         CourseId = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
                         InvoiceId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -82,6 +83,9 @@
                         IsPaid = c.Boolean(nullable: false),
                         InvoiceCode = c.String(),
                         Deleted = c.Boolean(nullable: false),
+                        Email = c.String(),
+                        Surname = c.String(),
+                        Firstname = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

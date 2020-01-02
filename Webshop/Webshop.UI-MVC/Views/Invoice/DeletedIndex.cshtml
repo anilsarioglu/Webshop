@@ -5,7 +5,16 @@
 }
 
 <h2>deletedIndex</h2>
-
+@using (Html.BeginForm())
+{
+    <p>
+        Zoek op klantnaam: @Html.TextBox("search", null, new
+                           {
+                               @class = "form-control", style = "display:initial;"
+                           })
+        <input class="btn" type="submit" value="Search" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>

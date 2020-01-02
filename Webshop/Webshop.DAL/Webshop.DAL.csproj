@@ -71,17 +71,13 @@
     <Compile Include="Entit\ProductPrice.cs" />
     <Compile Include="Entit\Product.cs" />
     <Compile Include="Entit\Vat.cs" />
-    <Compile Include="Migrations\201912291938021_CreateDB.cs" />
-    <Compile Include="Migrations\201912291938021_CreateDB.designer.cs">
-      <DependentUpon>201912291938021_CreateDB.cs</DependentUpon>
+    <Compile Include="Migrations\202001021616256_CreateDB.cs" />
+    <Compile Include="Migrations\202001021616256_CreateDB.designer.cs">
+      <DependentUpon>202001021616256_CreateDB.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201912291939329_ASPIdentity.cs" />
-    <Compile Include="Migrations\201912291939329_ASPIdentity.designer.cs">
-      <DependentUpon>201912291939329_ASPIdentity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201912292033146_CreateDB1.cs" />
-    <Compile Include="Migrations\201912292033146_CreateDB1.designer.cs">
-      <DependentUpon>201912292033146_CreateDB1.cs</DependentUpon>
+    <Compile Include="Migrations\202001021617199_CreateASPIdentity.cs" />
+    <Compile Include="Migrations\202001021617199_CreateASPIdentity.designer.cs">
+      <DependentUpon>202001021617199_CreateASPIdentity.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,14 +103,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912291938021_CreateDB.resx">
-      <DependentUpon>201912291938021_CreateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001021616256_CreateDB.resx">
+      <DependentUpon>202001021616256_CreateDB.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912291939329_ASPIdentity.resx">
-      <DependentUpon>201912291939329_ASPIdentity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201912292033146_CreateDB1.resx">
-      <DependentUpon>201912292033146_CreateDB1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001021617199_CreateASPIdentity.resx">
+      <DependentUpon>202001021617199_CreateASPIdentity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

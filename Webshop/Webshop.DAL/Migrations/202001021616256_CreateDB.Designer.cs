@@ -13,7 +13,7 @@ namespace Webshop.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201912291938021_CreateDB"; }
+            get { return "202001021616256_CreateDB"; }
         }
         
         string IMigrationMetadata.Source

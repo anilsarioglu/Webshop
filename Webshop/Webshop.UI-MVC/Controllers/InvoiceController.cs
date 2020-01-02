@@ -13,38 +13,58 @@ namespace Webshop.UI_MVC.Controllers
     {
         private const string PATH = "invoice";
         private IEnumerable<Invoice> invoices = APIConsumer<Invoice>.GetAPI("invoice");
-        private List<Invoice> activeInvoices = new List<Invoice>();
-        private List<Invoice> deletedInvoices = new List<Invoice>();
 
         // GET: Invoice
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            foreach (Invoice item in invoices)
+            if (!String.IsNullOrEmpty(search))
             {
-                if (item.Deleted == false)
+                List<Invoice> activeInvoices = new List<Invoice>();
+                foreach (Invoice item in invoices)
                 {
-                    activeInvoices.Add(item);
+                    if (item.Surname != null && item.Firstname != null)
+                    {
+                        if ((search.ToLower() == item.Surname.ToLower() ||
+                             search.ToLower() == item.Firstname.ToLower()) && item.Deleted == false)
+                        {
+                            activeInvoices.Add(item);
+                        }
+                    }
                 }
+
+                return View(activeInvoices);
             }
-            return View(activeInvoices);
+
+            return View(invoices.Where(x => x.Deleted != true));
         }
 
-        public ActionResult DeletedIndex()
+        public ActionResult DeletedIndex(string search)
         {
-            foreach (Invoice item in invoices)
+            if (!String.IsNullOrEmpty(search))
             {
-                if (item.Deleted == true)
+                List<Invoice> deletedInvoices = new List<Invoice>();
+                foreach (Invoice item in invoices)
                 {
-                    deletedInvoices.Add(item);
+                    if (item.Surname != null && item.Firstname != null)
+                    {
+                        if ((search.ToLower() == item.Surname.ToLower() ||
+                             search.ToLower() == item.Firstname.ToLower()) && item.Deleted == true)
+                        {
+                            deletedInvoices.Add(item);
+                        }
+                    }
                 }
+
+                return View(deletedInvoices);
             }
-            return View(deletedInvoices);
+
+            return View(invoices.Where(x => x.Deleted == true));
         }
 
         // GET: Invoice/Details/5
         public ActionResult Details(int id)
         {
-            return View(APIConsumer<Invoice>.GetObject(PATH , id.ToString()));
+            return View(APIConsumer<Invoice>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Invoice/Create
@@ -73,10 +93,18 @@ namespace Webshop.UI_MVC.Controllers
         public ActionResult Edit(int id)
         {
             Invoice invoice = APIConsumer<Invoice>.GetObject(PATH, id.ToString());
+            string email = invoice.Email;
+            string surname = invoice.Surname;
+
+            string firstname = invoice.Firstname;
             if (invoice.Deleted == false)
             {
+                invoice.Email = email;
+                invoice.Surname = surname;
+                invoice.Firstname = firstname;
                 return View(invoice);
             }
+
             else return RedirectToAction("DeletedIndex");
         }
 
@@ -87,6 +115,14 @@ namespace Webshop.UI_MVC.Controllers
             try
             {
                 // TODO: Add update logic here
+                invoice = APIConsumer<Invoice>.GetObject(PATH, invoice.Id.ToString());
+
+                if (invoice.IsPaid == false)
+                {
+                    invoice.IsPaid = true;
+                }
+                else invoice.IsPaid = false;
+
                 APIConsumer<Models.Webshop.Invoice>.EditObject(PATH, invoice.Id.ToString(), invoice);
                 return RedirectToAction("Index");
             }
@@ -104,6 +140,7 @@ namespace Webshop.UI_MVC.Controllers
             {
                 return View(invoice);
             }
+
             else return RedirectToAction("DeletedIndex");
         }
 

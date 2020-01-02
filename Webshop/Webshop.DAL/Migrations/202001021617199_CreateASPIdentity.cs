@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ASPIdentity : DbMigration
+    public partial class CreateASPIdentity : DbMigration
     {
         public override void Up()
         {
