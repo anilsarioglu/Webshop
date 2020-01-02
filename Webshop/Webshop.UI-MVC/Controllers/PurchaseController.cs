@@ -38,7 +38,7 @@ namespace Webshop.UI_MVC.Controllers
                 .GetUserManager<ApplicationUserManager>()
                 .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString());
+            Invoice invoice = new Invoice(DateTime.Today, false, false, DateTime.Now.ToString(), user.Email, user.Surname, user.Firstname);
             APIConsumer<Models.Webshop.Invoice>.AddObject("invoice", invoice);
 
             Webshop.BL.EmailService service = new Webshop.BL.EmailService();
