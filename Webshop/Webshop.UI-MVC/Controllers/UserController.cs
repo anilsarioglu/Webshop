@@ -32,33 +32,21 @@ namespace Webshop.UI_MVC.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
+            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
+            private set { _signInManager = value; }
         }
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
         }
 
         // GET: Users
         [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
-            var allUsers = context.Users.Where(user => user.UserName != "admin") .ToList();
+            var allUsers = context.Users.Where(user => user.UserName != "admin").ToList();
             return View(allUsers);
         }
 
@@ -81,7 +69,7 @@ namespace Webshop.UI_MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -91,7 +79,8 @@ namespace Webshop.UI_MVC.Controllers
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, code = code},
+                        protocol: Request.Url.Scheme);
                     service.SendMail(user.Email, user.Id, "Confirm your account",
                         "Please confirm your account by clicking " + callbackUrl);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
@@ -105,6 +94,7 @@ namespace Webshop.UI_MVC.Controllers
                     return View("Info");
                     //return RedirectToAction("Index", "Home");
                 }
+
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                     .ToList(), "Name", "Name");
                 AddErrors(result);
@@ -127,6 +117,17 @@ namespace Webshop.UI_MVC.Controllers
                 return View(user);
             }
             else return RedirectToAction("Login", "Account");
+        }
+
+        // GET: User/Details
+        public ActionResult DetailsOtherUser(string id)
+        {
+            var userid = id;
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            ApplicationUser user = userManager.FindByIdAsync(userid).Result;
+
+            return View(user);
         }
 
         //GET: Users/Edit/{id}
@@ -154,6 +155,7 @@ namespace Webshop.UI_MVC.Controllers
             {
                 return View(model);
             }
+
             var store = new UserStore<ApplicationUser>(new ApplicationDbContext());
             var manager = new UserManager<ApplicationUser>(store);
             var currentUser = manager.FindByEmail(model.Email);
@@ -176,11 +178,13 @@ namespace Webshop.UI_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var user = context.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
             }
+
             return View(user);
         }
 
