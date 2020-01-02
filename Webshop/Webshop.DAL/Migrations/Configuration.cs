@@ -22,7 +22,7 @@ namespace Webshop.DAL.Migrations
             //  to avoid creating duplicate seed data.
             SeedList(DataHolder.GetInvoices(), context._Invoices);
             SeedList(DataHolder.GetProductPrices(), context._ProductPrices);
-
+            SeedList(DataHolder.GetProducts(), context._Products);
         }
 
         private void SeedList<TEntity>(List<TEntity> items, DbSet<TEntity> dbSet) where TEntity : class
