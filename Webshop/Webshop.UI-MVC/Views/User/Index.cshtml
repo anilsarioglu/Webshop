@@ -26,22 +26,22 @@
             </thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Surname)
+                    @Html.DisplayName("Achternaam")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Firstname)
+                    @Html.DisplayName("Voornaam")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    @Html.DisplayName("Adres")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ZIPCode)
+                    @Html.DisplayName("Postcode")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Email)
+                    @Html.DisplayName("Email")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                    @Html.DisplayName("Email Bevestigd")
                 </th>
 
                 <th></th>
@@ -71,7 +71,7 @@
                     <td>
                         @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
                         @Html.ActionLink("Details", "DetailsOtherUser", new {id = item.Id}) |
-                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                        @Html.ActionLink("Verwijder", "Delete", new {id = item.Id})
                     </td>
                 </tr>
             }

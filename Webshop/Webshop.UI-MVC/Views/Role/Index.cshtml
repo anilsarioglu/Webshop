@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 @{
-    ViewBag.Title = "Add Role";
+    ViewBag.Title = "Rollen";
 }
 <br />
 <div class="table-responsive">
@@ -31,11 +31,11 @@
                     {
                         <td>@item.Name</td>
                         <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
-                        <td>@Html.ActionLink("Delete", "Delete", new {id = item.Id})</td>
+                        <td>@Html.ActionLink("Verwijder", "Delete", new {id = item.Id})</td>
                     }
                 </tr>
             }
         }
     </table>
 </div>
-<p> @Html.ActionLink("Click here to create a new role", "Create", "Role") </p>
+<p> @Html.ActionLink("Maak nieuwe rol", "Create", "Role") </p>
