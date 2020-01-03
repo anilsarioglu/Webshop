@@ -186,8 +186,8 @@ namespace Webshop.UI_MVC.Controllers
                         "Please confirm your account by clicking " + callbackUrl);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                      + "before you can log in.";
+                    ViewBag.Message = "Check je email en bevestig je account, je moet dit doen "
+                                      + "vooraleer je kan inloggen.";
 
                     return View("Info");
                     //return RedirectToAction("Index", "Home");

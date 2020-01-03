@@ -88,8 +88,8 @@ namespace Webshop.UI_MVC.Controllers
                     //Assign Role to user Here       
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 
-                    ViewBag.Message = "Check your email and confirm your account, you must be confirmed "
-                                      + "before you can log in.";
+                    ViewBag.Message = "Check je email en bevestig je account, je moet dit doen "
+                                      + "vooraleer je kan inloggen.";
 
                     return View("Info");
                     //return RedirectToAction("Index", "Home");
