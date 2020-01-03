@@ -1,7 +1,9 @@
-﻿@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
+﻿@using Syncfusion.XPS
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
 
 @{
     ViewBag.Title = "Rapport van producten";
+    int i = 0;
 }
 
 <h2>Rapport van de producten</h2>
@@ -22,16 +24,19 @@ else
         </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model)
-            {
+
+
+        @foreach (var product in Model)
+        {
             <tr>
                 <td>@product.Id</td>
-                <td>@Html.ActionLink(product.Name, "Details", "ProductReport", new { id = product.Id }, null)</td>
+                <td>@Html.ActionLink(product.Name, "Details", "ProductReport", new {id = product.Id}, null)</td>
                 <td>@product.Duration min.</td>
                 <td>@product.Price</td>
-                <td>[TODO]</td>
+                <td>@ViewBag.aantalList[i]</td>
             </tr>
-            }
+            i++;
+        }
         </tbody>
     </table>
 }

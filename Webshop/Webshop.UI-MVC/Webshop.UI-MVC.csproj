@@ -478,11 +478,14 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\ProductReport\Index.cshtml" />
+    <Content Include="Views\Invoice\DeletedIndex.cshtml" />
+    <Content Include="Views\MyOrder\Details.cshtml" />
+    <Content Include="Views\MyOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Mail\" />
-    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
