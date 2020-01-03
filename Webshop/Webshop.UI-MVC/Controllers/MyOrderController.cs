@@ -47,6 +47,7 @@ namespace Webshop.UI_MVC.Controllers
         public ActionResult Details(int id)
         {
             orderDetails = new List<ShoppingCart>();
+            decimal total = 0;
 
             foreach (Invoice item in invoices)
             {
@@ -60,16 +61,21 @@ namespace Webshop.UI_MVC.Controllers
                             {
                                 Product products =
                                     APIConsumer<Product>.GetObject("product", detail.ProductId.ToString());
+                                total += (products.Price * detail.Pieces);
                                 orderDetails.Add(new ShoppingCart() {Product = products, Quantity = detail.Pieces});
                             }
 
                             if (detail.CourseId != 0)
                             {
                                 Course courses = APIConsumer<Course>.GetObject("course", detail.CourseId.ToString());
+                                total += (courses.Price * detail.Pieces);
                                 orderDetails.Add(new ShoppingCart() {Course = courses, Quantity = detail.Pieces});
                             }
                         }
                     }
+
+                    ViewBag.total = total;
+                    break;
                 }
             }
 
