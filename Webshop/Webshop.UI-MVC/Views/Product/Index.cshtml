@@ -4,7 +4,7 @@
     ViewBag.Title = "Producten";
 }
 
-<h2>Index</h2>
+<h2>Kies een product</h2>
 @if (User.IsInRole("Admin"))
 {
     <p>
@@ -61,7 +61,7 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    €@Html.DisplayFor(modelItem => item.Price)
                 </td>
                 @if (User.IsInRole("Admin"))
                 {

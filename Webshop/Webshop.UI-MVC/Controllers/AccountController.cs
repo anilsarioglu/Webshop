@@ -89,7 +89,7 @@ namespace Webshop.UI_MVC.Controllers
                     return RedirectToAction("SendCode", new {ReturnUrl = returnUrl, RememberMe = model.RememberMe});
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Ongeldige inlogpoging.");
                     return View(model);
             }
         }
@@ -182,12 +182,12 @@ namespace Webshop.UI_MVC.Controllers
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, code = code},
                         protocol: Request.Url.Scheme);
-                    service.SendMail(user.Email, user.Id, "Confirm your account",
-                        "Please confirm your account by clicking " + callbackUrl);
+                    service.SendMail(user.Email, user.Id, "Bevestig uw account",
+                        "Bevestig uw account door te klikken op " + callbackUrl);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    ViewBag.Message = "Check je email en bevestig je account, je moet dit doen "
-                                      + "vooraleer je kan inloggen.";
+                    ViewBag.Message = "Controlleer uw email en bevestig uw account, u moet dit doen "
+                                      + "vooraleer u kan inloggen.";
 
                     return View("Info");
                     //return RedirectToAction("Index", "Home");

@@ -193,7 +193,7 @@ namespace Webshop.UI_MVC.Controllers
             }
 
             string mail = user.Email;
-            service.SendInvoice(mail, "factuur", "Als bijlage je bestelbon.");
+            service.SendInvoice(mail, "Factuur", "Als bijlage uw bestelbon.");
 
             return RedirectToAction("Success", "Purchase");
         }
