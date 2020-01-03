@@ -1,13 +1,13 @@
 ﻿@model Webshop.UI_MVC.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Beheer";
 }
 
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    <h4>Verander uw account settings</h4>
     <hr/>
     <dl class="dl-horizontal">
         <dt>Wachtwoord:</dt>
@@ -19,7 +19,7 @@
             }
             else
             {
-                @Html.ActionLink("Create", "SetPassword")
+                @Html.ActionLink("Aanmaken", "SetPassword")
             }
             ]
         </dd>

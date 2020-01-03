@@ -13,7 +13,7 @@
             Item
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Quantity)
+            @Html.DisplayName("Aantal")
         </th>
         <th>
             Prijs
@@ -49,5 +49,11 @@
             }
         </tr>
     }
-
+    <tr>
+        <th>Totaal te betalen:</th>
+        <th>€ @ViewBag.total</th>
+    </tr>
 </table>
+<p>
+    @Html.ActionLink("Terug naar lijst", "Index")
+</p>

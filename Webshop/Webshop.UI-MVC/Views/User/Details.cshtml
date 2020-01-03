@@ -7,11 +7,11 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ApplicationUser</h4>
+    <h4>Gebruiker</h4>
     <hr/>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Surname)
+            @Html.DisplayName("Achternaam")
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Firstname)
+            @Html.DisplayName("Voornaam")
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayName("Adres")
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ZIPCode)
+            @Html.DisplayName("Postcode")
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayName("Telefoonnummer")
         </dt>
 
         <dd>
@@ -56,11 +56,11 @@
     @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
     @if (!User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Back to List", "Index", "Manage")
+        @Html.ActionLink("Terug naar lijst", "Index", "Manage")
     }
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Back to List", "Index", "User")
+        @Html.ActionLink("Terug naar lijst", "Index", "User")
 
     }
 </p>

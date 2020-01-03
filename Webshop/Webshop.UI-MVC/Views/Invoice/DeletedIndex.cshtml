@@ -18,16 +18,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayName("Datum")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsPaid)
+            @Html.DisplayName("Betaald?")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceCode)
+            @Html.DisplayName("Factuur Code")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Deleted)
+            @Html.DisplayName("Verwijderd?")
         </th>
         <th></th>
     </tr>
@@ -55,5 +55,5 @@
 
 </table>
 <div>
-    @Html.ActionLink("Terug naar facturen", "Index")
+    @Html.ActionLink("Terug naar lijst", "Index")
 </div>
