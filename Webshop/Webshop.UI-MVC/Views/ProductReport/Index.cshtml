@@ -1,0 +1,42 @@
+﻿@using Syncfusion.XPS
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
+
+@{
+    ViewBag.Title = "Rapport van producten";
+    int i = 0;
+}
+
+<h2>Rapport van de producten</h2>
+@if (!Model.Any())
+{
+    <p>Er zijn nog geen producten.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Duur</th>
+            <th>Prijs</th>
+            <th>Aantal Verkocht</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@Html.ActionLink(product.Name, "Details", "ProductReport", new {id = product.Id}, null)</td>
+                <td>@product.Duration min.</td>
+                <td>@product.Price</td>
+                <td>@ViewBag.aantalList[i]</td>
+            </tr>
+            i++;
+        }
+        </tbody>
+    </table>
+}

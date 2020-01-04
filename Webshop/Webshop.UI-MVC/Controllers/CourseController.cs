@@ -1,15 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Webshop.Domain;
+using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class CourseController : Controller
     {
-        private IEnumerable<CourseDTO> courses = APIConsumer<CourseDTO>.GetAPI("course");
+        private IEnumerable<Course> courses = APIConsumer<Course>.GetAPI("course");
 
         // GET: Course
         public ActionResult Index(string searchString)
@@ -25,25 +25,32 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // GET: Course/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
+            ViewBag.products = products;
             return View();
         }
 
         // POST: Course/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create(Course course)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                string PId = Request.Form["products"];
+                course.ProductId = int.Parse(PId);
+                APIConsumer<Models.Webshop.Course>.AddObject("course", course);
                 return RedirectToAction("Index");
             }
             catch
@@ -53,20 +60,23 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // POST: Course/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(Course course)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+        // TODO: Add update logic here
+          APIConsumer<Models.Webshop.Course>.EditObject("course" , course.Id.ToString(), course);
+          return RedirectToAction("Index");
             }
             catch
             {
@@ -75,20 +85,23 @@ namespace Webshop.UI_MVC.Controllers
         }
 
         // GET: Course/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            return View(courses.ElementAt(id + 1));
+            return View(APIConsumer<Course>.GetObject("course" , id.ToString()));
         }
 
         // POST: Course/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(Course course)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+        // TODO: Add delete logic here
+            APIConsumer<Models.Webshop.Course>.DeleteObject("course", (course.Id).ToString() , course);
+            return RedirectToAction("Index");
             }
             catch
             {

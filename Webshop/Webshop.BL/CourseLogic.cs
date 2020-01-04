@@ -1,82 +1,113 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class CourseLogic : ILogic<CourseDTO>
     {
-        private IRepository<Course> _courseRepo;
+        private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CourseLogic(CourseRepo repo)
+        public CourseLogic(UnitOfWork uow)
         {
-            _courseRepo = repo;
+            _uow = uow;
         }
 
-        public static Course Map(CourseDTO e)
+        public CourseDTO Create(CourseDTO c)
         {
+            try
+            {
+                var course = MapDTO.Map<Course, CourseDTO>(c);
+                _uow.CourseRepo.Add(course);
+                _uow.Save();
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CourseDTO, Course>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Course dto = mapper.Map<Course>(e);
-            return dto;
+                c.Id = course.Id;
 
-        }
-        public static CourseDTO Map(Course e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Course, CourseDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            CourseDTO dto = mapper.Map<CourseDTO>(e);
-            return dto;
-
-        }
-
-        public void Create(CourseDTO c)
-        {
-            _courseRepo.Add(Map(c));
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("Kon geen cursus aanmaken", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public CourseDTO FindByID(int? id)
         {
-            Course c = _courseRepo.FindById(id);
+            try
+            {
+                var c = _uow.CourseRepo.FindById(id);
 
-            return Map(c);
+                return c == null ? null : MapDTO.Map<CourseDTO, Course>(c);
+            }
+            catch (Exception e)
+            {
+                log.Error("Kon id niet vinden", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public void Delete(CourseDTO c)
         {
-            _courseRepo.Remove(Map(c));
+            try
+            {
+                _uow.CourseRepo.Remove(MapDTO.Map<Course, CourseDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen cursus verwijderren", e);
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void Delete(int id)
+        {
+            var c = FindByID(id);
+            try
+            {
+                _uow.CourseRepo.Remove(MapDTO.Map<Course, CourseDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen cursus verwijderren", e);
+                throw new Exception(e.Message);
+            }
         }
 
         public List<CourseDTO> GetAll()
         {
-            List<Course> courses = _courseRepo.GetAll();
-            List<CourseDTO> coursesDto = new List<CourseDTO>();
-
-            foreach (Course c in courses)
+            try
             {
-                coursesDto.Add(Map(c));
+                return MapDTO.MapList<CourseDTO, Course>(_uow.CourseRepo.GetAll());
             }
-
-            return coursesDto;
+            catch (Exception e)
+            {
+                log.Error("kon niet ophalen", e);
+                throw new Exception(e.Message);
+            }
         }
 
-        public void Update(CourseDTO c)
+        public CourseDTO Update(CourseDTO c)
         {
-
-            _courseRepo.Modify(Map(c));
-            
+            try
+            {
+                _uow.CourseRepo.Modify(MapDTO.Map<Course, CourseDTO>(c));
+                _uow.Save();
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon niet updaten");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

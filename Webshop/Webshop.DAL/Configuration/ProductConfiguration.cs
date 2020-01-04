@@ -7,14 +7,15 @@ namespace Webshop.DAL.Configuration
     {
         public ProductConfiguration()
         {
-            this.ToTable("Product");
-            this.Property(p => p.Id).HasColumnType("int");
-            this.Property(p => p.Duration).HasColumnType("int");
-            this.Property(p => p.EndDate).HasColumnType("Date");
-            this.Property(p => p.StartDate).HasColumnType("Date");
-            this.Property(p => p.Name).HasColumnType("varchar").HasMaxLength(150);
-            
-            
+            ToTable("Product");
+            Property(p => p.Id).HasColumnType("int");
+            Property(p => p.Duration).HasColumnType("int");
+            Property(p => p.EndDate).HasColumnType("Date");
+            Property(p => p.StartDate).HasColumnType("Date");
+            Property(p => p.Name).HasColumnType("varchar").HasMaxLength(150);
+
+            HasMany(p => p.Courses)
+                .WithRequired(c => c.Product);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +11,11 @@ namespace Webshop.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal price { get; set; }
+        public int ProductId { get; set; }
+        public ProductDTO Product { get; set; }
+
+        public CourseDTO()
+        {
+        }
     }
 }

@@ -4,78 +4,90 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Webshop.DAL;
 using Webshop.DAL.Entit;
 using Webshop.DAL.Repositories;
+using Webshop.DAL.UnitOfWork;
 using Webshop.Domain;
 
 namespace Webshop.BL
 {
     public class InvoiceLogic : ILogic<InvoiceDTO>
     {
-        private IRepository<Invoice> _invoiceRepo;
+        private UnitOfWork _uow;
+        private static readonly log4net.ILog log = log4net.LogManager
+            .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public InvoiceLogic(InvoiceRepo repo)
+        public InvoiceLogic(UnitOfWork uow)
         {
-            _invoiceRepo = repo;
+            _uow = uow;
         }
 
-        public static Invoice Map(InvoiceDTO e)
+        public InvoiceDTO Create(InvoiceDTO c)
         {
+            try
+            {
+                var invoiceRepo = MapDTO.Map<Invoice, InvoiceDTO>(c);
+                _uow.InvoiceRepo.Add(invoiceRepo);
+                _uow.Save();
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<InvoiceDTO, Invoice>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            Invoice dto = mapper.Map<Invoice>(e);
-            return dto;
+                c.Id = invoiceRepo.Id;
 
-        }
-        public static InvoiceDTO Map(Invoice e)
-        {
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Invoice, InvoiceDTO>());
-            var mapper = config.CreateMapper();
-            mapper = new Mapper(config);
-            InvoiceDTO dto = mapper.Map<InvoiceDTO>(e);
-            return dto;
-
-        }
-
-        public void Create(InvoiceDTO c)
-        {
-            _invoiceRepo.Add(Map(c));
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen factuur toevoegen",e);
+                throw new Exception(e.Message);
+            }
         }
 
         public InvoiceDTO FindByID(int? id)
         {
-            Invoice c = _invoiceRepo.FindById(id);
+            var c = _uow.InvoiceRepo.FindById(id);
 
-            return Map(c);
+            return c == null ? null : MapDTO.Map<InvoiceDTO, Invoice>(c);
         }
 
         public void Delete(InvoiceDTO c)
         {
-            _invoiceRepo.Remove(Map(c));
+            _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+            _uow.Save();
         }
 
+        public void Delete(int id)
+        {
+            var c = FindByID(id);
+            try
+            {
+                _uow.InvoiceRepo.Remove(MapDTO.Map<Invoice, InvoiceDTO>(c));
+                _uow.Save();
+            }
+            catch (Exception e)
+            {
+                log.Error("kon geen invoice verwijderren", e);
+                throw new Exception(e.Message);
+            }
+        }
 
         public List<InvoiceDTO> GetAll()
         {
-          List<Invoice> invoices = _invoiceRepo.GetAll();
-          List<InvoiceDTO> invoiceDTO = new List<InvoiceDTO>();
-
-          foreach (Invoice c in invoices)
-          {
-             invoiceDTO.Add(Map(c));
-          }
-
-         return invoiceDTO;
+            return MapDTO.MapList<InvoiceDTO, Invoice>(_uow.InvoiceRepo.GetAll());
         }
 
-    public void Update(InvoiceDTO c)
+        public InvoiceDTO Update(InvoiceDTO c)
         {
-
-            _invoiceRepo.Modify(Map(c));
-
+            try
+            {
+                _uow.InvoiceRepo.Modify(MapDTO.Map<Invoice, InvoiceDTO>(c));
+                _uow.Save();
+                return c;
+            }
+            catch (Exception e)
+            {
+                log.Error("kon niet updaten");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

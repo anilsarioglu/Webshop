@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -8,35 +9,83 @@ namespace Webshop.DAL.Repositories
 {
     public class ProductPriceRepo : IRepository<ProductPrice>
     {
-        private WebshopContext  _webshopContext = new WebshopContext();
-
-        public void Add(ProductPrice t)
+        private WebshopContext _webshopContext;
+        public ProductPriceRepo(WebshopContext context)
         {
-            _webshopContext._ProductPrices.Add(t);
-            _webshopContext.SaveChanges();
+            _webshopContext = context;
+        }
+
+        public ProductPrice Add(ProductPrice t)
+        {
+            try
+            {
+                _webshopContext._ProductPrices.Add(t);
+                return t;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
+            
         }
 
         public ProductPrice FindById(int? id)
         {
-            return _webshopContext._ProductPrices.Find(id);
+            try
+            {
+                return _webshopContext._ProductPrices.Find(id);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
         }
 
-        public void Modify(ProductPrice productPrice)
+        public ProductPrice Modify(ProductPrice productPrice)
         {
-            _webshopContext._ProductPrices.AddOrUpdate(productPrice);
-            _webshopContext.SaveChanges();
+            try
+            {
+                _webshopContext._ProductPrices.AddOrUpdate(productPrice);
+                return productPrice;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public List<ProductPrice> GetAll()
         {
-            return _webshopContext._ProductPrices.ToList();
+            try
+            {
+                return _webshopContext._ProductPrices.ToList();
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
 
         public void Remove(ProductPrice t)
         {
-            //_webshopContext._ProductPrices.Remove(t);
-            _webshopContext.Entry(t).State = EntityState.Deleted;
-            _webshopContext.SaveChanges();
+            try
+            {
+                var productPrice = FindById(t.Id);
+                _webshopContext._ProductPrices.Remove(productPrice);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
+          
         }
     }
 }

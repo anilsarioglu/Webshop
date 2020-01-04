@@ -7,9 +7,9 @@ namespace Webshop.DAL.Configuration
     {
         public InvoiceDetailConfiguration()
         {
-            this.ToTable("InvoiceDetail");
-            this.Property(id => id.Id).HasColumnType("int");
-            this.Property(id => id.Pieces).HasColumnType("int");
+            ToTable("InvoiceDetail");
+            Property(id => id.Id).HasColumnType("int");
+            Property(id => id.Pieces).HasColumnType("int");
         }
     }
 }

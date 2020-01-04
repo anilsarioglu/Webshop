@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using Webshop.DAL.Entit;
@@ -7,23 +9,54 @@ namespace Webshop.DAL.Repositories
 {
     public class ProductRepo : IRepository<Product>
     {
-        private WebshopContext _webshopContext = new WebshopContext();
-
-        public void Add(Product t)
+        private WebshopContext _webshopContext;
+        public ProductRepo(WebshopContext context)
         {
-            _webshopContext._Products.Add(t);
-            _webshopContext.SaveChanges();
+            _webshopContext = context;
+        }
+
+        public Product Add(Product t)
+        {
+            try
+            {
+                _webshopContext._Products.Add(t);
+                return t;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+            
+         
         }
 
         public Product FindById(int? id)
         {
-            return _webshopContext._Products.Find(id);
+            try
+            {
+                return _webshopContext._Products.Find(id);
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
         }
 
-        public void Modify(Product product)
+        public Product Modify(Product product)
         {
-            _webshopContext._Products.AddOrUpdate();
-            _webshopContext.SaveChanges();
+            try
+            {
+                _webshopContext._Products.AddOrUpdate(product);
+                return product;
+            }
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.Message);
+            }
+           
         }
 
         public List<Product> GetAll()
@@ -33,8 +66,17 @@ namespace Webshop.DAL.Repositories
 
         public void Remove(Product t)
         {
-            _webshopContext._Products.Remove(t);
-            _webshopContext.SaveChanges();
+            try
+            {
+                var product = FindById(t.Id);
+                _webshopContext._Products.Remove(product);
+            }
+            catch (Exception e)
+            {
+                
+                throw new  Exception(e.Message);
+            }
+
         }
     }
 }

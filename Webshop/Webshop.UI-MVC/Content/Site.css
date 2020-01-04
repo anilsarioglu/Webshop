@@ -22,3 +22,16 @@ select,
 textarea {
     max-width: 280px;
 }
+
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    * {
+        color: #000;    
+        background-color: #fff;
+        box-shadow: none;
+        text-shadow: none;
+    }
+}

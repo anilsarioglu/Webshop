@@ -15,6 +15,8 @@ namespace Webshop.Domain
         public DateTime EndDate { get; set; }
         public ICollection<CourseDTO> Courses { get; set; }
         public ICollection<VatDTO> Vats { get; set; }
+        public int PriceId { get; set; }
+        public decimal Price { get; set; }
         public ICollection<ProductPriceDTO> ProductPrices { get; set; }
     }
 }

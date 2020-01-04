@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +8,11 @@ namespace Webshop.BL
 {
     public interface ILogic<T> where T : class
     {
-        void Create(T t);
+        T Create(T t);
         T FindByID(int? id);
         void Delete(T t);
+        void Delete(int id);
         List<T> GetAll();
-        void Update(T t);
+        T Update(T t);
     }
 }

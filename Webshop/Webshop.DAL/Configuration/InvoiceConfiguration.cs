@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration;
 using Webshop.DAL.Entit;
 
 namespace Webshop.DAL.Configuration
@@ -7,12 +7,16 @@ namespace Webshop.DAL.Configuration
     {
         public InvoiceConfiguration()
         {
-            this.ToTable("Invoice");
-            this.Property(i => i.Id).HasColumnType("int");
-            this.Property(i => i.Date).HasColumnType("Date");
-            this.Property(i => i.IsPaid).HasColumnType("Bit");
-            this.Property(i => i.InvoiceCode).HasColumnType("Varchar");
-            
+            ToTable("Invoice");
+            Property(i => i.Id).HasColumnType("int");
+            Property(i => i.Date).HasColumnType("Date");
+            Property(i => i.IsPaid).HasColumnType("Bit");
+            Property(i => i.InvoiceCode).HasColumnType("Varchar");
+            Property(i => i.Deleted).HasColumnType("Bit");
+            Property(i => i.Email).HasColumnType("Varchar");
+            Property(i => i.Surname).HasColumnType("Varchar");
+            Property(i => i.Firstname).HasColumnType("Varchar");
+
         }
     }
 }

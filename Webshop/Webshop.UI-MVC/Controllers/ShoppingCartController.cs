@@ -194,9 +194,5 @@ namespace Webshop.UI_MVC.Controllers
 
             return -1;
         }
-        public ActionResult Popup1()
-{
-    return PartialView();
-}
     }
 }

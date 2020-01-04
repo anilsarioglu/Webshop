@@ -13,5 +13,10 @@
             Products = products;
             ProductId = productId;
         }
+
+        public InvoiceDetailProduct()
+        {
+            
+        }
     }
 }

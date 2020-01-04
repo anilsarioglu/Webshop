@@ -7,101 +7,149 @@ namespace Webshop.DAL
 {
     public static class DataHolder
     {
-        public static List<Course> GetCourses()
+        private static List<Course> GetMobileCourses()
         {
             List<Course> courses = new List<Course>
             {
-                new Course("Entity Framework", 150),
-                new Course("Unit Testing", 80),
-                new Course("ASP.NET MVC", 200),
-                new Course("ASP.NET Web API", 130),
-                new Course("Blazor", 300),
-                new Course("Identity Framework", 180),
-                new Course("Fundamentals", 100),
-                new Course("Front End", 200),
-                new Course("History of .NET", 75),
-                new Course("NHibernate", 200)
+                new Course("Objective C", 50, null),
+                new Course("Ionic", 50, null),
+                new Course("Android Studio", 20, null),
             };
 
             return courses;
         }
 
-        public static List<InvoiceDetail> GetInvoiceDetails()
+        private static List<Course> GetTestingCourses()
+        {
+            List<Course> courses = new List<Course>
+            {
+                new Course("Unit testing", 50, null),
+                new Course("Functional testing", 15, null),
+                new Course("Regression testing", 15, null),
+            };
+
+            return courses;
+        }
+
+        private static List<Course> GetAdvancedCourses()
+        {
+            List<Course> courses = new List<Course>
+            {
+                new Course("Blazor", 50, null),
+                new Course("History of .NET", 10, null),
+                new Course("NHibernate", 30, null),
+            };
+
+            return courses;
+        }
+
+        private static List<Course> GetBasicsCourses()
+        {
+            List<Course> courses = new List<Course>
+            {
+                new Course("Entity Framework", 20, null),
+                new Course("Web API", 30, null),
+                new Course("MVC", 30, null),
+            };
+
+            return courses;
+        }
+
+        private static List<Course> GetFrontEndCourses()
+        {
+            List<Course> courses = new List<Course>
+            {
+                new Course("Sass", 20, null),
+                new Course("Vue", 20, null),
+                new Course("Bootstrap", 30, null),
+            };
+
+            return courses;
+        }
+
+        public static List<InvoiceDetail> GetFrontEndInvoiceDetails()
         {
             List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                new InvoiceDetail(5),
-                new InvoiceDetail(11),
-                new InvoiceDetail(6),
-                new InvoiceDetail(13),
-                new InvoiceDetail(9),
-                new InvoiceDetail(2),
-                new InvoiceDetail(7),
-                new InvoiceDetail(32),
-                new InvoiceDetail(20),
-                new InvoiceDetail(14)
+                new InvoiceDetail(7, GetFrontEndCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(9, GetFrontEndCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(6, GetFrontEndCourses().ElementAt(2).Id, 1),
             };
 
             return invoiceDetails;
         }
 
-        public static List<DetailCourse> GetDetailCourses()
+        public static List<InvoiceDetail> GetBasicsInvoiceDetails()
         {
-            List<DetailCourse> detailCourses = new List<DetailCourse>();
-
-            for(int i = 0; i < 10; i++)
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
             {
-                detailCourses.Add(new DetailCourse(GetCourses().ElementAt(i), GetInvoiceDetails().ElementAt(i), i));
-            }
+                new InvoiceDetail(15, GetBasicsCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(15, GetBasicsCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(10, GetBasicsCourses().ElementAt(2).Id, 1),
+            };
 
-            return detailCourses;
+            return invoiceDetails;
+        }
+
+        public static List<InvoiceDetail> GetAdvancedInvoiceDetails()
+        {
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
+            {
+                new InvoiceDetail(5, GetAdvancedCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(11, GetAdvancedCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(6, GetAdvancedCourses().ElementAt(2).Id, 1),
+            };
+
+            return invoiceDetails;
+        }
+
+        public static List<InvoiceDetail> GetTestingInvoiceDetails()
+        {
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
+            {
+                new InvoiceDetail(10, GetTestingCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(3, GetTestingCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(2, GetTestingCourses().ElementAt(2).Id, 1),
+            };
+
+            return invoiceDetails;
+        }
+
+        public static List<InvoiceDetail> GetMobileInvoiceDetails()
+        {
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>
+            {
+                new InvoiceDetail(7, GetMobileCourses().ElementAt(0).Id, 1),
+                new InvoiceDetail(15, GetMobileCourses().ElementAt(1).Id, 1),
+                new InvoiceDetail(3, GetMobileCourses().ElementAt(2).Id, 1),
+            };
+
+            return invoiceDetails;
         }
 
         public static List<Invoice> GetInvoices()
         {
             List<Invoice> invoices = new List<Invoice>
             {
-                new Invoice(DateTime.Now, true, "randomCode123", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "random123", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "Code123", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "randomCode", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "randomCode548", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "randomCo23", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "randCode3", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "random", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, false, "123548", GetInvoiceDetails()),
-                new Invoice(DateTime.Now, true, "ra123", GetInvoiceDetails())
+                new Invoice(DateTime.Now, true, false, "randomCode123", GetFrontEndInvoiceDetails(), null, null, null),
+                new Invoice(DateTime.Now, false, false, "random123", GetBasicsInvoiceDetails(), null, null, null),
+                new Invoice(DateTime.Now, true, false, "Code123", GetAdvancedInvoiceDetails(), null, null, null),
+                new Invoice(DateTime.Now, true, false, "randomCode", GetTestingInvoiceDetails(), null, null, null),
+                new Invoice(DateTime.Now, false, false, "randomCode548", GetMobileInvoiceDetails(), null, null, null),
             };
 
             return invoices;
-        }
-
-        public static List<InvoiceDetailProduct> GetInvoiceDetailProducts()
-        {
-            List<InvoiceDetailProduct> invoiceDetailProducts = new List<InvoiceDetailProduct>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                invoiceDetailProducts.Add(new InvoiceDetailProduct(GetInvoiceDetails().ElementAt(i), null, i));
-            }
-
-            return invoiceDetailProducts;
         }
 
         public static List<Product> GetProducts()
         {
             List<Product> products = new List<Product>
             {
-                new Product("Angular", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Vue", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Sass", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("React", 30, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("TypeScript", 10, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Django", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Express", 5, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("CouchDb", 15, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("MongoDb", 20, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices()),
-                new Product("Ionic", 40, DateTime.Now, DateTime.Now, GetCourses(), GetVats(), GetProductPrices())
+                new Product("Front-end", 20, DateTime.Now, DateTime.Now, GetFrontEndCourses(), GetVats(), GetProductPrices()[0]),
+                new Product(".NET Basics", 10, DateTime.Now, DateTime.Now, GetBasicsCourses(), GetVats(), GetProductPrices()[1]),
+                new Product(".NET Advanced", 10, DateTime.Now, DateTime.Now, GetAdvancedCourses(), GetVats(), GetProductPrices()[2]),
+                new Product("Testing", 30, DateTime.Now, DateTime.Now, GetTestingCourses(), GetVats(), GetProductPrices()[3]),
+                new Product("Mobile", 10, DateTime.Now, DateTime.Now, GetMobileCourses(), GetVats(), GetProductPrices()[4]),
             };
 
             return products;
@@ -111,18 +159,12 @@ namespace Webshop.DAL
         {
             List<ProductPrice> productPrices = new List<ProductPrice>
             {
-                new ProductPrice(20, DateTime.Now, DateTime.Now),
-                new ProductPrice(10, DateTime.Now, DateTime.Now),
+                new ProductPrice(70, DateTime.Now, DateTime.Now),
+                new ProductPrice(80, DateTime.Now, DateTime.Now),
                 new ProductPrice(10, DateTime.Now, DateTime.Now),
                 new ProductPrice(30, DateTime.Now, DateTime.Now),
                 new ProductPrice(10, DateTime.Now, DateTime.Now),
-                new ProductPrice(5, DateTime.Now, DateTime.Now),
-                new ProductPrice(5, DateTime.Now, DateTime.Now),
-                new ProductPrice(15, DateTime.Now, DateTime.Now),
-                new ProductPrice(20, DateTime.Now, DateTime.Now),
-                new ProductPrice(40, DateTime.Now, DateTime.Now)
             };
-
 
             return productPrices;
         }

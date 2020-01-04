@@ -9,5 +9,10 @@
         {
             Percentage = percentage;
         }
+
+        public Vat()
+        {
+            
+        }
     }
 }

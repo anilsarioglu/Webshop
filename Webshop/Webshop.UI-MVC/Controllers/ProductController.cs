@@ -5,26 +5,19 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Webshop.Domain;
 using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
 {
     public class ProductController : Controller
     {
-        IEnumerable<ProductDTO> productsDTO = APIConsumer<ProductDTO>.GetAPI("product");
+        private const string PATH = "product";
+        IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
 
         // GET: Product
         public ActionResult Index(string searchString)
         {
-<<<<<<< Updated upstream
-            List<Product> products = new List<Product>();
 
-            foreach (ProductDTO dto in productsDTO)
-            {
-                products.Add(MapDTO.Map<Product, ProductDTO>(dto));
-            }
-=======
             
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -34,18 +27,18 @@ namespace Webshop.UI_MVC.Controllers
                 return View(result);
             }
 
-
->>>>>>> Stashed changes
             return View(products);
         }
 
         // GET: Product/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -53,56 +46,90 @@ namespace Webshop.UI_MVC.Controllers
 
         // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create(Product product)
         {
-            try
+            if (product.EndDate < product.StartDate)
             {
-                // TODO: Add insert logic here
+                ModelState.AddModelError("EndDate", "Einddatum moet groter dan startdatum zijn");
+            }
+            else if (product.StartDate < DateTime.Today)
+            {
+                ModelState.AddModelError("StartDate", "Startdatum moet groter of gelijk zijn dan vandaag");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    ProductPrice productPrice = new ProductPrice(product.Price, product.StartDate, product.EndDate);
+                    APIConsumer<ProductPrice>.AddObject("productprice", productPrice);
+                    APIConsumer<Models.Webshop.Product>.AddObject(PATH, product);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
+
+            return View();
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Product/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(Product product)
         {
-            try
+            if (product.EndDate < product.StartDate)
             {
-                // TODO: Add update logic here
+                ModelState.AddModelError("EndDate", "Einddatum moet groter dan startdatum zijn");
+            }
+            else if (product.StartDate < DateTime.Today)
+            {
+                ModelState.AddModelError("StartDate", "Startdatum moet groter dan dag van vandaag zijn");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    // TODO: Add update logic here
+                    APIConsumer<Models.Webshop.Product>.EditObject(PATH, product.Id.ToString(), product);
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View();
+                }
             }
+
+            return View();
         }
 
         // GET: Product/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(APIConsumer<Product>.GetObject(PATH, id.ToString()));
         }
 
         // POST: Product/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(Product product)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                APIConsumer<Models.Webshop.Product>.DeleteObject(PATH, (product.Id).ToString(), product);
                 return RedirectToAction("Index");
             }
             catch
