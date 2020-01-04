@@ -41,10 +41,10 @@
                 @Html.DisplayName("Factuur Code")
             </th>
             <th>
-                @Html.DisplayName("Betaald?")
+                @Html.DisplayName("Klant Naam")
             </th>
             <th>
-                @Html.DisplayName("Klant Naam")
+                @Html.DisplayName("Betaald?")
             </th>
             <th></th>
         </tr>
@@ -59,10 +59,10 @@
                     @Html.DisplayFor(modelItem => item.InvoiceCode)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsPaid)
+                    @Html.DisplayFor(modelItem => item.Surname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Surname)
+                    @Html.DisplayFor(modelItem => item.IsPaid)
                 </td>
                 <td>
                     @Html.ActionLink("Wijzig", "Edit", new {id = item.Id}) |
