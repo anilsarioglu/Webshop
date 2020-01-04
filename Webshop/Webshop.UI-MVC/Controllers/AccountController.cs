@@ -77,8 +77,16 @@ namespace Webshop.UI_MVC.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             ApplicationUser signedUser = UserManager.FindByEmail(model.Email);
-            var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password, model.RememberMe,
+            if (signedUser == null)
+            {
+                ModelState.AddModelError("", "Ongeldige inlogpoging.");
+                return View(model);
+            }
+
+            var result = await SignInManager.PasswordSignInAsync(signedUser.UserName, model.Password,
+                model.RememberMe,
                 shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:

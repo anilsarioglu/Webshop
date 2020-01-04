@@ -18,6 +18,12 @@ namespace Webshop.BL
         private static readonly log4net.ILog log = log4net.LogManager
             .GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        private static int counter;
+        private DateTime today = DateTime.Today;
+
+        private DateTime firstDayOfNextMonth = new DateTime(DateTime.Today.Year + (DateTime.Today.Month) / 12,
+            (DateTime.Today.Month) % 12 + 1, 1);
+
         public InvoiceLogic(UnitOfWork uow)
         {
             _uow = uow;
@@ -27,11 +33,33 @@ namespace Webshop.BL
         {
             try
             {
-                var invoiceRepo = MapDTO.Map<Invoice, InvoiceDTO>(c);
-                _uow.InvoiceRepo.Add(invoiceRepo);
-                _uow.Save();
+                if (today != firstDayOfNextMonth)
+                {
+                    counter++;
 
-                c.Id = invoiceRepo.Id;
+                    var now = DateTime.Now;
+                    var generateId = now.Year + "-" + now.Month + "-" + counter;
+                    var invoiceRepo = MapDTO.Map<Invoice, InvoiceDTO>(c);
+                    invoiceRepo.InvoiceCode = generateId;
+                    _uow.InvoiceRepo.Add(invoiceRepo);
+                    _uow.Save();
+
+                    c.Id = invoiceRepo.Id;
+                }
+                else
+                {
+                    getCounter();
+                    var now = DateTime.Now;
+                    var generateId = now.Year + "-" + now.Month + "-" + counter;
+
+                    var invoiceRepo = MapDTO.Map<Invoice, InvoiceDTO>(c);
+                    invoiceRepo.InvoiceCode = generateId;
+                    _uow.InvoiceRepo.Add(invoiceRepo);
+                    _uow.Save();
+
+                    c.InvoiceCode = generateId;
+                    c.Id = invoiceRepo.Id;
+                }
 
                 return c;
             }
@@ -88,6 +116,13 @@ namespace Webshop.BL
                 log.Error("kon niet updaten");
                 throw new Exception(e.Message);
             }
+        }
+
+        public static int getCounter()
+        {
+            int temp = counter;
+            counter = 0;
+            return temp;
         }
     }
 }

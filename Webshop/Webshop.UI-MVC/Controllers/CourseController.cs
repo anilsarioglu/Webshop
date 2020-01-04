@@ -10,6 +10,8 @@ namespace Webshop.UI_MVC.Controllers
     public class CourseController : Controller
     {
         private IEnumerable<Course> courses = APIConsumer<Course>.GetAPI("course");
+        private IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
+
 
         // GET: Course
         public ActionResult Index()
@@ -28,7 +30,6 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
             ViewBag.products = products;
             return View();
         }
@@ -56,6 +57,7 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
+            ViewBag.products = products;
             return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
@@ -67,9 +69,10 @@ namespace Webshop.UI_MVC.Controllers
         {
             try
             {
-        // TODO: Add update logic here
-          APIConsumer<Models.Webshop.Course>.EditObject("course" , course.Id.ToString(), course);
-          return RedirectToAction("Index");
+                string PId = Request.Form["products"];
+                course.ProductId = int.Parse(PId);
+                APIConsumer<Models.Webshop.Course>.EditObject("course", course.Id.ToString(), course);
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -81,7 +84,7 @@ namespace Webshop.UI_MVC.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
-            return View(APIConsumer<Course>.GetObject("course" , id.ToString()));
+            return View(APIConsumer<Course>.GetObject("course", id.ToString()));
         }
 
         // POST: Course/Delete/5
@@ -92,9 +95,8 @@ namespace Webshop.UI_MVC.Controllers
         {
             try
             {
-        // TODO: Add delete logic here
-            APIConsumer<Models.Webshop.Course>.DeleteObject("course", (course.Id).ToString() , course);
-            return RedirectToAction("Index");
+                APIConsumer<Models.Webshop.Course>.DeleteObject("course", (course.Id).ToString(), course);
+                return RedirectToAction("Index");
             }
             catch
             {
