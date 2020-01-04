@@ -46,9 +46,13 @@ namespace Webshop.UI_MVC.Controllers
                     }
 
                     Session["card"] = cart;
+
                 }
+                return RedirectToAction("Index", "Course");
+
+
             }
-            else
+            if(getBool == true)
             {
                 Product products = APIConsumer<Product>.GetObject("product", id.ToString());
 
@@ -77,9 +81,11 @@ namespace Webshop.UI_MVC.Controllers
 
                     Session["card"] = cart;
                 }
+
+                return RedirectToAction("Index", "Product");
             }
 
-            return RedirectToAction("Index");
+            return null;
         }
 
         public ActionResult RemoveQuantity(int id, bool? getBool)
