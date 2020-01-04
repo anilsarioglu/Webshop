@@ -15,7 +15,6 @@ namespace Webshop.UI_MVC.Controllers
         IEnumerable<ProductDTO> productsDTO = APIConsumer<ProductDTO>.GetAPI("product");
 
         // GET: Product
-        public ActionResult Index()
         public ActionResult Index(string searchString)
         {
 <<<<<<< Updated upstream
@@ -25,6 +24,18 @@ namespace Webshop.UI_MVC.Controllers
             {
                 products.Add(MapDTO.Map<Product, ProductDTO>(dto));
             }
+=======
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var result = products.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
+                                 || s.StartDate.ToString().Contains(searchString)
+                                 || s.EndDate.ToString().Contains(searchString));
+                return View(result);
+            }
+
+
+>>>>>>> Stashed changes
             return View(products);
         }
 
