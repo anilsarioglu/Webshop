@@ -7,6 +7,15 @@
 }
 
 <h2>Producten</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        <div align="right">
+            @Html.TextBox("SearchString")
+            <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+        </div>
+    </div>
+}
 @if (!Model.Any())
 {
     <p>Er zijn nog geen producten.</p>
@@ -29,18 +38,18 @@ else
         </thead>
         <tbody>
 
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Duration</td>
-                <td>@product.StartDate</td>
-                <td>@product.EndDate</td>
-                <td>@product.Price</td>
-                <td>@ViewBag.aantalList[i]</td>
-            </tr>
-            i++;
-        }
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Duration</td>
+                    <td>@product.StartDate</td>
+                    <td>@product.EndDate</td>
+                    <td>@product.Price</td>
+                    <td>@ViewBag.aantalList[i]</td>
+                </tr>
+                i++;
+            }
         </tbody>
     </table>
 }
