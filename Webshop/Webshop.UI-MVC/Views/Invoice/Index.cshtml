@@ -5,8 +5,6 @@
 }
 
 <h2>Facturen</h2>
-
-
 <p>
     @Html.ActionLink("Verwijderde facturen", "DeletedIndex")
 </p>
@@ -40,10 +38,13 @@
                 @Html.DisplayName("Datum")
             </th>
             <th>
+                @Html.DisplayName("Factuur Code")
+            </th>
+            <th>
                 @Html.DisplayName("Betaald?")
             </th>
             <th>
-                @Html.DisplayName("Factuur Code")
+                @Html.DisplayName("Klant Naam")
             </th>
             <th></th>
         </tr>
@@ -55,10 +56,13 @@
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceCode)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IsPaid)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.InvoiceCode)
+                    @Html.DisplayFor(modelItem => item.Surname)
                 </td>
                 <td>
                     @Html.ActionLink("Wijzig", "Edit", new {id = item.Id}) |

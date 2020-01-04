@@ -21,10 +21,13 @@
             @Html.DisplayName("Datum")
         </th>
         <th>
+            @Html.DisplayName("Factuur Code")
+        </th>
+        <th>
             @Html.DisplayName("Betaald?")
         </th>
         <th>
-            @Html.DisplayName("Factuur Code")
+            @Html.DisplayName("Klant Naam")
         </th>
         <th>
             @Html.DisplayName("Verwijderd?")
@@ -39,10 +42,13 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.InvoiceCode)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IsPaid)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceCode)
+                @Html.DisplayFor(modelItem => item.Surname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Deleted)

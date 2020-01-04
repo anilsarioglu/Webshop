@@ -6,32 +6,36 @@
     int i = 0;
 }
 
-<h2>Rapport van de producten</h2>
+<h2>Producten</h2>
 @if (!Model.Any())
 {
     <p>Er zijn nog geen producten.</p>
 }
 else
 {
+    <p>
+        @Html.ActionLink("Klik hier om een product te wijzigen/verwijderen", "Index", "Product")
+    </p>
     <table class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Product</th>
-            <th>Aantal Dagen</th>
-            <th>Prijs</th>
-            <th>Aantal Verkocht</th>
-        </tr>
+            <tr>
+                <th>Product</th>
+                <th>Aantal Dagen</th>
+                <th>Startdatum</th>
+                <th>Einddatum</th>
+                <th>Prijs</th>
+                <th>Aantal Verkocht</th>
+            </tr>
         </thead>
         <tbody>
-
 
         @foreach (var product in Model)
         {
             <tr>
-                <td>@product.Id</td>
-                <td>@Html.ActionLink(product.Name, "Details", "ProductReport", new {id = product.Id}, null)</td>
+                <td>@product.Name</td>
                 <td>@product.Duration</td>
+                <td>@product.StartDate</td>
+                <td>@product.EndDate</td>
                 <td>@product.Price</td>
                 <td>@ViewBag.aantalList[i]</td>
             </tr>
