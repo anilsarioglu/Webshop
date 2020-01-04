@@ -14,8 +14,15 @@ namespace Webshop.UI_MVC.Controllers
 
 
         // GET: Course
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var result = courses.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
+                                                                                        || s.Price.ToString()
+                                                                                            .Contains(searchString));
+                return View(result);
+            }
             return View(courses);
         }
 

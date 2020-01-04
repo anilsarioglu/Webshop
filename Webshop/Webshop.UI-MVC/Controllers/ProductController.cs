@@ -15,8 +15,18 @@ namespace Webshop.UI_MVC.Controllers
         IEnumerable<Product> products = APIConsumer<Product>.GetAPI("product");
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+
+            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var result = products.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
+                                 || s.StartDate.ToString().Contains(searchString)
+                                 || s.EndDate.ToString().Contains(searchString));
+                return View(result);
+            }
+
             return View(products);
         }
 
