@@ -18,7 +18,7 @@ else
         <tr>
             <th>ID</th>
             <th>Product</th>
-            <th>Duur</th>
+            <th>Aantal Dagen</th>
             <th>Prijs</th>
             <th>Aantal Verkocht</th>
         </tr>
@@ -31,7 +31,7 @@ else
             <tr>
                 <td>@product.Id</td>
                 <td>@Html.ActionLink(product.Name, "Details", "ProductReport", new {id = product.Id}, null)</td>
-                <td>@product.Duration min.</td>
+                <td>@product.Duration</td>
                 <td>@product.Price</td>
                 <td>@ViewBag.aantalList[i]</td>
             </tr>

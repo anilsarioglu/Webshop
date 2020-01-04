@@ -24,13 +24,13 @@
                     @if ((item.Name == "Admin") || (item.Name == "Customer"))
                     {
                         <td>@item.Name</td>
-                        <td>not editable</td>
-                        <td>not deletable</td>
+                        <td>Niet bewerkbaar</td>
+                        <td>Niet verwijderbaar</td>
                     }
                     else
                     {
                         <td>@item.Name</td>
-                        <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                        <td>@Html.ActionLink("Wijzig", "Edit", new {id = item.Id})</td>
                         <td>@Html.ActionLink("Verwijder", "Delete", new {id = item.Id})</td>
                     }
                 </tr>

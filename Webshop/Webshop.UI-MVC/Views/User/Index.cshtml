@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Alle gebruikers</h2>
 
 <p>
     @Html.ActionLink("Maak nieuwe gebruiker", "RegisterUser", "Account")
@@ -69,7 +69,7 @@
                         @Html.DisplayFor(modelItem => item.EmailConfirmed)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Wijzig", "Edit", new {id = item.Id}) |
                         @Html.ActionLink("Details", "DetailsOtherUser", new {id = item.Id}) |
                         @Html.ActionLink("Verwijder", "Delete", new {id = item.Id})
                     </td>

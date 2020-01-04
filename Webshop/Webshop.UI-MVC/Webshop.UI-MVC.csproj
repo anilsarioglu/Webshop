@@ -480,6 +480,7 @@
     <Content Include="Views\Invoice\DeletedIndex.cshtml" />
     <Content Include="Views\MyOrder\Details.cshtml" />
     <Content Include="Views\MyOrder\Index.cshtml" />
+    <Content Include="Views\User\DetailsOtherUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
