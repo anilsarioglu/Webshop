@@ -2,96 +2,74 @@
 
 @{
     ViewBag.Title = "Producten";
+    var count = 0;
 }
 
-<h2>Kies een product</h2>
 
 @using (Html.BeginForm())
 {
-    <div>
-        <div align="right">
-            @Html.TextBox("SearchString")
-            <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+    <p>
+        <div>
+            <h2 style="padding: 15px">Kies een opleiding</h2>
+            <div align="right">
+                @Html.TextBox("SearchString")
+                <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+            </div>
         </div>
-    </div>
-}
+    </p>
 
+}
 @if (User.IsInRole("Admin"))
 {
-    <p>
-        @Html.ActionLink("Maak nieuw product", "Create")
-    </p>
+    @Html.ActionLink("Maak nieuwe cursus", "Create", "Product")
 }
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        @if (Model.Count() == 0)
+<div class="card-deck">
+    <div class="row">
+        @foreach (var item in Model)
         {
-            <tr>
-                <td colspan="10">Geen producten gevonden.</td>
-            </tr>
-        }
-        else
-        {
-            <thead colspan="3">
-                <tr class="active">
-                    <th data-defaultsign="_19">Producten</th>
-                </tr>
-            </thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("Naam")
-                </th>
-                <th>
-                    @Html.DisplayName("Aantal Dagen")
-                </th>
-                <th>
-                    @Html.DisplayName("Startdatum")
-                </th>
-                <th>
-                    @Html.DisplayName("Einddatum")
-                </th>
-                <th>
-                    @Html.DisplayName("Prijs")
-                </th>
-                <th></th>
-            </tr>
-
-            foreach (var item in Model)
+            var insertRow = count != 0 && count % 6 == 0;
+            if (insertRow)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Duration)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td>
-                            @Html.ActionLink("Wijzig", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Verwijder", "Delete", new { id = item.Id })
-                        </td>
-                    }
-
-                    @if (!User.IsInRole("Admin"))
-                    {
-                        <td>
-                            <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id, getBool = true})" class="btn btn-primary">Bestellen</a>
-                        </td>
-                    }
-
-                </tr>
+            @:</div>
+            @:<div class="row">
             }
+
+            <div class="col-md-4">
+                <div class="card" width="350" height="200">
+                    <img src="https://techmeetups.com/wp-content/uploads/2017/03/learn-to-code-3.png" class="card-img-top" alt="corgi" width="350" height="200">
+                    <div class="card-body">
+                        <div>
+                            <h5 style="font-weight: bold">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <p class="card-text"><small>Aantal dagen : @Html.DisplayFor(modelItem => item.Duration)</small></p>
+                            <p class="card-text"><small>Startdatum: @Html.DisplayFor(modelItem => item.StartDate)</small></p>
+                            <p class="card-text"><small>Einddatum: @Html.DisplayFor(modelItem => item.EndDate)</small></p>
+                            <p class="card-subtitle mb-2 text-muted" align="right">Prijs : @Html.DisplayFor(modelItem => item.Price) EUR</p>
+                        </div>
+
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <div align="center">
+                                <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id, getBool = true})" class="btn btn-primary">
+                                    <img src="../../shopping-cart(1).svg" width="25" height="25"/> &nbsp;
+                                    In winkelmandje
+                                </a>
+                            </div>
+                           
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @Html.ActionLink("Wijzig", "Edit", new {id = item.Id}) |
+                                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                                @Html.ActionLink("Verwijder", "Delete", new {id = item.Id})
+                            </td>
+                        }
+
+                    </div>
+                </div>
+                <br />
+            </div>
+            count++;
         }
-    </table>
+    </div>
 </div>

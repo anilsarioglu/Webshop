@@ -36,10 +36,10 @@
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="https://techmeetups.com/wp-content/uploads/2017/03/learn-to-code-3.png" class="card-img-top" alt="corgi" width="350" height="200">
+                    <img src="https://fossbytes.com/wp-content/uploads/2017/03/loved-hated-programming-languages-640x360.jpg" class="card-img-top" alt="corgi" width="350" height="200">
                     <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Price) EUR</h5>
-                        <p class="card-text" style="font-weight: bold;">@Html.DisplayFor(modelItem => item.Name)</p>
+                        <h5 class="card-title"style="font-weight: bold">@Html.DisplayFor(modelItem => item.Name)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Price) EUR</p>
                         @if (!User.IsInRole("Admin"))
                         {
                             <a href="@Url.Action("Buy", "ShoppingCart" , new {id=item.Id, getBool=false})" class="btn btn-primary">
