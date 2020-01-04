@@ -16,7 +16,9 @@ namespace Webshop.UI_MVC.Controllers
 
         // GET: Product
         public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
+<<<<<<< Updated upstream
             List<Product> products = new List<Product>();
 
             foreach (ProductDTO dto in productsDTO)

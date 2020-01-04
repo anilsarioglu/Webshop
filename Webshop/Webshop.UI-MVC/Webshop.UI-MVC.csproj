@@ -232,6 +232,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+<<<<<<< Updated upstream
+=======
+    <Content Include="iconmonstr-shopping-cart-23.svg" />
+    <Content Include="magnifying-glass.svg" />
+>>>>>>> Stashed changes
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

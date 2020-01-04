@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+<<<<<<< Updated upstream
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -49,3 +50,94 @@
 }
 
 </table>
+=======
+@using (Html.BeginForm())
+{
+    <div>
+        <div align="right">
+            @Html.TextBox("SearchString")
+            <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+        </div>
+    </div>
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Maak nieuw product", "Create")
+    </p>
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="10">Geen producten gevonden.</td>
+            </tr>
+        }
+        else
+        {
+            <thead colspan="3">
+                <tr class="active">
+                    <th data-defaultsign="_19">Producten</th>
+                </tr>
+            </thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Naam")
+                </th>
+                <th>
+                    @Html.DisplayName("Aantal Dagen")
+                </th>
+                <th>
+                    @Html.DisplayName("Start Datum")
+                </th>
+                <th>
+                    @Html.DisplayName("Eind Datum")
+                </th>
+                <th>
+                    @Html.DisplayName("Prijs")
+                </th>
+                <th></th>
+            </tr>
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Verwijder", "Delete", new { id = item.Id }) |
+                        </td>
+                    }
+
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id, getBool = true})" class="btn btn-primary">Bestellen</a>
+                        </td>
+                    }
+
+                </tr>
+            }
+        }
+    </table>
+</div>
+>>>>>>> Stashed changes
