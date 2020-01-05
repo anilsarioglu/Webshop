@@ -1,21 +1,24 @@
-﻿@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Invoice>
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Invoice>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Facturen</h2>
+-
 <p>
     @Html.ActionLink("Verwijderde facturen", "DeletedIndex")
 </p>
 @using (Html.BeginForm())
 {
     <div>
-        <div align="right">
-            @Html.TextBox("search")
-            <button title="Zoeken op klantnaam" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+      <div class="object">
+        <h2 class="objectTitle">Facturen</h2>
+        <div class="objectInput">
+          @Html.TextBox("search")
+          <button title="Zoeken op klantnaam" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+          </div>
         </div>
-    </div>
+      </div>
 }
 <div class="table-responsive">
     <table class="table table-bordered table-hover">

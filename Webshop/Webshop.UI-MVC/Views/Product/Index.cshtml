@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
+@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
 
 @{
     ViewBag.Title = "Producten";
@@ -9,11 +9,11 @@
 @using (Html.BeginForm())
 {
     <p>
-        <div>
-            <h2 style="padding: 15px">Kies een opleiding</h2>
-            <div align="right">
+        <div class="object">
+            <h2 class ="objectTitle">Kies een opleiding</h2>
+            <div class="objectInput" >
                 @Html.TextBox("SearchString")
-                <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+                <button title="Zoeken" input="submit"  ><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
             </div>
         </div>
     </p>

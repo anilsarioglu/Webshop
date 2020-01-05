@@ -1,4 +1,4 @@
-﻿body {
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -22,9 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+.object {
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+.objectTitle {
+  display: inline;
+  padding: 15px;
+}
+.objectInput {
+  display: inline;
+  float: right;
+  background-color: transparent;
+  border: none;
+  margin-top: 7px;
+}
 
 @media print {
-    .no-print, .no-print * {
+  .no-print, .no-print * {
         display: none !important;
     }
 
