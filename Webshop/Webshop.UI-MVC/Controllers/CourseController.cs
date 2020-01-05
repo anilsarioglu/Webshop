@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using Webshop.UI_MVC.Models.Webshop;
 
 namespace Webshop.UI_MVC.Controllers
@@ -14,8 +15,19 @@ namespace Webshop.UI_MVC.Controllers
 
 
         // GET: Course
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, string currentFilter, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             if (!String.IsNullOrEmpty(searchString))
             {
                 var result = courses.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
@@ -23,6 +35,10 @@ namespace Webshop.UI_MVC.Controllers
                                                                                             .Contains(searchString));
                 return View(result);
             }
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+
+            return View(courses.ToPagedList(pageNumber, pageSize));
             return View(courses);
         }
 

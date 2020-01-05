@@ -43,8 +43,8 @@ else
                 <tr>
                     <td>@product.Name</td>
                     <td>@product.Duration</td>
-                    <td>@product.StartDate</td>
-                    <td>@product.EndDate</td>
+                    <td>@product.StartDate.ToShortDateString()</td>
+                    <td>@product.EndDate.ToShortDateString()</td>
                     <td>@product.Price</td>
                     <td>@ViewBag.aantalList[i]</td>
                 </tr>

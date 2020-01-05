@@ -1,4 +1,8 @@
-@model IEnumerable<Webshop.UI_MVC.Models.Webshop.Product>
+
+@using PagedList.Mvc
+@model PagedList.IPagedList<Webshop.UI_MVC.Models.Webshop.Product>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
 
 @{
     ViewBag.Title = "Producten";
@@ -10,10 +14,10 @@
 {
     <p>
         <div class="object">
-            <h2 class ="objectTitle">Kies een opleiding</h2>
-            <div class="objectInput" >
+            <h2 class="objectTitle">Kies een Product</h2>
+            <div class="objectInput">
                 @Html.TextBox("SearchString")
-                <button title="Zoeken" input="submit"  ><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
+                <button title="Zoeken" input="submit" style="background-color: transparent; border: none"><img src="../../magnifying-glass.svg" width="20" height="20" /></button>
             </div>
         </div>
     </p>
@@ -50,18 +54,18 @@
                         {
                             <div align="center">
                                 <a href="@Url.Action("Buy", "ShoppingCart", new {id = item.Id, getBool = true})" class="btn btn-primary">
-                                    <img src="../../shopping-cart(1).svg" width="25" height="25"/> &nbsp;
+                                    <img src="../../shopping-cart(1).svg" width="25" height="25" /> &nbsp;
                                     In winkelmandje
                                 </a>
                             </div>
-                           
+
                         }
                         @if (User.IsInRole("Admin"))
                         {
                             <td>
-                                @Html.ActionLink("Wijzig", "Edit", new {id = item.Id}) |
-                                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
-                                @Html.ActionLink("Verwijder", "Delete", new {id = item.Id})
+                                @Html.ActionLink("Wijzig", "Edit", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Verwijder", "Delete", new { id = item.Id })
                             </td>
                         }
 
@@ -73,3 +77,8 @@
         }
     </div>
 </div>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
