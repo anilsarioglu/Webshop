@@ -18,6 +18,8 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Product
         public ActionResult Index(string searchString, string currentFilter,int ? page)
         {
+            var productFilterd = from product in products
+                select product;
 
             if (searchString != null)
             {
@@ -32,15 +34,14 @@ namespace Webshop.UI_MVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                var result = products.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
+               productFilterd = products.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
                                  || s.StartDate.ToString().Contains(searchString)
                                  || s.EndDate.ToString().Contains(searchString));
-                return View(result);
             }
             int pageSize = 6;
             int pageNumber = (page ?? 1);
 
-            return View(products.ToPagedList(pageNumber,pageSize));
+            return View(productFilterd.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Product/Details/5

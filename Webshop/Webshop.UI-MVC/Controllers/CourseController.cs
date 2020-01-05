@@ -17,6 +17,8 @@ namespace Webshop.UI_MVC.Controllers
         // GET: Course
         public ActionResult Index(string searchString, string currentFilter, int? page)
         {
+            var coursesFiltered = from course in courses
+                select course;
             if (searchString != null)
             {
                 page = 1;
@@ -30,16 +32,15 @@ namespace Webshop.UI_MVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                var result = courses.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
+                coursesFiltered = coursesFiltered.Where(s => s.Name.ToLower().Contains(searchString) || s.Name.Contains(searchString)
                                                                                         || s.Price.ToString()
                                                                                             .Contains(searchString));
-                return View(result);
             }
             int pageSize = 6;
             int pageNumber = (page ?? 1);
 
-            return View(courses.ToPagedList(pageNumber, pageSize));
-            return View(courses);
+            return View(coursesFiltered.ToPagedList(pageNumber, pageSize));
+           
         }
 
         // GET: Course/Details/5
