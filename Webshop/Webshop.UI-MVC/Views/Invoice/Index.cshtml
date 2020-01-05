@@ -3,11 +3,6 @@
 @{
     ViewBag.Title = "Index";
 }
-
--
-<p>
-    @Html.ActionLink("Verwijderde facturen", "DeletedIndex")
-</p>
 @using (Html.BeginForm())
 {
     <div>
@@ -20,6 +15,9 @@
         </div>
       </div>
 }
+<p>
+        @Html.ActionLink("Verwijderde facturen", "DeletedIndex")
+</p>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         @if (Model.Count() == 0)
